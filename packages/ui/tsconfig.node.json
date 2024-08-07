@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "rootDir": "./"
+  },
+  "include": ["vite.config.ts", "src"],
+}

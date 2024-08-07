@@ -1,0 +1,17 @@
+{
+  "name": "symbiosis-monorepo",
+  "private": false,
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "turbo run format"
+  },
+  "devDependencies": {
+    "turbo": "^1.13.4"
+  }
+}
