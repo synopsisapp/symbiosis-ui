@@ -1,5 +1,3 @@
-// import { SymbiosisUIWebpackPlugin } from "@synopsisapp/symbiosis-ui/plugin";
-
 const plugin = require("@synopsisapp/symbiosis-ui/plugin");
 const defaultTheme = require("./tailwindTheme.js");
 
