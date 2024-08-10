@@ -7,7 +7,8 @@
   "module": "dist/symbiosis-ui.es.js",
   "types": "dist/src/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "exports": {
     ".": {
@@ -31,8 +32,7 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "lint": "biome check .",
-    "format": "biome format .",
-    "build:icons": "tsx ./scripts/generate-icons.ts"
+    "format": "biome format ."
   },
   "dependencies": {
     "@types/lodash": "^4.17.7",
