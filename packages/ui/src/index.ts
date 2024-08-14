@@ -3,17 +3,24 @@ import "./tailwind.css";
 export { cn } from "./utils/cn";
 
 export { Button } from "./components/Button";
-export { IconButton } from "./components/IconButton";
-export { Icon } from "./components/Icon";
-export { Spinner } from "./components/Spinner";
-export { Text } from "./components/Text";
-
+export * from "./components/Button/types";
 export type { ButtonProps } from "./components/Button/types";
+
+export { IconButton } from "./components/IconButton";
+export * from "./components/IconButton/types";
 export type { IconButtonProps } from "./components/IconButton/types";
+
+export { Icon } from "./components/Icon";
+export * from "./components/Icon/types";
 export type { IconProps } from "./components/Icon/types";
 export { IconProvider } from "./components/Icon/IconContext";
 
+export { Spinner } from "./components/Spinner";
+export * from "./components/Spinner/types";
 export type { SpinnerProps } from "./components/Spinner/types";
+
+export { Text } from "./components/Text";
+export * from "./components/Text/types";
 export type { TextProps } from "./components/Text/types";
 
 export * from "./designSystemTokens";

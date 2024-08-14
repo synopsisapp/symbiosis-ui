@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@synopsisapp/symbiosis-ui": "*",
+    "@synopsisapp/symbiosis-ui": "0.0.4",
     "react": "^18",
     "react-dom": "^18",
     "next": "14.2.5"

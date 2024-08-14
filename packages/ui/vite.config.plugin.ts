@@ -4,10 +4,10 @@ import { resolve } from "path";
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, "./plugin/index.ts"),
+      entry: resolve(__dirname, "plugin/index.ts"),
       name: "SymbiosisUIPlugin",
-      fileName: "symbiosis-ui-plugin",
-      formats: ["es", "cjs"],
+      formats: ["es", "umd"],
+      fileName: (format) => `plugin.${format}.js`,
     },
     rollupOptions: {
       external: [
