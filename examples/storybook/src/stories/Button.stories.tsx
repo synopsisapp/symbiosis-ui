@@ -29,11 +29,11 @@ export const Default: Story = {
 export const DifferentSizes: Story = {
   render: (args) => (
     <div className="flex flex-col gap-4 items-start">
-      <Button {...args} size="small-200" leftIcon="" />
-      <Button {...args} size="small-100" leftIcon="" />
+      <Button {...args} size="small-200" />
+      <Button {...args} size="small-100" />
     </div>
   ),
   args: {
     ...Default.args,
-  }
-}
+  },
+};

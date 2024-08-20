@@ -23,12 +23,12 @@ export type BaseProps = {
   layout?: ButtonLayout;
   size?: Sizes;
   isDisabled?: boolean;
-  leftIcon?: IconProps['name'];
-  rightIcon?: IconProps['name'];
+  leftIcon?: IconProps["name"];
+  rightIcon?: IconProps["name"];
   isLoading?: boolean;
-  type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
+  type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
   renderAs?: ButtonRenderAs;
-  classname?: string;
+  className?: string;
   form?: string;
 };
 
