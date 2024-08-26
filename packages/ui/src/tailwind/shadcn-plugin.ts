@@ -147,6 +147,22 @@ export const shadcnPlugin = plugin(
               transform: "translateY(0px)",
             },
           },
+          "slide-down-and-fade": {
+            from: { opacity: "0", transform: "translateY(-5px)" },
+            to: { opacity: "1", transform: "translateY(0)" },
+          },
+          "slide-left-and-fade": {
+            from: { opacity: "0", transform: "translateX(5px)" },
+            to: { opacity: "1", transform: "translateX(0)" },
+          },
+          "slide-up-and-fade": {
+            from: { opacity: "0", transform: "translateY(5px)" },
+            to: { opacity: "1", transform: "translateY(0)" },
+          },
+          "slide-right-and-fade": {
+            from: { opacity: "0", transform: "translateX(-5px)" },
+            to: { opacity: "1", transform: "translateX(0)" },
+          },
           "accordion-down": {
             from: { height: "0" },
             to: { height: "var(--radix-accordion-content-height)" },
@@ -161,8 +177,12 @@ export const shadcnPlugin = plugin(
           "fade-down": "fade-down 0.5s",
           "accordion-down": "accordion-down 0.2s ease-out",
           "accordion-up": "accordion-up 0.2s ease-out",
+          "slide-down-and-fade": "slide-down-and-fade 0.2s ease-out",
+          "slide-up-and-fade": "slide-up-and-fade 0.2s ease-out",
+          "slide-left-and-fade": "slide-left-and-fade 0.2s ease-out",
+          "slide-right-and-fade": "slide-right-and-fade 0.2s ease-out",
         },
       },
     },
-  },
+  }
 );

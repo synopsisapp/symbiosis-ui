@@ -23,6 +23,10 @@ export { Text } from "./components/Text";
 export * from "./components/Text/types";
 export type { TextProps } from "./components/Text/types";
 
+export { Tooltip } from "./components/Tooltip";
+export * from "./components/Tooltip/types";
+export type { TooltipProps } from "./components/Tooltip/types";
+
 export * from "./designSystemTokens";
 
 export { shadcnPreset } from "./tailwind/shadcn-preset";
