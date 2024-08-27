@@ -15,7 +15,7 @@ type Story = StoryObj<typeof Tooltip.Root>;
 export const Uncontrolled: Story = {
   decorators: [
     (Story) => (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 items-start">
         <Story />
       </div>
     ),
@@ -67,7 +67,7 @@ export const Uncontrolled: Story = {
 export const Controlled: Story = {
   decorators: [
     (Story) => (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 items-start">
         <Story />
       </div>
     ),
@@ -75,14 +75,12 @@ export const Controlled: Story = {
   render: (args) => {
     const [open, setOpen] = React.useState(false);
     return (
-      <div className="flex flex-col gap-4">
-        <Tooltip.Root {...args} open={open} onOpenChange={setOpen}>
-          <Tooltip.Trigger>
-            <span>Hover me</span>
-          </Tooltip.Trigger>
-          <Tooltip.Content label="Controlled Tooltip" />
-        </Tooltip.Root>
-      </div>
+      <Tooltip.Root {...args} open={open} onOpenChange={setOpen}>
+        <Tooltip.Trigger>
+          <span>Hover me</span>
+        </Tooltip.Trigger>
+        <Tooltip.Content label="Controlled Tooltip" />
+      </Tooltip.Root>
     );
   },
   parameters: {
@@ -107,4 +105,24 @@ export const Controlled: Story = {
       },
     },
   },
+};
+
+export const CustomContent: Story = {
+  decorators: [
+    (Story) => (
+      <div className="flex flex-col gap-4 items-start">
+        <Story />
+      </div>
+    ),
+  ],
+  render: (args: TooltipProps["Root"]) => (
+    <Tooltip.Root {...args}>
+      <Tooltip.Trigger>
+        <span>Hover me</span>
+      </Tooltip.Trigger>
+      <Tooltip.Content className="bg-mainColors-light-200 rounded-none">
+        <div>Popover content</div>
+      </Tooltip.Content>
+    </Tooltip.Root>
+  ),
 };
