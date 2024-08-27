@@ -8,6 +8,7 @@ export type TooltipRootProps = {
 export type TooltipContentProps = {
   children?: React.ReactNode;
   label?: string;
+  className?: string;
 };
 
 export type TooltipTriggerProps = {

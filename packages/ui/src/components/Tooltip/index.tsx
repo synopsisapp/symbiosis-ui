@@ -38,24 +38,25 @@ const classnames = cn(
   "data-[state=delayed-open]:data-[side=bottom]:animate-slide-down-and-fade"
 );
 
-export const TooltipContent = ({ children, label }: TooltipContentProps) => {
+export const TooltipContent = ({
+  children,
+  label,
+  className,
+}: TooltipContentProps) => {
   return (
     <TooltipPrimitive.Portal>
       <TooltipPrimitive.Content
         sideOffset={5}
-        asChild
         forceMount
-        className={classnames}
+        className={cn(classnames, className)}
       >
-        <div>
-          {label ? (
-            <Text variant="body-small-200" noTranslations className="m-0 p-0">
-              {label}
-            </Text>
-          ) : (
-            children
-          )}
-        </div>
+        {label ? (
+          <Text variant="body-small-200" noTranslations className="m-0 p-0">
+            {label}
+          </Text>
+        ) : (
+          children
+        )}
       </TooltipPrimitive.Content>
     </TooltipPrimitive.Portal>
   );
