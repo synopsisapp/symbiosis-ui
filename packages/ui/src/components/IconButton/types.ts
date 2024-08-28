@@ -19,7 +19,7 @@ type BaseProps = {
   icon?: IconProps["name"];
   value?: React.ReactNode;
   layout?: ButtonLayout;
-  classname?: string;
+  className?: string;
 };
 
 type LinkProps = {

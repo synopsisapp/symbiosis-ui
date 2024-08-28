@@ -20,7 +20,7 @@ export const IconButton = React.forwardRef(
       icon,
       value,
       layout = "normal",
-      classname,
+      className,
       tone = "default",
       ...restProps
     }: IconButtonProps,
@@ -81,7 +81,7 @@ export const IconButton = React.forwardRef(
             size,
             shape: isCircle ? "circle" : "square",
           }),
-          classname,
+          className,
         )}
         style={isLoading && buttonWidth ? { width: `${buttonWidth}px`, height: `${buttonWidth}px` } : undefined}
         {...restProps}
