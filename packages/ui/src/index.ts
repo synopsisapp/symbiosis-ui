@@ -32,6 +32,10 @@ export { Dropdown } from "./components/Dropdown";
 export * from "./components/Dropdown/types";
 export type { DropdownProps } from "./components/Dropdown/types";
 
+export { Popover } from "./components/Popover";
+export * from "./components/Popover/types";
+export type { PopoverProps } from "./components/Popover/types";
+
 export * from "./designSystemTokens";
 
 export { shadcnPreset } from "./tailwind/shadcn-preset";
