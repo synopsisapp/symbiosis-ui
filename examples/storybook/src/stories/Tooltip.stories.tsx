@@ -6,13 +6,6 @@ const meta: Meta<typeof Tooltip.Root> = {
   title: "Components/Tooltip",
   component: Tooltip.Root,
   tags: ["autodocs"],
-};
-
-export default meta;
-
-type Story = StoryObj<typeof Tooltip.Root>;
-
-export const Uncontrolled: Story = {
   decorators: [
     (Story) => (
       <div className="flex flex-col gap-4 items-start">
@@ -20,6 +13,13 @@ export const Uncontrolled: Story = {
       </div>
     ),
   ],
+};
+
+export default meta;
+
+type Story = StoryObj<typeof Tooltip.Root>;
+
+export const Uncontrolled: Story = {
   render: (args: TooltipProps["Root"]) => (
     <Tooltip.Root {...args}>
       <Tooltip.Trigger>
@@ -65,13 +65,6 @@ export const Uncontrolled: Story = {
 };
 
 export const Controlled: Story = {
-  decorators: [
-    (Story) => (
-      <div className="flex flex-col gap-4 items-start">
-        <Story />
-      </div>
-    ),
-  ],
   render: (args) => {
     const [open, setOpen] = React.useState(false);
     return (
@@ -87,18 +80,18 @@ export const Controlled: Story = {
     docs: {
       source: {
         code: `
-        const ControlledTooltip = () => {
-          const [open, setOpen] = React.useState(false);
+const ControlledTooltip = () => {
+  const [open, setOpen] = React.useState(false);
 
-          return (
-              <Tooltip.Root  open={open} onOpenChange={setOpen}>
-                <Tooltip.Trigger>
-                  <span>Hover me</span>
-                </Tooltip.Trigger>
-                <Tooltip.Content label="Controlled Tooltip" />
-              </Tooltip.Root>
-          );
-        };
+  return (
+      <Tooltip.Root  open={open} onOpenChange={setOpen}>
+        <Tooltip.Trigger>
+          <span>Hover me</span>
+        </Tooltip.Trigger>
+        <Tooltip.Content label="Controlled Tooltip" />
+      </Tooltip.Root>
+  );
+};
         `,
         language: "jsx",
         type: "code",
@@ -108,13 +101,6 @@ export const Controlled: Story = {
 };
 
 export const CustomContent: Story = {
-  decorators: [
-    (Story) => (
-      <div className="flex flex-col gap-4 items-start">
-        <Story />
-      </div>
-    ),
-  ],
   render: (args: TooltipProps["Root"]) => (
     <Tooltip.Root {...args}>
       <Tooltip.Trigger>
