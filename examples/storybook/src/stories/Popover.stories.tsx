@@ -24,7 +24,7 @@ const meta: Meta<PopoverProps["Root"] & PopoverProps["Content"]> = {
       },
       type: "boolean",
       description:
-        "The controlled open state of the tooltip. Must be used in conjunction with onOpenChange.",
+        "The controlled open state of popover. Must be used in conjunction with onOpenChange.",
       required: false,
     },
     onOpenChange: {
