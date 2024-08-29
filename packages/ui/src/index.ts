@@ -36,6 +36,10 @@ export { Popover } from "./components/Popover";
 export * from "./components/Popover/types";
 export type { PopoverProps } from "./components/Popover/types";
 
+export { Radio } from "./components/Radio";
+export * from "./components/Radio/types";
+export type { RadioProps } from "./components/Radio/types";
+
 export * from "./designSystemTokens";
 
 export { shadcnPreset } from "./tailwind/shadcn-preset";
