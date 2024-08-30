@@ -93,19 +93,22 @@ export const Default: Story = {
 };
 
 export const DifferentSizes: Story = {
-	render: () => (
-		<Radio.Root name="size-radio-group">
+	render: (args) => (
+		<Radio.Root {...args}>
 			<Radio.Item value="small200" label="Small 200" size="small-200" />
 			<Radio.Item value="small100" label="Small 100" size="small-100" />
 			<Radio.Item value="base" label="Base" size="base" />
 			<Radio.Item value="large100" label="Large 100" size="large-100" />
 		</Radio.Root>
 	),
+	args: {
+		name: "size-radio-group",
+	},
 };
 
 export const CustomisedUI: Story = {
-	render: () => (
-		<Radio.Root name="customised-radio-group">
+	render: (args) => (
+		<Radio.Root {...args}>
 			<Radio.Item
 				value="option-ui-1"
 				label="Option 1"
@@ -123,43 +126,70 @@ export const CustomisedUI: Story = {
 			/>
 		</Radio.Root>
 	),
+	args: {
+		name: "customised-radio-group",
+	},
 };
 
 export const WithDefaultValue: Story = {
-	render: () => (
-		<Radio.Root name="default-value-radio-group" defaultValue="option2">
+	render: (args) => (
+		<Radio.Root {...args}>
 			<Radio.Item value="option-with-def-1" label="Option 1" />
 			<Radio.Item value="option-with-def-2" label="Option 2" />
 			<Radio.Item value="option-with-def-3" label="Option 3" />
 		</Radio.Root>
 	),
+	args: {
+		name: "default-value-radio-group",
+		defaultValue: "option2",
+	},
 };
 
 export const WithoutLabels: Story = {
-	render: () => (
-		<Radio.Root name="no-label-radio-group">
+	render: (args) => (
+		<Radio.Root {...args}>
 			<Radio.Item value="option-no-label-1" />
 			<Radio.Item value="option-no-label-2" />
 			<Radio.Item value="option-no-label-3" />
 		</Radio.Root>
 	),
+	args: {
+		name: "no-label-radio-group",
+	},
 };
 
 export const Controlled: Story = {
-	render: () => {
+	render: (args) => {
 		const [value, setValue] = React.useState("option1");
 		return (
-			<form>
-				<Radio.Root
-					name="controlled-radio-group"
-					onChange={setValue}
-					defaultValue={value}
-				>
-					<Radio.Item value="option1" label="Option 1" />
-					<Radio.Item value="option2" label="Option 2" />
-					<Radio.Item value="option3" label="Option 3" />
-				</Radio.Root>
-			</form>
+			<Radio.Root {...args} onChange={setValue} defaultValue={value}>
+				<Radio.Item value="option1" label="Option 1" />
+				<Radio.Item value="option2" label="Option 2" />
+				<Radio.Item value="option3" label="Option 3" />
+			</Radio.Root>
 		);
+	},
+	args: {
+		name: "controlled-radio-group",
+	},
+	parameters: {
+		docs: {
+			source: {
+				code: `
+const ControlledRadioGroup = () => {
+  const [value, setValue] = React.useState("option1");
+    return (
+      <Radio.Root name={controlled-radio-group} onChange={setValue} defaultValue={value}>
+        <Radio.Item value="option1" label="Option 1" />
+        <Radio.Item value="option2" label="Option 2" />
+        <Radio.Item value="option3" label="Option 3" />
+      </Radio.Root>
+    );
+}
+    `,
+				language: "tsx",
+				type: "code",
+			},
+		},
 	},
 };
