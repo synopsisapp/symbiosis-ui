@@ -6,10 +6,7 @@
   "main": "dist/symbiosis-ui.umd.js",
   "module": "dist/symbiosis-ui.es.js",
   "types": "dist/src/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
+  "files": ["dist", "src"],
   "exports": {
     "./plugin": {
       "types": "./dist/plugin/index.d.ts",
@@ -31,8 +28,10 @@
     "build:plugin": "vite build -c vite.config.plugin.ts && npm run build:plugin:types",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "lint": "biome check .",
-    "format": "biome format ."
+    "lint:check": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "format:check": "biome format .",
+    "format:fix": "biome format --write ."
   },
   "dependencies": {
     "@types/lodash": "^4.17.7",

@@ -1,9 +1,9 @@
-import fs from "fs/promises";
-import path from "path";
+import fs from "node:fs/promises";
+import path from "node:path";
 import postcss from "postcss";
-import tailwindcss, { Config } from "tailwindcss";
+import tailwindcss, { type Config } from "tailwindcss";
 import autoprefixer from "autoprefixer";
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
 import defaultConfig from "../tailwind.config";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -22,9 +22,7 @@ export async function rebuildStyles({
   const inputFile = path.resolve(__dirname, "../../src/tailwind.css");
   const outputFile = path.resolve(resolvedOutputDir, "symbiosis-ui.css");
 
-  const contentFiles = [
-    path.resolve(__dirname, "../../src/**/*.{js,ts,jsx,tsx}"),
-  ];
+  const contentFiles = [path.resolve(__dirname, "../../src/**/*.{js,ts,jsx,tsx}")];
 
   try {
     const input = await fs.readFile(inputFile, "utf8");

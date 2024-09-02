@@ -4,8 +4,8 @@ import type { SymbiosisUIPluginOptions } from "./types";
 
 export class SymbiosisUIWebpackPlugin {
   private options: Required<SymbiosisUIPluginOptions>;
-  private lastOptionsHash: string = "";
-  private assetsGenerated: boolean = false;
+  private lastOptionsHash = "";
+  private assetsGenerated = false;
 
   constructor(options: SymbiosisUIPluginOptions = {}) {
     this.options = {
@@ -26,18 +26,18 @@ export class SymbiosisUIWebpackPlugin {
     return JSON.stringify(options).split("").sort().join("");
   }
 
+  // biome-ignore lint: any is used here on purpose
   async apply(compiler: any) {
     const webpack = await import("webpack").catch(() => null);
 
     if (!webpack?.default) {
-      console.warn(
-        "Webpack is not installed. SymbiosisUIWebpackPlugin will not be applied."
-      );
+      console.warn("Webpack is not installed. SymbiosisUIWebpackPlugin will not be applied.");
       return;
     }
 
     compiler.hooks.thisCompilation.tap(
       "SymbiosisUIWebpackPlugin",
+      // biome-ignore lint: any is used here on purpose
       (compilation: any) => {
         compilation.hooks.processAssets.tapPromise(
           {
@@ -50,9 +50,9 @@ export class SymbiosisUIWebpackPlugin {
             } catch (error) {
               console.error("Symbiosis UI Webpack Plugin: Error - ", error);
             }
-          }
+          },
         );
-      }
+      },
     );
   }
 
@@ -63,8 +63,7 @@ export class SymbiosisUIWebpackPlugin {
     }
 
     console.log("Symbiosis UI Webpack Plugin: Generating assets");
-    const { iconsDir, publicDir, tailwindTheme, tailwindContent } =
-      this.options;
+    const { iconsDir, publicDir, tailwindTheme, tailwindContent } = this.options;
 
     try {
       await generateIcons({
@@ -82,10 +81,7 @@ export class SymbiosisUIWebpackPlugin {
       this.lastOptionsHash = currentOptionsHash;
       console.log("Symbiosis UI Webpack Plugin: Assets generated successfully");
     } catch (error) {
-      console.error(
-        "Symbiosis UI Webpack Plugin: Error generating assets - ",
-        error
-      );
+      console.error("Symbiosis UI Webpack Plugin: Error generating assets - ", error);
       throw error;
     }
   }
