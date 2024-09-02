@@ -4,8 +4,8 @@ import type { SymbiosisUIPluginOptions } from "./types";
 
 export class SymbiosisUIWebpackPlugin {
   private options: Required<SymbiosisUIPluginOptions>;
-  private lastOptionsHash: string = "";
-  private assetsGenerated: boolean = false;
+  private lastOptionsHash = "";
+  private assetsGenerated = false;
 
   constructor(options: SymbiosisUIPluginOptions = {}) {
     this.options = {
@@ -26,6 +26,7 @@ export class SymbiosisUIWebpackPlugin {
     return JSON.stringify(options).split("").sort().join("");
   }
 
+  // biome-ignore lint: any is used here on purpose
   async apply(compiler: any) {
     const webpack = await import("webpack").catch(() => null);
 
@@ -38,6 +39,7 @@ export class SymbiosisUIWebpackPlugin {
 
     compiler.hooks.thisCompilation.tap(
       "SymbiosisUIWebpackPlugin",
+      // biome-ignore lint: any is used here on purpose
       (compilation: any) => {
         compilation.hooks.processAssets.tapPromise(
           {

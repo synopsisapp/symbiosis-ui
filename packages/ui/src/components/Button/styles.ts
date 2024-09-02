@@ -17,16 +17,16 @@ export interface ButtonHeightSizingVariants extends VariantProps<typeof buttonHe
 export const buttonHeightSizingCva = cva([], {
   variants: {
     size: {
-      ['small-200']: [
+      "small-200": [
         'h-6', 'min-h-[1.5rem]',
       ],
-      ['small-100']: [
+      "small-100": [
         'h-7', 'min-h-[1.75rem]',
       ],
-      ['base']: [
+      "base": [
         'h-8', 'min-h-[2rem]',
       ],
-      ['large-100']: [
+      "large-100": [
         'h-9', 'min-h-[2.25rem]',
       ],
     }
@@ -45,16 +45,16 @@ const iconButtonCva = cva(['justify-center p-0 items-center'], {
       square: [],
     },
     size: {
-      ['small-200']: [
+      "small-200": [
         'w-[1.5rem]', 'min-w-[1.5rem]',
       ],
-      ['small-100']: [
+      "small-100": [
         'w-[1.75rem]', 'min-w-[1.75rem]',
       ],
-      ['base']: [
+      "base": [
         'w-[2rem]', 'min-w-[2rem]',
       ],
-      ['large-100']: [
+      "large-100": [
         'w-[2.25rem]', 'min-w-[2.25rem]',
       ],
     }
@@ -118,19 +118,19 @@ const buttonCva = cva([
       ],
     },
     size: {
-      ['small-200']: [
+      "small-200": [
         'py-0 px-1.5',
         'gap-1'
       ],
-      ['small-100']: [
+      "small-100": [
         'py-0 px-1.5',
         'gap-1.5'
       ],
-      ['base']: [
+      "base": [
         'py-0 px-2',
         'gap-2'
       ],
-      ['large-100']: [
+      "large-100": [
         'py-0 px-3',
         'gap-3'
       ],
@@ -335,35 +335,35 @@ const buttonCva = cva([
 })
 
 export const iconSizeToPx: Record<Sizes, number> = {
-  ['small-200']: 12,
-  ['small-100']: 14,
-  ['base']: 16,
-  ['large-100']: 18,
+  "small-200": 12,
+  "small-100": 14,
+  "base": 16,
+  "large-100": 18,
 };
 
 export const iconSizeToTailwind: Record<Sizes, string> = {
-  ['small-200']: cn(
+  "small-200": cn(
     'w-[12px]',
     'h-[12px]',
     'min-w-[12px]',
     'min-h-[12px]',
     'text-[12px]'
   ),
-  ['small-100']: cn(
+  "small-100": cn(
     'w-[14px]',
     'h-[14px]',
     'min-w-[14px]',
     'min-h-[14px]',
     'text-[14px]'
   ),
-  ['base']: cn(
+  "base": cn(
     'w-[16px]',
     'h-[16px]',
     'min-w-[16px]',
     'min-h-[16px]',
     'text-[16px]'
   ),
-  ['large-100']: cn(
+  "large-100": cn(
     'w-[18px]',
     'h-[18px]',
     'min-w-[18px]',

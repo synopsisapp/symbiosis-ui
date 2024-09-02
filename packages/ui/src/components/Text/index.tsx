@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TextProps } from './types';
+import type { TextProps } from './types';
 import { cn } from '../../utils/cn';
 
 import { text } from './styles';

@@ -1,7 +1,7 @@
 import z from 'zod';
-import * as React from 'react';
+import type * as React from 'react';
 import type { IconProps } from '../Icon/types';
-import { Sizes } from '../../designSystemTokens';
+import type { Sizes } from '../../designSystemTokens';
 
 export const ButtonVariant = z.enum(['primary', 'outline', 'ghost', 'link']);
 export type ButtonVariant = z.infer<typeof ButtonVariant>;

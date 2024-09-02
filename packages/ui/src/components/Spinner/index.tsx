@@ -1,6 +1,6 @@
 import { iconSizeToTailwind } from '../Button/styles';
 import { cn } from '../../utils/cn';
-import { SpinnerProps } from "./types";
+import type { SpinnerProps } from "./types";
 
 const primaryColors = cn(
   'border-white/30',

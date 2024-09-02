@@ -26,6 +26,7 @@ export const Button = React.forwardRef(({
   const [buttonWidth, setButtonWidth] = React.useState<number | null>(null);
   const buttonRef = React.useRef<HTMLElement>(null);
 
+  // biome-ignore lint: this dependency array uses more dependencies than necessary as we need to force it to rerun
   React.useEffect(() => {
     if (buttonRef.current && !isLoading) {
       setButtonWidth(buttonRef.current.offsetWidth);
@@ -37,8 +38,7 @@ export const Button = React.forwardRef(({
       case 'a':
         return 'a';
       case 'div':
-        return 'div';
-      case 'button':
+        return "div";
       default:
         return 'button';
     }

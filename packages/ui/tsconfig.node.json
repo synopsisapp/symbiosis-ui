@@ -8,5 +8,5 @@
     "typeRoots": ["./node_modules/@types", "./src/types"],
     "rootDir": "./"
   },
-  "include": ["vite.config.ts", "src"],
+  "include": ["vite.config.ts", "src"]
 }
