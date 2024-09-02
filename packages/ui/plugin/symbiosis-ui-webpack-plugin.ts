@@ -13,6 +13,7 @@ export class SymbiosisUIWebpackPlugin {
       tailwindContent: [],
       iconsDir: "assets/icons",
       publicDir: "public",
+      verboseLogs: false,
       ...options,
     };
     this.updateOptionsHash();
@@ -63,12 +64,13 @@ export class SymbiosisUIWebpackPlugin {
     }
 
     console.log("Symbiosis UI Webpack Plugin: Generating assets");
-    const { iconsDir, publicDir, tailwindTheme, tailwindContent } = this.options;
+    const { iconsDir, publicDir, tailwindTheme, tailwindContent, verboseLogs } = this.options;
 
     try {
       await generateIcons({
         inputDir: iconsDir,
         outputDir: publicDir,
+        verboseLogs,
       });
 
       await rebuildStyles({

@@ -1,3 +1,3 @@
 declare namespace SymbiosisUI {
-  type IconName = string;
+  type IconName = "symbiosis-chevron-down";
 }
