@@ -1,4 +1,4 @@
-import path from "node:path";
+import path from "path";
 import { glob } from "glob";
 import { parse } from "node-html-parser";
 import fsExtra from "fs-extra";
