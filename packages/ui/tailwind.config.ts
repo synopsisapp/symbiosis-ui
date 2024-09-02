@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-import { shadcnPreset } from "./src/tailwind/shadcn-preset"
+import { shadcnPreset } from "./src/tailwind/shadcn-preset";
 import defaultTheme from "./src/defaultTheme";
 
 const config: Config = {

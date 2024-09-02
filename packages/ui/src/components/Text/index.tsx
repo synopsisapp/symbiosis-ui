@@ -1,16 +1,16 @@
-import * as React from 'react';
-import type { TextProps } from './types';
-import { cn } from '../../utils/cn';
+import * as React from "react";
+import type { TextProps } from "./types";
+import { cn } from "../../utils/cn";
 
-import { text } from './styles';
+import { text } from "./styles";
 
 export function TextTw({
-  variant = 'body-base',
-  renderAs = 'p',
-  weight = 'base',
+  variant = "body-base",
+  renderAs = "p",
+  weight = "base",
   className,
   children,
-  style
+  style,
 }: TextProps) {
   const Component = renderAs;
   return (

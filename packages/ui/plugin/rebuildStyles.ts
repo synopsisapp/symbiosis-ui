@@ -22,9 +22,7 @@ export async function rebuildStyles({
   const inputFile = path.resolve(__dirname, "../../src/tailwind.css");
   const outputFile = path.resolve(resolvedOutputDir, "symbiosis-ui.css");
 
-  const contentFiles = [
-    path.resolve(__dirname, "../../src/**/*.{js,ts,jsx,tsx}"),
-  ];
+  const contentFiles = [path.resolve(__dirname, "../../src/**/*.{js,ts,jsx,tsx}")];
 
   try {
     const input = await fs.readFile(inputFile, "utf8");

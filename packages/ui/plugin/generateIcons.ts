@@ -47,14 +47,7 @@ export async function generateIcons(options: Options) {
     console.log(`No SVG files found in ${inputDirRelative}`);
     await generateEmptyIconFiles(outputDir);
   } else {
-    await generateIconFiles(
-      files,
-      inputDir,
-      outputDir,
-      cwd,
-      inputDirRelative,
-      logVerbose
-    );
+    await generateIconFiles(files, inputDir, outputDir, cwd, inputDirRelative, logVerbose);
   }
 }
 
@@ -73,10 +66,7 @@ async function generateEmptyIconFiles(outputDir: string) {
 
   await fsExtra.writeFile(typeOutputFilepath, typeOutputContent);
   await fsExtra.writeJson(jsonOutputFilepath, [], { spaces: 2 });
-  await fsExtra.writeFile(
-    spriteFilepath,
-    '<svg xmlns="http://www.w3.org/2000/svg"></svg>'
-  );
+  await fsExtra.writeFile(spriteFilepath, '<svg xmlns="http://www.w3.org/2000/svg"></svg>');
 
   console.log("Generated empty icon files");
 }
@@ -187,7 +177,7 @@ async function generateSvgSprite({
       svg.removeAttribute("height");
 
       return svg.toString().trim();
-    })
+    }),
   );
 
   let output = [
@@ -214,9 +204,7 @@ async function generateSvgSprite({
 }
 
 async function writeIfChanged(filepath: string, newContent: string) {
-  const currentContent = await fsExtra
-    .readFile(filepath, "utf8")
-    .catch(() => "");
+  const currentContent = await fsExtra.readFile(filepath, "utf8").catch(() => "");
   if (currentContent === newContent) return false;
   await fsExtra.writeFile(filepath, newContent, "utf8");
   return true;

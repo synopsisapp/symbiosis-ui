@@ -1,11 +1,6 @@
 import type z from "zod";
 import type { Sizes } from "../../designSystemTokens";
-import {
-  ButtonVariant,
-  type ButtonTone,
-  type ButtonRenderAs,
-  type ButtonLayout,
-} from "../Button/types";
+import { ButtonVariant, type ButtonTone, type ButtonRenderAs, type ButtonLayout } from "../Button/types";
 import type { IconProps } from "../Icon/types";
 
 export const IconButtonVariant = ButtonVariant.exclude(["link"]);

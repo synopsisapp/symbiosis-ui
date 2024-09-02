@@ -1,131 +1,127 @@
-import * as React from 'react';
-import { Icon } from '../Icon';
-import { Text } from '../Text';
-import { Spinner } from '../Spinner';
-import type { IconButtonProps } from './types';
-import { button, iconButton, iconSizeToTailwind } from '../Button/styles';
-import { cn } from '../../utils/cn';
+import * as React from "react";
+import { Icon } from "../Icon";
+import { Text } from "../Text";
+import { Spinner } from "../Spinner";
+import type { IconButtonProps } from "./types";
+import { button, iconButton, iconSizeToTailwind } from "../Button/styles";
+import { cn } from "../../utils/cn";
 
-export const IconButton = React.forwardRef(({
-  onPress,
-  variant = 'primary',
-  size = 'base',
-  isDisabled = false,
-  isLoading = false,
-  type = 'button',
-  isCircle = false,
-  renderAs = 'button',
-  icon,
-  value,
-  layout = 'normal',
-  classname,
-  tone = 'default',
-  ...restProps
-}: IconButtonProps, ref) => {
-  const [buttonWidth, setButtonWidth] = React.useState<number | null>(null);
-  const buttonRef = React.useRef<HTMLElement>(null);
+export const IconButton = React.forwardRef(
+  (
+    {
+      onPress,
+      variant = "primary",
+      size = "base",
+      isDisabled = false,
+      isLoading = false,
+      type = "button",
+      isCircle = false,
+      renderAs = "button",
+      icon,
+      value,
+      layout = "normal",
+      classname,
+      tone = "default",
+      ...restProps
+    }: IconButtonProps,
+    ref,
+  ) => {
+    const [buttonWidth, setButtonWidth] = React.useState<number | null>(null);
+    const buttonRef = React.useRef<HTMLElement>(null);
 
-  // biome-ignore lint: this dependency array uses more dependencies than necessary as we need to force it to rerun
-  React.useEffect(() => {
-    if (buttonRef.current && !isLoading) {
-      setButtonWidth(buttonRef.current.offsetWidth);
-    }
-  }, [isLoading, icon, value, size]);
+    // biome-ignore lint: this dependency array uses more dependencies than necessary as we need to force it to rerun
+    React.useEffect(() => {
+      if (buttonRef.current && !isLoading) {
+        setButtonWidth(buttonRef.current.offsetWidth);
+      }
+    }, [isLoading, icon, value, size]);
 
-  const ButtonComponent = (() => {
-    switch (renderAs) {
-      case 'a':
-        return 'a';
-      case 'div':
-        return "div";
-      default:
-        return 'button';
-    }
-  })();
+    const ButtonComponent = (() => {
+      switch (renderAs) {
+        case "a":
+          return "a";
+        case "div":
+          return "div";
+        default:
+          return "button";
+      }
+    })();
 
-  return (
-    <ButtonComponent
-      disabled={isDisabled}
-      type={type}
-      onClick={(e: React.MouseEvent<HTMLElement>) => {
-        if (isDisabled || isLoading) {
-          return;
-        }
-        onPress?.(e);
-      }}
-      ref={(el: HTMLElement | null) => {
-        // @ts-ignore
-        buttonRef.current = el;
-        if (typeof ref === 'function') {
-          ref(el);
-        } else if (ref) {
-          ref.current = el;
-        }
-      }}
-      className={cn(
-        cn(button({
-          variant,
-          layout,
-          size,
-          tone,
-          isDisabled: isDisabled,
-          isLoading: isLoading
-        })),
-        iconButton({
-          size,
-          shape: isCircle ? 'circle' : 'square',
-        }),
-        classname,
-      )}
-      style={isLoading && buttonWidth ? { width: `${buttonWidth}px`, height: `${buttonWidth}px` } : undefined}
-      {...restProps}
-    >
-      {isLoading ? (
-        <div className="flex w-full h-full items-center justify-center">
-          <Spinner
-            isLoading
-            size={(() => {
-              switch (size) {
-                case 'small-200':
-                  return 'small-100';
-                case 'small-100':
-                  return 'small-100';
-                case 'base':
-                  return 'base';
-                case 'large-100':
-                  return 'large-100';
-                default:
-                  return 'base';
-              }
-            })()}
-            variant={variant === 'primary'
-              ? 'primary'
-              : tone === 'default'
-                ? 'secondary'
-                : 'currentColor'
-            }
-          />
-        </div>
-      ) : (
-        <>
-          {icon && (
-            <div className={cn(
-              iconSizeToTailwind[size],
-            )}>
-              <Icon name={icon} size="font" />
-            </div>
-          )}
-          {value && (
-            <Text
-              noTranslations
-              variant="body-small-100"
-              className={cn('text-inherit')}
-            >
-              {value}
-            </Text>
-          )}
-        </>
-      )}
-    </ButtonComponent>
-  );
-});
+    return (
+      <ButtonComponent
+        disabled={isDisabled}
+        type={type}
+        onClick={(e: React.MouseEvent<HTMLElement>) => {
+          if (isDisabled || isLoading) {
+            return;
+          }
+          onPress?.(e);
+        }}
+        ref={(el: HTMLElement | null) => {
+          // @ts-ignore
+          buttonRef.current = el;
+          if (typeof ref === "function") {
+            ref(el);
+          } else if (ref) {
+            ref.current = el;
+          }
+        }}
+        className={cn(
+          cn(
+            button({
+              variant,
+              layout,
+              size,
+              tone,
+              isDisabled: isDisabled,
+              isLoading: isLoading,
+            }),
+          ),
+          iconButton({
+            size,
+            shape: isCircle ? "circle" : "square",
+          }),
+          classname,
+        )}
+        style={isLoading && buttonWidth ? { width: `${buttonWidth}px`, height: `${buttonWidth}px` } : undefined}
+        {...restProps}
+      >
+        {isLoading ? (
+          <div className="flex w-full h-full items-center justify-center">
+            <Spinner
+              isLoading
+              size={(() => {
+                switch (size) {
+                  case "small-200":
+                    return "small-100";
+                  case "small-100":
+                    return "small-100";
+                  case "base":
+                    return "base";
+                  case "large-100":
+                    return "large-100";
+                  default:
+                    return "base";
+                }
+              })()}
+              variant={variant === "primary" ? "primary" : tone === "default" ? "secondary" : "currentColor"}
+            />
+          </div>
+        ) : (
+          <>
+            {icon && (
+              <div className={cn(iconSizeToTailwind[size])}>
+                <Icon name={icon} size="font" />
+              </div>
+            )}
+            {value && (
+              <Text noTranslations variant="body-small-100" className={cn("text-inherit")}>
+                {value}
+              </Text>
+            )}
+          </>
+        )}
+      </ButtonComponent>
+    );
+  },
+);
