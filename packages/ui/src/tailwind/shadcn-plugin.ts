@@ -184,5 +184,5 @@ export const shadcnPlugin = plugin(
         },
       },
     },
-  }
+  },
 );

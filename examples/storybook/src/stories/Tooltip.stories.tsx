@@ -47,8 +47,7 @@ export const Uncontrolled: Story = {
         defaultValue: { summary: "false" },
       },
       type: "boolean",
-      description:
-        "The controlled open state of the tooltip. Must be used in conjunction with onOpenChange.",
+      description: "The controlled open state of the tooltip. Must be used in conjunction with onOpenChange.",
       defaultValue: false,
       required: false,
     },
@@ -56,8 +55,7 @@ export const Uncontrolled: Story = {
       table: {
         type: { summary: "(open: boolean) => void" },
       },
-      description:
-        "Event handler called when the open state of the tooltip changes.",
+      description: "Event handler called when the open state of the tooltip changes.",
       control: false,
       required: false,
     },
