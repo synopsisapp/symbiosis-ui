@@ -5,13 +5,13 @@ import { cn } from "../../utils/cn";
 
 export const sharedSwitchStyles = cn(
 	"peer inline-flex shrink-0 cursor-pointer",
-	"items-center rounded-full border-2 border-gray-300",
+	"items-center rounded-full border-2 border-slate-300",
 	"transition-colors focus-visible:outline-none focus-visible:ring-2",
 	"focus-visible:ring-ring focus-visible:ring-offset-2",
 	"focus-visible:ring-offset-background disabled:cursor-not-allowed",
 	"disabled:opacity-50",
-	"data-[state=checked]:bg-gray-700 data-[state=checked]:border-gray-800",
-	"data-[state=unchecked]:border-gray-300 bg-gray-300 relative",
+	"data-[state=checked]:bg-slate-700/95 data-[state=checked]:border-slate-700",
+	"data-[state=unchecked]:border-slate-300 bg-slate-300 relative",
 );
 
 export const switchSizes = cva([], {
