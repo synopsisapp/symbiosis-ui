@@ -44,6 +44,10 @@ export { Switch } from "./components/Switch";
 export * from "./components/Switch/types";
 export type { SwitchProps } from "./components/Switch/types";
 
+export { Checkbox } from "./components/Checkbox";
+export * from "./components/Checkbox/types";
+export type { CheckboxProps } from "./components/Checkbox/types";
+
 export * from "./designSystemTokens";
 
 export { shadcnPreset } from "./tailwind/shadcn-preset";
