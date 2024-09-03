@@ -14,7 +14,7 @@ export default function Index() {
       <h1>Symbiosis UI</h1>
       <Button label="Click me" leftIcon="calendar" rightIcon="calendar" />
       <div className="text-gray-500">
-        <Icon name="dashboard" />
+        <Icon name="calendar" />
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ export function symbiosisUIPlugin({
   tailwindContent,
   iconsDir = "assets/icons",
   publicDir = "public",
+  verboseLogs = false,
 }: SymbiosisUIPluginOptions = {}): Plugin {
   return {
     name: "symbiosis-ui-plugin",
@@ -27,6 +28,7 @@ export function symbiosisUIPlugin({
         await generateIcons({
           inputDir: iconsDir,
           outputDir: publicDir,
+          verboseLogs,
         });
         await rebuildStyles({
           userTheme: tailwindTheme,

@@ -1,9 +1,9 @@
-import fs from "node:fs/promises";
-import path from "node:path";
+import fs from "fs/promises";
+import path from "path";
 import postcss from "postcss";
 import tailwindcss, { type Config } from "tailwindcss";
 import autoprefixer from "autoprefixer";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath } from "url";
 import defaultConfig from "../tailwind.config";
 
 const __filename = fileURLToPath(import.meta.url);

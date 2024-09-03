@@ -5,4 +5,5 @@ export type SymbiosisUIPluginOptions = {
   tailwindContent?: string[];
   iconsDir?: string;
   publicDir?: string;
+  verboseLogs?: boolean;
 };
