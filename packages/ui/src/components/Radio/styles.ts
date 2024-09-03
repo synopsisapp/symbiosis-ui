@@ -15,9 +15,9 @@ export const radioItemCva = cva([], {
 });
 
 export const sharedRadioItemStyles = cn(
-  "before:border-slate-800 peer",
+  "before:border-slate-700 peer",
   "flex rounded-full",
-  "border border-slate-800 text-slate-700 ring-offset-background",
+  "border border-slate-700 text-slate-700 ring-offset-background",
   "disabled:cursor-not-allowed disabled:opacity-50",
   "items-center justify-center",
 );
