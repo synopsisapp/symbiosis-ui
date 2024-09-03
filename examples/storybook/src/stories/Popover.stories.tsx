@@ -23,16 +23,14 @@ const meta: Meta<PopoverProps["Root"] & PopoverProps["Content"]> = {
         defaultValue: { summary: "false" },
       },
       type: "boolean",
-      description:
-        "The controlled open state of popover. Must be used in conjunction with onOpenChange.",
+      description: "The controlled open state of popover. Must be used in conjunction with onOpenChange.",
       required: false,
     },
     onOpenChange: {
       table: {
         type: { summary: "(open: boolean) => void" },
       },
-      description:
-        "Event handler called when the open state of the popover changes.",
+      description: "Event handler called when the open state of the popover changes.",
       control: false,
       required: false,
     },
@@ -143,12 +141,7 @@ export const CustomContent: Story = {
         <Popover.Trigger>
           <span>Open Popover</span>
         </Popover.Trigger>
-        <Popover.Content
-          side={side}
-          closeIcon={closeIcon}
-          tone={tone}
-          className="bg-lime-200"
-        >
+        <Popover.Content side={side} closeIcon={closeIcon} tone={tone} className="bg-lime-200">
           <div>Popover content</div>
           <Popover.Arrow className="fill-lime-200" />
         </Popover.Content>

@@ -3,26 +3,11 @@ import { IconButton } from "../IconButton";
 import { cn } from "../../utils/cn";
 import { sharedPopoverStyles } from "./styles";
 
-import type {
-  PopoverRootProps,
-  PopoverContentProps,
-  PopoverTriggerProps,
-  PopoverArrowProps,
-} from "./types";
+import type { PopoverRootProps, PopoverContentProps, PopoverTriggerProps, PopoverArrowProps } from "./types";
 
-const PopoverRoot = ({
-  children,
-  defaultOpen,
-  onOpenChange,
-  open,
-}: PopoverRootProps) => {
+const PopoverRoot = ({ children, defaultOpen, onOpenChange, open }: PopoverRootProps) => {
   return (
-    <PopoverPrimitive.Root
-      modal
-      defaultOpen={defaultOpen}
-      open={open}
-      onOpenChange={onOpenChange}
-    >
+    <PopoverPrimitive.Root modal defaultOpen={defaultOpen} open={open} onOpenChange={onOpenChange}>
       {children}
     </PopoverPrimitive.Root>
   );
@@ -45,23 +30,10 @@ const PopoverContent = ({
 }: PopoverContentProps) => {
   return (
     <PopoverPrimitive.Portal>
-      <PopoverPrimitive.Content
-        avoidCollisions
-        side={side}
-        className={cn(sharedPopoverStyles, className)}
-      >
+      <PopoverPrimitive.Content avoidCollisions side={side} className={cn(sharedPopoverStyles, className)}>
         {closeIcon && (
-          <PopoverPrimitive.Close
-            className="absolute top-1 right-1 focus-visible:outline-none"
-            aria-label="Close"
-          >
-            <IconButton
-              icon={closeIcon}
-              tone={tone}
-              variant="ghost"
-              size="base"
-              className="w-4 min-w-4 h-4 min-h-4"
-            />
+          <PopoverPrimitive.Close className="absolute top-1 right-1 focus-visible:outline-none" aria-label="Close">
+            <IconButton icon={closeIcon} tone={tone} variant="ghost" size="base" className="w-4 min-w-4 h-4 min-h-4" />
           </PopoverPrimitive.Close>
         )}
 
