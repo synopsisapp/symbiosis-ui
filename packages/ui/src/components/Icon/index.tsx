@@ -22,7 +22,7 @@ const iconClasses = cva(["flex items-center"], {
  *
  * size: 'font' uses the size of the font of the parent element.
  */
-export function Icon({ name, size = "font", className }: IconProps) {
+const Icon = ({ name, size = "font", className }: IconProps) => {
   const { publicDir } = React.useContext(IconContext);
 
   return (
@@ -31,4 +31,8 @@ export function Icon({ name, size = "font", className }: IconProps) {
       <use href={`${publicDir}#${name}`} />
     </svg>
   );
-}
+};
+
+Icon.displayName = "Icon";
+
+export { Icon };
