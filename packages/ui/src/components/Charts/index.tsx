@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import * as ChartPrimitive from "recharts";
+import { getTwColor } from "../../utils/getTwColor";
 
 import type { ChartConfig } from "./types";
 import { ChartContext, useChart } from "./hooks/useChart";
@@ -58,8 +59,9 @@ ${prefix} [data-chart=${id}] {
 ${colorConfig
   .map(([key, itemConfig]) => {
     const color = itemConfig.theme?.[theme as keyof typeof itemConfig.theme] || itemConfig.color;
-    return color ? `  --color-${key}: ${color};` : null;
+    return color ? `  --color-${key}: ${getTwColor(color)};` : null;
   })
+  .filter(Boolean)
   .join("\n")}
 }
 `,
