@@ -8,3 +8,5 @@ export type ChartConfig = {
 };
 
 export type * from "recharts";
+
+export type ChartDataPoint = Record<string, number | string>;

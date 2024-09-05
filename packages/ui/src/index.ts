@@ -37,3 +37,7 @@ export { Chart } from "./components/Charts";
 export * from "./components/Charts/types";
 export type { ChartConfig } from "./components/Charts/types";
 export * from "./components/Charts/helpers";
+
+export { SymbiosisAreaChart } from "./components/SymbiosisAreaChart";
+export * from "./components/SymbiosisAreaChart/types";
+export type { SymbiosisAreaChartProps } from "./components/SymbiosisAreaChart/types";
