@@ -45,6 +45,8 @@ export default defineConfig({
         "vite-plugin-dts",
         "webpack",
         "zod",
+        "recharts",
+        "date-fns",
       ],
       output: {
         exports: "named",
