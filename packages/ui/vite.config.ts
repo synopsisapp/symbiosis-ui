@@ -47,6 +47,8 @@ export default defineConfig({
         "vite",
         "vite-plugin-dts",
         "zod",
+        "recharts",
+        "date-fns",
       ],
       output: {
         globals: {
