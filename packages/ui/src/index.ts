@@ -1,6 +1,7 @@
 import "./tailwind.css";
 
 export { cn } from "./utils/cn";
+export { getTwColor } from "./utils/getTwColor";
 
 export { Button } from "./components/Button";
 export * from "./components/Button/types";
@@ -31,3 +32,8 @@ export * from "./designSystemTokens";
 
 export { shadcnPreset } from "./tailwind/shadcn-preset";
 export { shadcnPlugin } from "./tailwind/shadcn-plugin";
+
+export { Chart } from "./components/Charts";
+export * from "./components/Charts/types";
+export type { ChartConfig } from "./components/Charts/types";
+export * from "./components/Charts/helpers";
