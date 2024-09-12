@@ -1032,6 +1032,7 @@ export const CustomUI: Story = {
         {...args}
         className="bg-slate-400 [&_.recharts-cartesian-axis-tick_text]:fill-white [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-white"
         legendClassName="text-white"
+        tooltipClassName="rounded-none border-green-400 border-2"
       />
     );
   },
