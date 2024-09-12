@@ -182,7 +182,7 @@ const ChartTooltipContent = React.forwardRef<
                     )}
                     <div
                       className={cn(
-                        "flex flex-1 justify-between leading-none text-inherit",
+                        "flex flex-1 justify-between leading-none text-inherit gap-2",
                         nestLabel ? "items-end" : "items-center",
                       )}
                     >
