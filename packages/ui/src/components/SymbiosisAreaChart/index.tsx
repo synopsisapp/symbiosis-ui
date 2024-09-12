@@ -12,6 +12,7 @@ const SymbiosisAreaChart = ({
   tooltipLabelFormatter,
   className,
   legendClassName,
+  tooltipClassName,
 }: SymbiosisAreaChartProps) => {
   const defaultTickFormatter = React.useCallback((value: string) => {
     const date = new Date(value);
@@ -48,6 +49,7 @@ const SymbiosisAreaChart = ({
             <Chart.TooltipContent
               labelFormatter={tooltipLabelFormatter ?? defaultTooltipLabelFormatter}
               indicator="dot"
+              className={tooltipClassName}
             />
           }
         />

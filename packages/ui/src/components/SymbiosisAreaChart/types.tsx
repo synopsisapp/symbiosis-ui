@@ -7,4 +7,5 @@ export type SymbiosisAreaChartProps = {
   tooltipLabelFormatter?: (value: string) => string;
   className?: string;
   legendClassName?: string;
+  tooltipClassName?: string;
 };
