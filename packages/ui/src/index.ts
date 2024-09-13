@@ -28,6 +28,10 @@ export { Tooltip } from "./components/Tooltip";
 export * from "./components/Tooltip/types";
 export type { TooltipProps } from "./components/Tooltip/types";
 
+export { Dropdown } from "./components/Dropdown";
+export * from "./components/Dropdown/types";
+export type { DropdownProps } from "./components/Dropdown/types";
+
 export * from "./designSystemTokens";
 
 export { shadcnPreset } from "./tailwind/shadcn-preset";
