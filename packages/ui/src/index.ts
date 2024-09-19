@@ -3,6 +3,8 @@ import "./tailwind.css";
 export { cn } from "./utils/cn";
 export { getTwColor } from "./utils/getTwColor";
 
+export { usePagination } from "./hooks/usePagination";
+
 export { Button } from "./components/Button";
 export * from "./components/Button/types";
 export type { ButtonProps } from "./components/Button/types";
@@ -47,6 +49,9 @@ export type { SwitchProps } from "./components/Switch/types";
 export { Checkbox } from "./components/Checkbox";
 export * from "./components/Checkbox/types";
 export type { CheckboxProps } from "./components/Checkbox/types";
+export { Pagination } from "./components/Pagination";
+export * from "./components/Pagination/types";
+export type { PaginationProps } from "./components/Pagination/types";
 
 export * from "./designSystemTokens";
 
