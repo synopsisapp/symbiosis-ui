@@ -28,7 +28,8 @@ export type BaseProps = {
   isLoading?: boolean;
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
   renderAs?: ButtonRenderAs;
-  classname?: string;
+  className?: string;
+  iconClassName?: string;
   form?: string;
 };
 
