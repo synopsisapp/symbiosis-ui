@@ -11,6 +11,7 @@ type CalculateCountForDataOnDatesInput<T extends Record<string, string[]>> = {
   data: DataItems<T>;
   startDate: string;
   endDate: string;
+  cumulativeCount?: boolean;
 };
 
 type StringKeys<T> = Extract<keyof T, string>;
@@ -19,6 +20,7 @@ export function calculateCountForDataOnDates<T extends Record<string, string[]>>
   data,
   startDate,
   endDate,
+  cumulativeCount = true,
 }: CalculateCountForDataOnDatesInput<T>): DateAndModel<StringKeys<T>>[] {
   // Initialize the indices for each data item
   const indices = {} as Record<StringKeys<T>, number>;
@@ -40,20 +42,29 @@ export function calculateCountForDataOnDates<T extends Record<string, string[]>>
   while (currentDate <= new Date(endDate)) {
     // For each data item, increment the count if the date is the same day or before currentDate
     for (const name in data) {
+      let dailyCount = cumulativeCount ? results[currentDate.toISOString()][name as StringKeys<T>] : 0;
       while (
         indices[name] < data[name].length &&
         (isSameDay(new Date(data[name][indices[name]]), currentDate) ||
-          isBefore(new Date(data[name][indices[name]]), currentDate))
+          (cumulativeCount && isBefore(new Date(data[name][indices[name]]), currentDate)))
       ) {
-        results[currentDate.toISOString()][name as StringKeys<T>]++;
+        dailyCount++;
         indices[name]++;
       }
+      results[currentDate.toISOString()][name as StringKeys<T>] = dailyCount;
     }
 
-    // Increment currentDate by one day and initialize the counts for the new day based on the previous day
+    // Increment currentDate by one day and initialize the counts for the new day
     currentDate.setDate(currentDate.getDate() + 1);
     if (currentDate <= new Date(endDate)) {
-      results[currentDate.toISOString()] = { ...results[new Date(subDays(currentDate, 1)).toISOString()] };
+      if (cumulativeCount) {
+        results[currentDate.toISOString()] = { ...results[new Date(subDays(currentDate, 1)).toISOString()] };
+      } else {
+        results[currentDate.toISOString()] = {} as Record<StringKeys<T>, number>;
+        for (const name in data) {
+          results[currentDate.toISOString()][name as StringKeys<T>] = 0;
+        }
+      }
     }
   }
 
