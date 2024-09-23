@@ -1,7 +1,7 @@
 import type { IconProps } from "../Icon/types";
 import type { Sizes } from "../../designSystemTokens";
 
-export type InputProps = {
+export type TextFieldProps = {
   label?: string;
   error?: string;
   required?: boolean;

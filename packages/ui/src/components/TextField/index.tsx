@@ -3,9 +3,9 @@ import { Icon } from "../Icon";
 import { cn } from "../../utils/cn";
 import { Text } from "../Text";
 import { input, inputLabel } from "./styles";
-import type { InputProps } from "./types";
+import type { TextFieldProps } from "./types";
 
-const Input = React.forwardRef(
+const TextField = React.forwardRef(
   (
     {
       error,
@@ -23,7 +23,7 @@ const Input = React.forwardRef(
       id,
       label,
       className,
-    }: InputProps,
+    }: TextFieldProps,
     ref,
   ) => {
     const formId = id ?? label ?? "";
@@ -108,6 +108,6 @@ const Input = React.forwardRef(
   },
 );
 
-Input.displayName = "Input";
+TextField.displayName = "TextField";
 
-export { Input };
+export { TextField };

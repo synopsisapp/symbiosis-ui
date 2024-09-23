@@ -78,6 +78,6 @@ export { SymbiosisAreaChart } from "./components/SymbiosisAreaChart";
 export * from "./components/SymbiosisAreaChart/types";
 export type { SymbiosisAreaChartProps } from "./components/SymbiosisAreaChart/types";
 
-export { Input } from "./components/Input";
-export * from "./components/Input/types";
-export type { InputProps } from "./components/Input/types";
+export { TextField } from "./components/TextField";
+export * from "./components/TextField/types";
+export type { TextFieldProps } from "./components/TextField/types";
