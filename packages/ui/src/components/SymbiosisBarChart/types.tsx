@@ -1,4 +1,4 @@
-import { ChartConfig, ChartDataPoint } from "../Charts/types";
+import type { ChartConfig, ChartDataPoint } from "../Charts/types";
 
 export type SymbiosisBarChartProps = {
   data: ChartDataPoint[];

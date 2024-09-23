@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { Chart } from "../Charts";
-import type { ChartConfig, ChartDataPoint } from "../Charts/types";
 import type { SymbiosisBarChartProps } from "./types";
 import { cn } from "../../utils/cn";
 
@@ -14,7 +13,6 @@ const SymbiosisBarChart = ({
   legendClassName,
   tooltipClassName,
 }: SymbiosisBarChartProps) => {
-
   const defaultTickFormatter = React.useCallback((value: string) => {
     const date = new Date(value);
     return date.toLocaleDateString("en-US", {
@@ -31,6 +29,16 @@ const SymbiosisBarChart = ({
       year: "numeric",
     });
   }, []);
+
+  const dataKeys = React.useMemo(
+    () => Object.keys(data[0]).filter((key) => key !== "date" && typeof data[0][key] === "number"),
+    [data],
+  );
+
+  const zeroValues = React.useMemo(
+    () => data.map((entry) => dataKeys.map((key) => entry[key] === 0)),
+    [data, dataKeys],
+  );
 
   return (
     <Chart.Container config={config} className={cn("aspect-auto h-[250px] w-full", className)}>
@@ -52,46 +60,28 @@ const SymbiosisBarChart = ({
             />
           }
         />
-        <Chart.Legend content={<Chart.LegendContent  className={legendClassName} />} />
-        {generateBars(data, config)}
+        <Chart.Legend content={<Chart.LegendContent className={legendClassName} />} />
+        {dataKeys.map(
+          (key, index) =>
+            config[key] && (
+              <Chart.Bar key={key} dataKey={key} stackId="a" fill={`var(--color-${key})`}>
+                {data.map((_, entryIndex) => {
+                  const isTopStack = zeroValues[entryIndex].slice(index + 1).every(Boolean);
+                  const isBottomStack = zeroValues[entryIndex].slice(0, index).every(Boolean);
+                  return (
+                    <Chart.Cell
+                      key={`cell-${key}`}
+                      radius={isTopStack ? [2, 2, 0, 0] : isBottomStack ? [0, 0, 2, 2] : [0, 0, 0, 0]}
+                    />
+                  );
+                })}
+              </Chart.Bar>
+            ),
+        )}
       </Chart.BarChart>
     </Chart.Container>
   );
 };
-
-function generateBars<T extends ChartDataPoint>(chartData: T[], chartConfig: ChartConfig) {
-  if (chartData.length === 0) return [];
-
-  const dataKeys = Object.keys(chartData[0])
-    .filter((key) => key !== "date" && typeof chartData[0][key] === "number");
-
-  const zeroValues = chartData.map(entry => 
-    dataKeys.map(key => entry[key] === 0)
-  );
-
-  return dataKeys.map((key, index) => {
-    if (!chartConfig[key]) return null;
-    return (
-      <Chart.Bar
-          key={key}
-          dataKey={key}
-          stackId="a"
-          fill={`var(--color-${key})`}
-        >
-          {chartData.map((_, entryIndex) => {
-            const isTopStack = zeroValues[entryIndex].slice(index + 1).every(Boolean);
-            const isBottomStack = zeroValues[entryIndex].slice(0, index).every(Boolean);
-            return (
-              <Chart.Cell
-                key={`cell-${entryIndex}`}
-                radius={isTopStack ? [2, 2, 0, 0] : isBottomStack ? [0, 0, 2, 2] : [0, 0, 0, 0]}
-              />
-            );
-          })}
-        </Chart.Bar>
-    );
-  });
-}
 
 SymbiosisBarChart.displayName = "SymbiosisBarChart";
 
