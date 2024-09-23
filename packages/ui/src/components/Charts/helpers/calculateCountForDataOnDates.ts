@@ -2,16 +2,20 @@ import { isSameDay } from "date-fns/isSameDay";
 import { compareAsc } from "date-fns/compareAsc";
 import { subDays } from "date-fns/subDays";
 import { isBefore } from "date-fns/isBefore";
+import { z } from "zod";
 
 type DataItems<T extends Record<string, string[]>> = T;
 
 type DateAndModel<K extends string> = { date: string } & Record<K, number>;
 
+const Mode = z.enum(["cumulative", "daily"]);
+type Mode = z.infer<typeof Mode>;
+
 type CalculateCountForDataOnDatesInput<T extends Record<string, string[]>> = {
   data: DataItems<T>;
   startDate: string;
   endDate: string;
-  cumulativeCount?: boolean;
+  mode?: Mode;
 };
 
 type StringKeys<T> = Extract<keyof T, string>;
@@ -20,7 +24,7 @@ export function calculateCountForDataOnDates<T extends Record<string, string[]>>
   data,
   startDate,
   endDate,
-  cumulativeCount = true,
+  mode = "cumulative",
 }: CalculateCountForDataOnDatesInput<T>): DateAndModel<StringKeys<T>>[] {
   // Initialize the indices for each data item
   const indices = {} as Record<StringKeys<T>, number>;
@@ -42,11 +46,11 @@ export function calculateCountForDataOnDates<T extends Record<string, string[]>>
   while (currentDate <= new Date(endDate)) {
     // For each data item, increment the count if the date is the same day or before currentDate
     for (const name in data) {
-      let dailyCount = cumulativeCount ? results[currentDate.toISOString()][name as StringKeys<T>] : 0;
+      let dailyCount = mode === Mode.Enum.cumulative ? results[currentDate.toISOString()][name as StringKeys<T>] : 0;
       while (
         indices[name] < data[name].length &&
         (isSameDay(new Date(data[name][indices[name]]), currentDate) ||
-          (cumulativeCount && isBefore(new Date(data[name][indices[name]]), currentDate)))
+          (mode === Mode.Enum.cumulative && isBefore(new Date(data[name][indices[name]]), currentDate)))
       ) {
         dailyCount++;
         indices[name]++;
@@ -57,7 +61,7 @@ export function calculateCountForDataOnDates<T extends Record<string, string[]>>
     // Increment currentDate by one day and initialize the counts for the new day
     currentDate.setDate(currentDate.getDate() + 1);
     if (currentDate <= new Date(endDate)) {
-      if (cumulativeCount) {
+      if (mode === Mode.Enum.cumulative) {
         results[currentDate.toISOString()] = { ...results[new Date(subDays(currentDate, 1)).toISOString()] };
       } else {
         results[currentDate.toISOString()] = {} as Record<StringKeys<T>, number>;

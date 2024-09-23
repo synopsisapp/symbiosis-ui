@@ -982,7 +982,7 @@ const chartData = calculateCountForDataOnDates({
   },
   startDate: "2024-08-14",
   endDate: "2024-09-06",
-  cumulativeCount: false,
+  mode: "daily",
 });
 
 
