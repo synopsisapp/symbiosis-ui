@@ -25,6 +25,7 @@ export default defineConfig({
         "@radix-ui/react-slot",
         "@radix-ui/react-tooltip",
         "@tailwindcss/typography",
+        "@tanstack/react-table",
         "@types/fs-extra",
         "@types/node",
         "@types/react",

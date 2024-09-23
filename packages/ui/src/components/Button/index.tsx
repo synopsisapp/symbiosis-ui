@@ -20,7 +20,8 @@ export const Button = React.forwardRef(
       type = "button",
       renderAs = "button",
       layout = "normal",
-      classname,
+      className,
+      iconClassName,
       form,
       tone = "default",
       ...restProps
@@ -95,7 +96,7 @@ export const Button = React.forwardRef(
               isLoading: isLoading,
             }),
           ),
-          classname,
+          className,
         )}
         style={isLoading && buttonWidth ? { width: `${buttonWidth}px` } : undefined}
         {...restProps}
@@ -124,7 +125,7 @@ export const Button = React.forwardRef(
         ) : (
           <>
             {leftIcon && (
-              <div className={cn(classname, iconSizeToTailwind[size])}>
+              <div className={cn(iconSizeToTailwind[size], iconClassName)}>
                 <Icon name={leftIcon} size="font" />
               </div>
             )}
@@ -132,7 +133,7 @@ export const Button = React.forwardRef(
               {label}
             </Text>
             {rightIcon && (
-              <div className={cn(classname, iconSizeToTailwind[size])}>
+              <div className={cn(iconSizeToTailwind[size], iconClassName)}>
                 <Icon name={rightIcon} size="font" />
               </div>
             )}

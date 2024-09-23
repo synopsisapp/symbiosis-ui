@@ -49,6 +49,13 @@ export type { SwitchProps } from "./components/Switch/types";
 export { Checkbox } from "./components/Checkbox";
 export * from "./components/Checkbox/types";
 export type { CheckboxProps } from "./components/Checkbox/types";
+
+export { Table } from "./components/Table";
+
+export { DataTable } from "./components/DataTable";
+export * from "./components/DataTable/types";
+export type { DataTableProps } from "./components/DataTable/types";
+
 export { Pagination } from "./components/Pagination";
 export * from "./components/Pagination/types";
 export type { PaginationProps } from "./components/Pagination/types";
