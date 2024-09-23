@@ -48,6 +48,10 @@ export { Checkbox } from "./components/Checkbox";
 export * from "./components/Checkbox/types";
 export type { CheckboxProps } from "./components/Checkbox/types";
 
+export { SymbiosisBarChart } from "./components/SymbiosisBarChart";
+export * from "./components/SymbiosisBarChart/types";
+export type { SymbiosisBarChartProps } from "./components/SymbiosisBarChart/types";
+
 export * from "./designSystemTokens";
 
 export { shadcnPreset } from "./tailwind/shadcn-preset";
