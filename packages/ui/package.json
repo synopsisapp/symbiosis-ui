@@ -6,7 +6,10 @@
   "main": "dist/symbiosis-ui.umd.js",
   "module": "dist/symbiosis-ui.es.js",
   "types": "dist/src/index.d.ts",
-  "files": ["dist", "src"],
+  "files": [
+    "dist",
+    "src"
+  ],
   "exports": {
     "./plugin": {
       "types": "./dist/plugin/index.d.ts",
@@ -35,6 +38,7 @@
   },
   "dependencies": {
     "@types/lodash": "^4.17.7",
+    "date-fns": "^4.1.0",
     "deepmerge": "^4.3.1",
     "fs-extra": "^11.2.0",
     "glob": "^10.3.10",
