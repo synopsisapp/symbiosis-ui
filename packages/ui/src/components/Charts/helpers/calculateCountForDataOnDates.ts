@@ -23,11 +23,6 @@ export function calculateCountForDataOnDates<T extends Record<string, string[]>>
   endDate,
   mode = "cumulative",
 }: CalculateCountForDataOnDatesInput<T>): DateAndModel<StringKeys<T>>[] {
-  // Initialize the indices for each data item
-  const indices = {} as Record<StringKeys<T>, number>;
-  for (const name in data) {
-    indices[name] = 0;
-  }
 
   // Start from the startDate
   const currentDate = new Date(startDate);
