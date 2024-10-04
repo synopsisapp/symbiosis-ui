@@ -77,3 +77,7 @@ export * from "./components/Charts/helpers";
 export { SymbiosisAreaChart } from "./components/SymbiosisAreaChart";
 export * from "./components/SymbiosisAreaChart/types";
 export type { SymbiosisAreaChartProps } from "./components/SymbiosisAreaChart/types";
+
+export { TextField } from "./components/TextField";
+export * from "./components/TextField/types";
+export type { TextFieldProps } from "./components/TextField/types";

@@ -1,6 +1,6 @@
 import { cva } from "class-variance-authority";
 
-export const text = cva(["mx-0 my-2", "text-ink-700"], {
+export const text = cva(["mx-0 my-2", "text-slate-600"], {
   variants: {
     variant: {
       "body-small-200": ["text-xs", "leading-tight"],
