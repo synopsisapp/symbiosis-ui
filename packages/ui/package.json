@@ -1,6 +1,6 @@
 {
   "name": "@synopsisapp/symbiosis-ui",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "license": "MIT",
   "type": "module",
   "main": "dist/symbiosis-ui.umd.js",
@@ -8,7 +8,8 @@
   "types": "dist/src/index.d.ts",
   "files": [
     "dist",
-    "src"
+    "src",
+    "internal-assets"
   ],
   "exports": {
     "./plugin": {
