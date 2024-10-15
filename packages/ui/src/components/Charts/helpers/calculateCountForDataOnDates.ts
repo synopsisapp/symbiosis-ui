@@ -1,7 +1,4 @@
 import { isSameDay } from "date-fns/isSameDay";
-import { compareAsc } from "date-fns/compareAsc";
-import { subDays } from "date-fns/subDays";
-import { isBefore } from "date-fns/isBefore";
 import { z } from "zod";
 
 type DataItems<T extends Record<string, string[]>> = T;
@@ -26,60 +23,38 @@ export function calculateCountForDataOnDates<T extends Record<string, string[]>>
   endDate,
   mode = "cumulative",
 }: CalculateCountForDataOnDatesInput<T>): DateAndModel<StringKeys<T>>[] {
-  // Initialize the indices for each data item
-  const indices = {} as Record<StringKeys<T>, number>;
-  for (const name in data) {
-    indices[name as StringKeys<T>] = 0;
-  }
 
-  // Find the earliest date
-  const currentDate = [...Object.values(data).flat(), startDate].map((date) => new Date(date)).sort(compareAsc)[0];
+  // Start from the startDate
+  const currentDate = new Date(startDate);
+  const endDateObj = new Date(endDate);
 
-  // Initialize the results object
-  const results: Record<string, Record<StringKeys<T>, number>> = {};
-  results[currentDate.toISOString()] = {} as Record<StringKeys<T>, number>;
-  for (const name in data) {
-    results[currentDate.toISOString()][name as StringKeys<T>] = 0;
-  }
+  // Initialize the results array
+  const results: DateAndModel<StringKeys<T>>[] = [];
 
   // Iterate over each date until currentDate is later than endDate
-  while (currentDate <= new Date(endDate)) {
-    // For each data item, increment the count if the date is the same day or before currentDate
+  while (currentDate <= endDateObj) {
+    const currentResult: DateAndModel<StringKeys<T>> = {
+      date: currentDate.toISOString(),
+    } as DateAndModel<StringKeys<T>>;
+
+    // For each data item, calculate the count for the current date
     for (const name in data) {
-      let dailyCount = mode === Mode.Enum.cumulative ? results[currentDate.toISOString()][name as StringKeys<T>] : 0;
-      while (
-        indices[name] < data[name].length &&
-        (isSameDay(new Date(data[name][indices[name]]), currentDate) ||
-          (mode === Mode.Enum.cumulative && isBefore(new Date(data[name][indices[name]]), currentDate)))
-      ) {
-        dailyCount++;
-        indices[name]++;
+      let count = 0;
+      if (mode === Mode.Enum.cumulative) {
+        // For cumulative mode, count all dates up to and including the current date
+        count = data[name].filter((date) => new Date(date) <= currentDate).length;
+      } else {
+        // For daily mode, count only the dates that match the current date
+        count = data[name].filter((date) => isSameDay(new Date(date), currentDate)).length;
       }
-      results[currentDate.toISOString()][name as StringKeys<T>] = dailyCount;
+      currentResult[name] = count as DateAndModel<StringKeys<T>>[StringKeys<T>];
     }
 
-    // Increment currentDate by one day and initialize the counts for the new day
+    results.push(currentResult);
+
+    // Move to the next day
     currentDate.setDate(currentDate.getDate() + 1);
-    if (currentDate <= new Date(endDate)) {
-      if (mode === Mode.Enum.cumulative) {
-        results[currentDate.toISOString()] = { ...results[new Date(subDays(currentDate, 1)).toISOString()] };
-      } else {
-        results[currentDate.toISOString()] = {} as Record<StringKeys<T>, number>;
-        for (const name in data) {
-          results[currentDate.toISOString()][name as StringKeys<T>] = 0;
-        }
-      }
-    }
   }
 
-  // Filter the results to only include dates that are on or after startDate
-  const datesBetweenStartAndEnd = Object.keys(results).filter((date) => new Date(date) >= new Date(startDate));
-
-  // Format the results
-  const slicedResults = datesBetweenStartAndEnd.map((date) => ({
-    date,
-    ...results[date],
-  }));
-
-  return slicedResults as DateAndModel<StringKeys<T>>[];
+  return results;
 }
