@@ -6,11 +6,7 @@
   "main": "dist/symbiosis-ui.umd.js",
   "module": "dist/symbiosis-ui.es.js",
   "types": "dist/src/index.d.ts",
-  "files": [
-    "dist",
-    "src",
-    "internal-assets"
-  ],
+  "files": ["dist", "src", "internal-assets"],
   "exports": {
     "./plugin": {
       "types": "./dist/plugin/index.d.ts",
