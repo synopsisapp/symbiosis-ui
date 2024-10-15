@@ -23,7 +23,7 @@
   "postpublish": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag v$PACKAGE_VERSION && git push --tags",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && npm run build:plugin && tsc --emitDeclarationOnly",
+    "build": "npm run test && vite build && npm run build:plugin && tsc --emitDeclarationOnly",
     "build:plugin:types": "tsc -p tsconfig.plugin.json",
     "build:plugin": "vite build -c vite.config.plugin.ts && npm run build:plugin:types",
     "preview": "vite preview",
@@ -32,7 +32,8 @@
     "lint:fix": "biome lint --write .",
     "format:check": "biome format .",
     "format:fix": "biome format --write .",
-    "test": "vitest",
+    "test:watch": "vitest",
+    "test": "vitest run",
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
