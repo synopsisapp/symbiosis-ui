@@ -9,6 +9,7 @@ export type DropdownTriggerProps = {
   children: React.ReactNode;
   isDisabled?: boolean;
   className?: string;
+  asChild?: boolean;
 };
 
 export type DropdownContentProps = {

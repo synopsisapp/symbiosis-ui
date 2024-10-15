@@ -113,7 +113,7 @@ const SimpleColumn = <TData, TValue>({
     cell: (props: CellContext<TData, TValue>) => (
       <div className="flex justify-end">
         <Dropdown.Root>
-          <Dropdown.Trigger>
+          <Dropdown.Trigger asChild>
             <IconButton variant="ghost" icon="symbiosis-kebab" size="small-100" renderAs="button" />
           </Dropdown.Trigger>
           <Dropdown.Portal>
