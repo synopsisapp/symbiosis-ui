@@ -18,8 +18,7 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
-    "typeRoots": ["./node_modules/@types", "./src/types", "./src/lib", "./../../node_modules"],
-    "types": ["vitest/globals"],
+    "typeRoots": ["./node_modules/@types", "./src/types", "./src/lib"],
     "baseUrl": ".",
     "paths": {
       "*": ["src/*"]
