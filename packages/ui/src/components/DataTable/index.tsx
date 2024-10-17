@@ -67,6 +67,7 @@ const DataTableHeaderSortButton = <TData, TValue>({
       rightIcon={sortIcon}
       onPress={onPress}
       iconClassName="-ml-1"
+      className="-ml-[6px]"
     />
   );
 };
@@ -114,7 +115,13 @@ const SimpleColumn = <TData, TValue>({
       <div className="flex justify-end">
         <Dropdown.Root>
           <Dropdown.Trigger asChild>
-            <IconButton variant="ghost" icon="symbiosis-kebab" size="small-100" renderAs="button" />
+            <IconButton
+              variant="ghost"
+              icon="symbiosis-kebab"
+              size="small-100"
+              renderAs="button"
+              tone="monochrome-dark"
+            />
           </Dropdown.Trigger>
           <Dropdown.Portal>
             <Dropdown.Content>
