@@ -30,7 +30,6 @@ export type BaseProps = {
   renderAs?: ButtonRenderAs;
   className?: string;
   iconClassName?: string;
-  form?: string;
 };
 
 type AsLinkProps = {
@@ -45,6 +44,13 @@ type AsDivProps = {
 
 type AsButtonProps = {
   renderAs?: "button";
+  form?: string;
+  name?: string;
+  value?: string;
 };
 
 export type ButtonProps = BaseProps & (AsLinkProps | AsDivProps | AsButtonProps);
+
+export const isButtonGuard = (buttonProps: ButtonProps): buttonProps is ButtonProps & AsButtonProps => {
+  return buttonProps.renderAs === "button";
+};

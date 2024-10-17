@@ -12,4 +12,3 @@ export type CheckboxProps = {
   disabled?: boolean;
   required?: boolean;
 };
- 

@@ -8,4 +8,4 @@ export type SymbiosisBarChartProps = {
   className?: string;
   legendClassName?: string;
   tooltipClassName?: string;
-}
+};

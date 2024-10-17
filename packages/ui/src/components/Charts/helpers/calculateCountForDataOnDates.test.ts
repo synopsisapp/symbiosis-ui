@@ -185,9 +185,7 @@ describe("calculateCountForDataOnDates", () => {
       mode: "daily",
     });
 
-    console.log("Current behavior with timezone information:", result);
-
-    expect(result).not.toEqual([
+    expect(result).toEqual([
       { date: "2023-01-01T00:00:00.000Z", model1: 1, model2: 1 },
       { date: "2023-01-02T00:00:00.000Z", model1: 1, model2: 1 },
       { date: "2023-01-03T00:00:00.000Z", model1: 1, model2: 1 },

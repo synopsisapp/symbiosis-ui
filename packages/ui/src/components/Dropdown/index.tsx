@@ -27,8 +27,8 @@ const DropdownRoot = ({ children }: DropdownRootProps) => <DropdownMenu.Root>{ch
 
 DropdownRoot.displayName = "DropdownRoot";
 
-const DropdownTrigger = ({ children, isDisabled, className }: DropdownTriggerProps) => (
-  <DropdownMenu.Trigger disabled={isDisabled} className={cn(sharedDropdownTriggerStyles, className)}>
+const DropdownTrigger = ({ children, isDisabled, className, asChild }: DropdownTriggerProps) => (
+  <DropdownMenu.Trigger disabled={isDisabled} className={cn(sharedDropdownTriggerStyles, className)} asChild={asChild}>
     {children}
   </DropdownMenu.Trigger>
 );

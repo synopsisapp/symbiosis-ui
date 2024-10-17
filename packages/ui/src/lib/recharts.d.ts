@@ -1,11 +1,11 @@
-import 'recharts';
+import "recharts";
 
-declare module 'recharts' {
-  import { Props as OriginalCellProps } from 'recharts/types/component/Cell';
+declare module "recharts" {
+  import type { Props as OriginalCellProps } from "recharts/types/component/Cell";
 
   // Cell accepts radius as a number[] but the type was incorrect
   // https://github.com/recharts/recharts/issues/3325
-  export interface ExtendedCellProps extends Omit<OriginalCellProps, 'radius'> {
+  export interface ExtendedCellProps extends Omit<OriginalCellProps, "radius"> {
     radius?: number | [number, number, number, number] | string;
   }
 
