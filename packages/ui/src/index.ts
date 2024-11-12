@@ -81,3 +81,7 @@ export type { SymbiosisAreaChartProps } from "./components/SymbiosisAreaChart/ty
 export { TextField } from "./components/TextField";
 export * from "./components/TextField/types";
 export type { TextFieldProps } from "./components/TextField/types";
+
+export { NumberField } from "./components/NumberField";
+export * from "./components/NumberField/types";
+export type { NumberFieldProps } from "./components/NumberField/types";

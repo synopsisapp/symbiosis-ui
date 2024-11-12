@@ -14,5 +14,6 @@ declare namespace SymbiosisUI {
     | "symbiosis-minus"
     | "symbiosis-check"
     | "symbiosis-exclamation-circle"
-    | "symbiosis-help-circle";
+    | "symbiosis-help-circle"
+    | "symbiosis-plus";
 }

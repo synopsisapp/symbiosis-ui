@@ -10,4 +10,15 @@
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+  .hide-internal-input-elements {
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+
+    /* Works for Firefox */
+    &[type="number"] {
+      -moz-appearance: textfield;
+    }
+  }
 }
