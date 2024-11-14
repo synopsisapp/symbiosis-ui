@@ -110,7 +110,7 @@ export const NumberField = ({
               tone="monochrome-dark"
               size="small-100"
               isDisabled={disabled}
-              className="focus:before:border-none"
+              className={cn("focus:before:border-none", icon ? "left-6" : "left-0")}
             />
             {icon && (
               <Icon
