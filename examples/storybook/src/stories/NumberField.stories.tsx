@@ -131,6 +131,35 @@ const meta: Meta<NumberFieldProps> = {
         },
       },
     },
+    icon: {
+      control: {
+        type: "text",
+      },
+      description: "Icon name for the input field",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    onChange: {
+      control: false,
+      description: "Event handler called when the value changes",
+      table: {
+        type: {
+          summary: "(value: string) => void",
+        },
+      },
+    },
+    onBlur: {
+      control: false,
+      description: "Event handler called when the field loses focus",
+      table: {
+        type: {
+          summary: "(value: string) => void",
+        },
+      },
+    },
   },
 };
 

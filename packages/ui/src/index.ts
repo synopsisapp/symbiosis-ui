@@ -85,3 +85,7 @@ export type { TextFieldProps } from "./components/TextField/types";
 export { NumberField } from "./components/NumberField";
 export * from "./components/NumberField/types";
 export type { NumberFieldProps } from "./components/NumberField/types";
+
+export { TextAreaField } from "./components/TextAreaField";
+export * from "./components/TextAreaField/types";
+export type { TextAreaFieldProps } from "./components/TextAreaField/types";
