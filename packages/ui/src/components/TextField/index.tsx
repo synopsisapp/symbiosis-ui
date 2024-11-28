@@ -36,7 +36,7 @@ const TextField = React.forwardRef(
         {label && (
           <label
             htmlFor={formId}
-            data-symbiosis-input="label"
+            data-symbiosis-textfield="label"
             className={cn(
               inputLabel({
                 size,
@@ -52,14 +52,14 @@ const TextField = React.forwardRef(
           <div className={cn("flex-1", "flex")}>
             {icon && (
               <Icon
-                data-symbiosis-input="icon"
+                data-symbiosis-textfield="icon"
                 name={icon}
                 className={cn("absolute left-2 top-1/2 -translate-y-1/2 z-10 text-slate-500")}
                 size="small-200"
               />
             )}
             <input
-              data-symbiosis-input="field"
+              data-symbiosis-textfield="field"
               id={formId}
               name={name}
               className={cn(
@@ -88,7 +88,7 @@ const TextField = React.forwardRef(
           </div>
         </div>
         {hasError && (
-          <div className="flex gap-1 items-center" data-symbiosis-input="error">
+          <div className="flex gap-1 items-center" data-symbiosis-textfield="error">
             <Icon name="symbiosis-exclamation-circle" size="small-200" className="text-red-600" />
             <Text noTranslations variant="body-small-200" className="m-0 text-red-600">
               {error}
@@ -96,7 +96,7 @@ const TextField = React.forwardRef(
           </div>
         )}
         {!hasError && hint && (
-          <div className="flex gap-1 items-center text-slate-400" data-symbiosis-input="hint">
+          <div className="flex gap-1 items-center text-slate-400" data-symbiosis-textfield="hint">
             <Icon name="symbiosis-exclamation-circle" size="small-200" className="text-inherit" />
             <Text noTranslations variant="body-small-200" className="m-0 text-inherit">
               {hint}
