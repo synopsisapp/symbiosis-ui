@@ -6,6 +6,7 @@ import {
   getCoreRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  getFilteredRowModel,
   useReactTable,
   type HeaderContext,
   type CellContext,
@@ -26,6 +27,9 @@ import type {
 } from "./types";
 import { cn } from "../../utils/cn";
 import { tableCellStyles } from "./styles";
+import { TextField } from '../TextField';
+import { Icon } from '../Icon';
+import debounce from 'lodash/debounce';
 
 const DataTableHeaderSortButton = <TData, TValue>({
   column,
@@ -70,6 +74,47 @@ const DataTableHeaderSortButton = <TData, TValue>({
       className="-ml-[6px]"
     />
   );
+};
+
+const SearchBar = ({
+	onSearchChange,
+	hasClearButton = true,
+	className,
+}: {
+	onSearchChange?: (value: string) => void;
+	hasClearButton?: boolean;
+	className?: string;
+}) => {
+	const [search, setSearch] = React.useState('');
+	const debouncedOnChange = React.useMemo(
+		() => (onSearchChange ? debounce(onSearchChange, 300) : () => {}),
+		[onSearchChange]
+	);
+
+	return (
+		<div className='relative max-w-72 mb-4'>
+			<TextField
+				className={cn("[&_[data-symbiosis-textfield='field']]:pr-6", className)}
+				icon='symbiosis-search'
+				value={search}
+				onChange={(value) => {
+					setSearch(value);
+					debouncedOnChange(value);
+				}}
+			/>
+			{hasClearButton && Boolean(search) && (
+				<button
+					className='absolute right-2 top-1/2 -translate-y-1/2 z-10 text-slate-500'
+					type='button'
+					onClick={() => {
+						onSearchChange?.('');
+						setSearch('');
+					}}>
+					<Icon size='small-200' name='symbiosis-x' />
+				</button>
+			)}
+		</div>
+	);
 };
 
 const SimpleColumn = <TData, TValue>({
@@ -192,6 +237,7 @@ const DataTable = <TData, TValue>({
   stickyHeader = false,
   hiddenHeader = false,
   isSelectable,
+  isSearchable = false,
   headerActions,
   onRowSelectionChange,
   getRowId,
@@ -202,6 +248,7 @@ const DataTable = <TData, TValue>({
   selectedRows,
   defaultSorting,
 }: DataTableProps<TData, TValue>) => {
+  const [globalSearch, setGlobalSearch] = React.useState('');
   const [sorting, setSorting] = React.useState<SortingState>(defaultSorting ?? []);
 
   const [rowSelection, setRowSelection] = React.useState(() => {
@@ -236,11 +283,14 @@ const DataTable = <TData, TValue>({
     autoResetPageIndex: false,
     enablePinning: true,
     enableRowSelection: isSelectable,
+    onGlobalFilterChange: setGlobalSearch,
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     onRowSelectionChange: setRowSelection,
     getRowId,
     state: {
+      globalFilter: globalSearch,
       sorting,
       rowSelection: controlledRowSelection ?? rowSelection,
     },
@@ -303,6 +353,7 @@ const DataTable = <TData, TValue>({
           )}
         </div>
       )}
+      {isSearchable && <SearchBar onSearchChange={setGlobalSearch} />}
       <div className="rounded-md border border-slate-200 w-full flex-1 flex flex-col overflow-hidden">
         <div className="flex flex-1 overflow-auto">
           <Table.Root>

@@ -51,6 +51,7 @@ export type DataTableProps<TData, TValue> = {
   pinningState?: ColumnPinningState;
   hiddenHeader?: boolean;
   isSelectable?: boolean;
+  isSearchable?: boolean;
   headerActions?: ActionMenu<TData[]>[];
   onRowSelectionChange?: (rows: TData[]) => void;
   defaultSelectedRows?: TData[];
