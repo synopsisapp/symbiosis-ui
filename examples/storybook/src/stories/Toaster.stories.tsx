@@ -147,7 +147,6 @@ export const InfoToast: Story = {
   args: {
     variant: "info",
     title: "Info Toast",
-    duration: Number.POSITIVE_INFINITY,
   },
 };
 
