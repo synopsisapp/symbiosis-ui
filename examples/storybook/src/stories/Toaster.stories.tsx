@@ -1,22 +1,22 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button, useToast, type ToastConfig, Toaster } from "@synopsisapp/symbiosis-ui";
+import { Button, useToast, type ToastConfig, Toaster, type ToasterProps } from "@synopsisapp/symbiosis-ui";
 
-const ToasterDemo = (props: ToastConfig) => {
+const ToasterDemo = (props: ToastConfig & ToasterProps) => {
   const { toast } = useToast();
+  const { variant, title, description, duration, icon, ...rest } = props;
 
   return (
     <>
-      <Toaster />
+      <Toaster {...rest} />
       <Button
         label="Show toast"
         onPress={() => {
           toast({
-            variant: props.variant,
-            title: props.title,
-            description: props.description,
-            duration: props.duration,
-            closeButton: props.closeButton,
-            icon: props.icon,
+            variant,
+            title,
+            description,
+            duration,
+            icon,
           });
         }}
       />
@@ -29,15 +29,48 @@ const meta: Meta<typeof ToasterDemo> = {
   component: ToasterDemo,
   tags: ["autodocs"],
   argTypes: {
+    position: {
+      control: {
+        type: "select",
+      },
+      options: ["top-left", "top-right", "bottom-left", "bottom-right"],
+      description: "The position of the appearing toasts, controlled through the Toaster component",
+      required: false,
+      table: {
+        type: { summary: "string" },
+      },
+    },
+    expand: {
+      control: {
+        type: "boolean",
+      },
+      description:
+        "Whether to expand the toasts to the full width of the container, controlled through the Toaster component",
+      required: false,
+      table: {
+        type: { summary: "boolean" },
+      },
+    },
+    visibleToasts: {
+      control: {
+        type: "number",
+      },
+      description: "The maximum number of toasts to show at once, controlled through the Toaster component",
+      required: false,
+      table: {
+        type: { summary: "number" },
+      },
+    },
     variant: {
       control: {
         type: "select",
       },
-      options: ["success", "error", "info", "loading", "default"],
-      description: "The variant of the toast",
+      options: ["success", "destructive", "info", "loading", "default"],
+      description: "The variant of the toast, passed in the config of the toast function",
+      required: false,
       table: {
         type: {
-          summary: "success | error | info | loading | default",
+          summary: "success | destructive | info | loading | default",
         },
       },
     },
@@ -45,7 +78,8 @@ const meta: Meta<typeof ToasterDemo> = {
       control: {
         type: "text",
       },
-      description: "The title of the toast",
+
+      description: "The title of the toast, passed in the config of the toast function",
       table: {
         type: {
           summary: "string",
@@ -53,10 +87,11 @@ const meta: Meta<typeof ToasterDemo> = {
       },
     },
     description: {
+      required: false,
       control: {
         type: "text",
       },
-      description: "The description of the toast",
+      description: "The description of the toast, passed in the config of the toast function",
       table: {
         type: {
           summary: "string",
@@ -67,28 +102,17 @@ const meta: Meta<typeof ToasterDemo> = {
       control: {
         type: "number",
       },
-      description: "Duration in milliseconds before the toast disappears",
+      description: "Duration in milliseconds before the toast disappears, passed in the config of the toast function",
       table: {
         type: {
           summary: "number",
         },
       },
     },
-    closeButton: {
-      control: {
-        type: "boolean",
-      },
-      description: "Whether to show a close button",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
   },
   decorators: [
     (Story) => (
-      <div className="h-80">
+      <div className="h-64">
         <Story />
       </div>
     ),
@@ -109,15 +133,13 @@ export const SuccessToast: Story = {
   args: {
     variant: "success",
     title: "Success Toast",
-    description: "Operation completed successfully!",
   },
 };
 
-export const ErrorToast: Story = {
+export const DestructiveToast: Story = {
   args: {
-    variant: "error",
-    title: "Error Toast",
-    description: "Something went wrong!",
+    variant: "destructive",
+    title: "Destructive Toast",
   },
 };
 
@@ -125,7 +147,7 @@ export const InfoToast: Story = {
   args: {
     variant: "info",
     title: "Info Toast",
-    description: "Here's some information for you",
+    duration: Number.POSITIVE_INFINITY,
   },
 };
 
@@ -133,24 +155,21 @@ export const LoadingToast: Story = {
   args: {
     variant: "loading",
     title: "Loading Toast",
-    description: "Please wait...",
-    duration: 5000,
   },
 };
 
-export const CustomDurationToast: Story = {
+export const WarningToast: Story = {
   args: {
-    title: "Quick Toast",
-    description: "I'll disappear in 2 seconds",
-    duration: 2000,
+    variant: "warning",
+    title: "Warning Toast",
   },
 };
 
-export const WithCloseButton: Story = {
+export const WithCustomIcon: Story = {
   args: {
-    title: "Dismissible Toast",
-    description: "Click the X to dismiss",
-    closeButton: true,
+    variant: "default",
+    title: "Default Toast with Custom Icon",
+    icon: "symbiosis-plus",
   },
 };
 
@@ -175,7 +194,12 @@ export const UpdateExample: Story = {
       }, 2000);
     };
 
-    return <Button label="Show Updating Toast" onPress={showUpdatingToast} />;
+    return (
+      <>
+        <Toaster />
+        <Button label="Show Updating Toast" onPress={showUpdatingToast} />
+      </>
+    );
   },
   parameters: {
     docs: {
