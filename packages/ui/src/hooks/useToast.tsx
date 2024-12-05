@@ -40,7 +40,7 @@ const ToastContent = ({ title, variant = "default", description, className, icon
         <Icon
           name={iconName}
           size="small-100"
-          className={cn({
+          className={cn("text-slate-700", {
             "animate-spin": variant === "loading",
           })}
         />
