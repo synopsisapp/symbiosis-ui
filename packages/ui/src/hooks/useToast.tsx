@@ -48,11 +48,11 @@ const ToastContent = ({ title, variant = "default", description, className, icon
         />
       )}
       <div className="flex flex-col gap-1">
-        <Text variant="body-small-100" className="my-0">
+        <Text variant="body-small-100" className="my-0" weight={description ? "bold-100" : "base"}>
           {title}
         </Text>
         {description && (
-          <Text variant="body-small-200" className={cn("text-slate-500 my-0")}>
+          <Text variant="body-small-100" className={cn("text-slate-500 my-0")}>
             {description}
           </Text>
         )}
