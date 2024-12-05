@@ -259,6 +259,7 @@ export const WithPinningAndStickyHeader: Story = {
     ...Default.args,
     pinningState: {
       left: ["name"],
+      right: ["actions"],
     },
     isSelectable: true,
     stickyHeader: true,

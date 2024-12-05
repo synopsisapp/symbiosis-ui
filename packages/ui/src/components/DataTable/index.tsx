@@ -306,9 +306,9 @@ const DataTable = <TData, TValue>({
   React.useEffect(() => {
     if (!pinningState) return;
 
-    if (isSelectable && !!pinningState?.left) {
+    if (isSelectable) {
       const updatedPinningState = { ...pinningState };
-      updatedPinningState.left = ["select", ...pinningState.left];
+      updatedPinningState.left = ["select", ...(pinningState.left ?? [])];
       table.setColumnPinning(updatedPinningState);
       return;
     }

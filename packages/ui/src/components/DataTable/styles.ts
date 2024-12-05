@@ -20,7 +20,7 @@ export const tableCellStyles = cva("sticky z-20 transition-colors pl-[22px]", {
       false: "",
     },
     isSecondColumn: {
-      true: "left-10",
+      true: "",
       false: "",
     },
   },
@@ -29,6 +29,7 @@ export const tableCellStyles = cva("sticky z-20 transition-colors pl-[22px]", {
       pinedPosition: "left",
       isSelectable: true,
       isSecondColumn: true,
+      className: "left-10",
     },
   ],
   defaultVariants: {
