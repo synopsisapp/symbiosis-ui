@@ -31,8 +31,6 @@ const variantToIcon = {
 } as const;
 
 
-// Saddly if we want to use our Text component we need to pass the whole component as a prop.
-// primitiveToast acepts a message prop for the title, but if it is  a component it ignores description or icon props expecting the whole component as the message prop.
 const ToastContent = ({ title, variant = "default", description, className, icon }: ToastUpdateConfig) => {
   const iconName = icon ?? variantToIcon[variant];
 
