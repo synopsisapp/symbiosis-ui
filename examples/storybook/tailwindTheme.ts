@@ -1,20 +1,20 @@
-import { Config } from "tailwindcss";
+import type { Config } from "tailwindcss";
 
 export const defaultTheme: Partial<Config["theme"]> = {
   colors: {
     mainColors: {
-      ["light-400"]: "#E6FFF0",
-      ["light-300"]: "#B3FFD1",
-      ["light-200"]: "#44FF88",
-      ["light-100"]: "#22FF52",
-      base: "#00FF0A",         
-      ["dark-100"]: "#0BD435", 
-      ["dark-200"]: "#13AC2E", 
-      ["dark-300"]: "#178730", 
-      ["dark-400"]: "#196638", 
-      ["dark-500"]: "#174724",
+      ["light-400"]: "#E0F2F1",
+      ["light-300"]: "#B2DFDB",
+      ["light-200"]: "#80CBC4",
+      ["light-100"]: "#4DB6AC",
+      base: "#26A69A",
+      ["dark-100"]: "#009688",
+      ["dark-200"]: "#00897B",
+      ["dark-300"]: "#00796B",
+      ["dark-400"]: "#00695C",
+      ["dark-500"]: "#004D40",
     },
-  }
-}
+  },
+};
 
-// rgb(0 255 10)
+// rgb(0, 150, 136)
