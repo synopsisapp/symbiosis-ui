@@ -250,7 +250,7 @@ const ControlledTextField = () => {
 };
 
 export const CustomStyled: Story = {
-  render: (args) => <TextField {...args} className="[&>div[data-symbiosis-textField='hint']]:text-red-300 " />,
+  render: (args) => <TextField {...args} className="[&>div[data-symbiosis-textfield='hint']]:text-red-300 " />,
   args: {
     label: "Custom Styled TextField",
     placeholder: "Enter text",

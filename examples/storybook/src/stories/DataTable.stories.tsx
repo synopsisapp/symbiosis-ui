@@ -69,6 +69,13 @@ const meta: Meta<typeof DataTable> = {
         type: { summary: "boolean" },
       },
     },
+    isSearchable: {
+      control: { type: "boolean" },
+      description: "Whether the table can be searched.",
+      table: {
+        type: { summary: "boolean" },
+      },
+    },
     headerActions: {
       control: false,
       description:
@@ -221,6 +228,13 @@ export const Selectable: Story = {
   },
 };
 
+export const Searchable: Story = {
+  args: {
+    ...Default.args,
+    isSearchable: true,
+  },
+};
+
 export const WithBulkActions: Story = {
   args: {
     ...Selectable.args,
@@ -320,5 +334,3 @@ const ControlledDataTable = () => {
     },
   },
 };
-
-
