@@ -1,0 +1,43 @@
+on:
+  push:
+    branches:
+      - "main"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.build-publish.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install Dependencies
+        run: npm ci
+        
+      - name: Build UI components
+        run: |
+          cd packages/ui
+          npm ci
+          npm run build
+
+      - name: Build Storybook
+        run: |
+          cd examples/storybook
+          npm ci
+          npm run build-storybook
+
+      - id: build-publish
+        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+        with:
+          path: examples/storybook/storybook-static
