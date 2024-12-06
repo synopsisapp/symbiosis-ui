@@ -245,6 +245,7 @@ export const WithPinningAndStickyHeader: Story = {
     ...Default.args,
     pinningState: {
       left: ["name"],
+      right: ["actions"],
     },
     isSelectable: true,
     stickyHeader: true,
@@ -257,6 +258,27 @@ export const WithPinningAndStickyHeader: Story = {
       </div>
     ),
   ],
+};
+
+export const WithBulkActionsAndStickyHeader: Story = {
+  args: {
+    ...Selectable.args,
+    stickyHeader: true,
+    quickActionsText: "Bulk Actions",
+    headerActions: [
+      {
+        text: "Delete Selected",
+        icon: "symbiosis-minus",
+        onSelect: (rows) => console.log("Delete selected rows:", rows),
+      },
+      {
+        text: "Export Selected",
+        icon: "google-play",
+        onSelect: (rows) => console.log("Export selected rows:", rows),
+      },
+    ],
+    className: "h-[300px]",
+  },
 };
 
 export const CustomNoResultsText: Story = {
@@ -320,5 +342,3 @@ const ControlledDataTable = () => {
     },
   },
 };
-
-
