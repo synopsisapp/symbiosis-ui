@@ -32,7 +32,7 @@ const Pagination = ({
   }, [activePage]);
 
   return (
-    <div className={cn("flex gap-2", className)}>
+    <div className={cn("flex gap-2 items-center", className)}>
       {hasEdges && (
         <IconButton
           variant="ghost"
