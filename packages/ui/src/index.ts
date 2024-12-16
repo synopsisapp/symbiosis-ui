@@ -94,6 +94,10 @@ export * from "./hooks/useToast";
 export { Toaster } from "./components/Toaster";
 export * from "./components/Toaster/types";
 
+export { Combobox } from "./components/Combobox";
+export * from "./components/Combobox/types";
+export type { ComboboxProps } from "./components/Combobox/types";
+
 export { Command } from "./components/Command";
 export { Modal } from "./components/Modal";
 
