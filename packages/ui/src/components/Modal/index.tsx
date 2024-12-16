@@ -58,7 +58,7 @@ const ModalContent: React.FC<React.PropsWithChildren<ModalContentProps>> = ({
             <div className="mb-2 mr-2">
               <ModalPrimitive.Close asChild={onClose ? undefined : true}>
                 <IconButton
-                  icon="symbiosis-plus"
+                  icon="symbiosis-x"
                   isCircle
                   size="small-100"
                   variant="ghost"
