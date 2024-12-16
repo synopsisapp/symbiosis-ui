@@ -97,3 +97,7 @@ export * from "./components/Toaster/types";
 export { SplitButton } from "./components/SplitButton";
 export * from "./components/SplitButton/types";
 export type { SplitButtonProps } from "./components/SplitButton/types";
+
+export { Pill } from "./components/Pill";
+export * from "./components/Pill/types";
+export type { PillProps } from "./components/Pill/types";
