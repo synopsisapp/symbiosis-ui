@@ -64,6 +64,7 @@
     "@tanstack/react-table": "^8.20.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "cmdk": "^1.0.4",
     "framer-motion": "^11.3.31",
     "lucide-react": "^0.383.0",
     "react": "^18.2.0",

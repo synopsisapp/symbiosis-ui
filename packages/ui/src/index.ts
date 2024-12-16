@@ -93,6 +93,8 @@ export type { TextAreaFieldProps } from "./components/TextAreaField/types";
 export * from "./hooks/useToast";
 export { Toaster } from "./components/Toaster";
 export * from "./components/Toaster/types";
+
+export { Command } from "./components/Command";
 export { Modal } from "./components/Modal";
 
 export { SplitButton } from "./components/SplitButton";
