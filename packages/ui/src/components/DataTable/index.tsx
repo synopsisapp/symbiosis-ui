@@ -24,6 +24,7 @@ import type {
   ActionTextColumnProps,
   ColumnProps,
   DataTableProps,
+  SortStatus,
 } from "./types";
 import { cn } from "../../utils/cn";
 import { tableCellStyles } from "./styles";
@@ -34,7 +35,8 @@ import debounce from 'lodash/debounce';
 const DataTableHeaderSortButton = <TData, TValue>({
   column,
   label,
-}: HeaderContext<TData, TValue> & { label: string }) => {
+  onSort,
+}: HeaderContext<TData, TValue> & { label: string, onSort?: (sorting: SortStatus, columnId: string) => void }) => {
   const isSorted = column.getIsSorted();
 
   const sortIcon = React.useMemo(() => {
@@ -52,15 +54,18 @@ const DataTableHeaderSortButton = <TData, TValue>({
     switch (isSorted) {
       case "asc":
         column.toggleSorting(true, false);
+        onSort?.('desc', column.id);
         break;
       case "desc":
         column.clearSorting();
+        onSort?.(false, column.id);
         break;
       default:
         column.toggleSorting(false, false);
+        onSort?.('asc', column.id);
         break;
     }
-  }, [isSorted, column]);
+  }, [isSorted, column, onSort]);
 
   return (
     <Button
@@ -119,6 +124,7 @@ const SearchBar = ({
 
 const SimpleColumn = <TData, TValue>({
   id,
+  onSort,
   ...unknownColumn
 }: DataTableColumnProps<TData, TValue>): ColumnDef<TData, TValue> => {
   if (id !== "actions") {
@@ -129,7 +135,7 @@ const SimpleColumn = <TData, TValue>({
       sortingFn: restColumn.sortingFn ?? "auto",
       header: (props: HeaderContext<TData, TValue>) =>
         isSortable ? (
-          <DataTableHeaderSortButton {...props} label={header ?? id} />
+          <DataTableHeaderSortButton {...props} label={header ?? id} onSort={onSort} />
         ) : (
           <Text noTranslations variant="body-small-100" className="leading-none">
             {header}
@@ -247,6 +253,7 @@ const DataTable = <TData, TValue>({
   className,
   selectedRows,
   defaultSorting,
+  onSort
 }: DataTableProps<TData, TValue>) => {
   const [globalSearch, setGlobalSearch] = React.useState('');
   const [sorting, setSorting] = React.useState<SortingState>(defaultSorting ?? []);
@@ -261,9 +268,9 @@ const DataTable = <TData, TValue>({
   });
 
   const finalColumns = React.useMemo(() => {
-    const adjustedColumns = columns.map((column) => SimpleColumn<TData, TValue>(column));
+    const adjustedColumns = columns.map((column) => SimpleColumn<TData, TValue>({ ...column, onSort }));
     return isSelectable ? [SelectableColumn<TData, TValue>(onRowSelectionChange), ...adjustedColumns] : adjustedColumns;
-  }, [columns, isSelectable, onRowSelectionChange]);
+  }, [columns, isSelectable, onRowSelectionChange, onSort]);
 
   const controlledRowSelection = React.useMemo(() => {
     if (!selectedRows) return undefined;
@@ -297,6 +304,12 @@ const DataTable = <TData, TValue>({
   });
 
   React.useEffect(() => {
+    if (!defaultSorting?.length) return;
+
+    setSorting(defaultSorting);
+  }, [defaultSorting]);
+
+  React.useEffect(() => {
     const currentPerPage = table.getState().pagination.pageSize;
     if (currentPerPage === maxPerPage) return;
 
@@ -306,9 +319,9 @@ const DataTable = <TData, TValue>({
   React.useEffect(() => {
     if (!pinningState) return;
 
-    if (isSelectable && !!pinningState?.left) {
+    if (isSelectable) {
       const updatedPinningState = { ...pinningState };
-      updatedPinningState.left = ["select", ...pinningState.left];
+      updatedPinningState.left = ["select", ...(pinningState.left ?? [])];
       table.setColumnPinning(updatedPinningState);
       return;
     }

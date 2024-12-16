@@ -2,7 +2,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { sharedTableRowBottomBorderStyles } from "../Table/styles";
 import { cn } from "../../utils/cn";
 
-export const tableCellStyles = cva("sticky z-20 transition-colors pl-[22px]", {
+export const tableCellStyles = cva("sticky z-10 transition-colors pl-[22px]", {
   variants: {
     pinedPosition: {
       left: cn(
@@ -20,7 +20,7 @@ export const tableCellStyles = cva("sticky z-20 transition-colors pl-[22px]", {
       false: "",
     },
     isSecondColumn: {
-      true: "left-10",
+      true: "",
       false: "",
     },
   },
@@ -29,6 +29,7 @@ export const tableCellStyles = cva("sticky z-20 transition-colors pl-[22px]", {
       pinedPosition: "left",
       isSelectable: true,
       isSecondColumn: true,
+      className: "left-10",
     },
   ],
   defaultVariants: {

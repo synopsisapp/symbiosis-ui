@@ -1,5 +1,7 @@
-import type { SortingState, ColumnPinningState, AccessorFn, CellContext, SortingFnOption } from "@tanstack/react-table";
+import type { SortingState, ColumnPinningState, AccessorFn, CellContext, SortingFnOption, SortDirection } from "@tanstack/react-table";
 import type { IconProps } from "../Icon/types";
+
+export type SortStatus = false | SortDirection;
 
 export type ColumnProps<TData, TValue> = {
   id: string;
@@ -42,7 +44,9 @@ export type ActionCellColumnProps<TData, TValue> = {
   cell: (item: CellContext<TData, TValue>) => React.ReactNode;
 };
 
-export type DataTableColumnProps<TData, TValue> = ColumnProps<TData, TValue> | ActionColumnProps<TData, TValue>;
+export type DataTableColumnProps<TData, TValue> = (ColumnProps<TData, TValue> | ActionColumnProps<TData, TValue>) & {
+  onSort?: (sorting: SortStatus, columnId: string) => void;
+};
 
 export type DataTableProps<TData, TValue> = {
   data: TData[];
@@ -62,4 +66,5 @@ export type DataTableProps<TData, TValue> = {
   stickyHeader?: boolean;
   className?: string;
   selectedRows?: TData[];
+  onSort?: (sorting: SortStatus, columnId: string) => void;
 };

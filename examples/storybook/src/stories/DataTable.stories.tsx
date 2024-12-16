@@ -217,7 +217,6 @@ export const Default: Story = {
   args: {
     data: mockUsers,
     columns: columns,
-
   },
 };
 
@@ -254,11 +253,55 @@ export const WithBulkActions: Story = {
   },
 };
 
+export const WithAddingSortedColumnsToUrlSearchParams: Story = {
+  render: (args) => {
+    const [localSorting, setLocalSorting] = React.useState<[{ desc: boolean; id: string }] | undefined>(undefined);
+
+    React.useEffect(() => {
+      // Get initial sort from URL if it exists
+      const searchParams = new URLSearchParams(window.location.search);
+      const sortParam = searchParams.get('sort');
+      if (sortParam) {
+        const [columnId, sorting] = sortParam.split(':');
+        setLocalSorting([{ desc: sorting === "desc", id: sorting ? columnId : "" }]);
+      }
+    }, []);
+
+    return (
+      <DataTable
+        {...args}
+        defaultSorting={localSorting}
+        onSort={(sorting, columnId) => {
+          if (sorting === false) {
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.delete("sort");
+            const newUrl = searchParams.toString()
+              ? `${window.location.pathname}?${searchParams.toString()}`
+              : window.location.pathname;
+
+            window.history.replaceState({}, "", newUrl);
+          }
+          else {
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.set("sort", `${columnId}:${sorting}`);
+
+            window.history.replaceState({}, "", `${window.location.pathname}?${searchParams.toString()}`);
+          }
+        }}
+      />
+    );
+  },
+  args: {
+    ...Default.args,
+  },
+};
+
 export const WithPinningAndStickyHeader: Story = {
   args: {
     ...Default.args,
     pinningState: {
       left: ["name"],
+      right: ["actions"],
     },
     isSelectable: true,
     stickyHeader: true,
@@ -271,6 +314,27 @@ export const WithPinningAndStickyHeader: Story = {
       </div>
     ),
   ],
+};
+
+export const WithBulkActionsAndStickyHeader: Story = {
+  args: {
+    ...Selectable.args,
+    stickyHeader: true,
+    quickActionsText: "Bulk Actions",
+    headerActions: [
+      {
+        text: "Delete Selected",
+        icon: "symbiosis-minus",
+        onSelect: (rows) => console.log("Delete selected rows:", rows),
+      },
+      {
+        text: "Export Selected",
+        icon: "google-play",
+        onSelect: (rows) => console.log("Export selected rows:", rows),
+      },
+    ],
+    className: "h-[300px]",
+  },
 };
 
 export const CustomNoResultsText: Story = {
