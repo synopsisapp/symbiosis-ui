@@ -20,5 +20,7 @@ declare namespace SymbiosisUI {
     | "symbiosis-toast-success"
     | "symbiosis-toast-info"
     | "symbiosis-toast-warning"
-    | "symbiosis-toast-destructive";
+    | "symbiosis-toast-destructive"
+    | "symbiosis-search"
+    | "symbiosis-x";
 }
