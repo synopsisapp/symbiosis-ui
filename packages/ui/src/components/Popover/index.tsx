@@ -1,3 +1,4 @@
+import * as React from "react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { IconButton } from "../IconButton";
 import { cn } from "../../utils/cn";
@@ -15,22 +16,33 @@ const PopoverRoot = ({ children, defaultOpen, onOpenChange, open }: PopoverRootP
 
 PopoverRoot.displayName = "Popover.Root";
 
-const PopoverTrigger = ({ children }: PopoverTriggerProps) => (
-  <PopoverPrimitive.Trigger asChild>{children}</PopoverPrimitive.Trigger>
-);
+const PopoverTrigger = React.forwardRef<HTMLButtonElement, PopoverTriggerProps>(({ children, asChild }, ref) => (
+  <PopoverPrimitive.Trigger ref={ref} asChild={asChild}>
+    {children}
+  </PopoverPrimitive.Trigger>
+));
+
 
 PopoverTrigger.displayName = "Popover.Trigger";
 
 const PopoverContent = ({
   children,
   side = "top",
+  align = "start",
   className,
   closeIcon,
   tone = "monochrome-dark",
+  onOpenAutoFocus,
 }: PopoverContentProps) => {
   return (
     <PopoverPrimitive.Portal>
-      <PopoverPrimitive.Content avoidCollisions side={side} className={cn(sharedPopoverStyles, className)}>
+      <PopoverPrimitive.Content
+        avoidCollisions
+        side={side}
+        align={align}
+        className={cn(sharedPopoverStyles, className)}
+        onOpenAutoFocus={onOpenAutoFocus}
+      >
         {closeIcon && (
           <PopoverPrimitive.Close className="absolute top-1 right-1 focus-visible:outline-none" aria-label="Close">
             <IconButton icon={closeIcon} tone={tone} variant="ghost" size="base" className="w-4 min-w-4 h-4 min-h-4" />
