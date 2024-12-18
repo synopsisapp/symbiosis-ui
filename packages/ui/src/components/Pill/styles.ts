@@ -8,10 +8,10 @@ export const pillVariants = cva("flex gap-1 items-center rounded-full border tra
       outline: "bg-transparent",
     },
     size: {
-      [Sizes.Enum["small-200"]]: ["px-1"],
-      [Sizes.Enum["small-100"]]: ["px-1.5", "py-px"],
-      [Sizes.Enum.base]: ["px-1.5 py-0.5"],
-      [Sizes.Enum["large-100"]]: ["px-2 py-1"],
+      [Sizes.Enum["small-200"]]: ["px-1.5"],
+      [Sizes.Enum["small-100"]]: ["px-2", "py-px"],
+      [Sizes.Enum.base]: ["px-2.5 py-0.5"],
+      [Sizes.Enum["large-100"]]: ["px-3 py-1"],
     },
     tone: {
       default: "",

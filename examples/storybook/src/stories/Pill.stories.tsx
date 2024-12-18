@@ -166,7 +166,6 @@ export const NonRounded: Story = {
     label: "Non-rounded Pill",
     variant: "primary",
     tone: "default",
-
     isRounded: false,
   },
 };
