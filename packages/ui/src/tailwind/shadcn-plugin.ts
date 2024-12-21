@@ -181,6 +181,10 @@ export const shadcnPlugin = plugin(
             from: { height: "var(--radix-accordion-content-height)" },
             to: { height: "0" },
           },
+          "slide-up-modal": {
+            from: { opacity: "0", transform: "translateY(5%)" },
+            to: { opacity: "1", transform: "translateY(0)" },
+          },
         },
         animation: {
           "fade-up": "fade-up 0.5s",
