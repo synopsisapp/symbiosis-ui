@@ -11,8 +11,6 @@ declare namespace SymbiosisUI {
     | "symbiosis-chevron-left"
     | "symbiosis-chevron-right"
     | "symbiosis-chevron-down"
-    | "symbiosis-minus"
-    | "symbiosis-check"
     | "symbiosis-exclamation-circle"
     | "symbiosis-help-circle"
     | "symbiosis-plus"
@@ -22,5 +20,6 @@ declare namespace SymbiosisUI {
     | "symbiosis-toast-warning"
     | "symbiosis-toast-destructive"
     | "symbiosis-search"
-    | "symbiosis-x";
+    | "symbiosis-x"
+    | "symbiosis-calendar";
 }
