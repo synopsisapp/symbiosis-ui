@@ -99,8 +99,7 @@ const DateRangeField = React.forwardRef(
       }
     };
 
-    const selectedDates =
-      selectedRange.from && selectedRange.to ? { from: selectedRange.from, to: selectedRange.to } : undefined;
+    const selectedDates = selectedRange.from ? { from: selectedRange.from, to: selectedRange.to } : undefined;
 
     if (!datePickerProps.withDatePicker) {
       return (
