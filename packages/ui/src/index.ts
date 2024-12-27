@@ -113,3 +113,7 @@ export { DatePicker } from "./components/Datepicker";
 export * from "./components/Datepicker/types";
 export type { DatePickerProps } from "./components/Datepicker/types";
 
+export { DateField } from "./components/DateField";
+export * from "./components/DateField/types";
+export type { DateFieldProps } from "./components/DateField/types";
+

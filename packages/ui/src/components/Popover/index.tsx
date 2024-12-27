@@ -6,9 +6,9 @@ import { sharedPopoverStyles } from "./styles";
 
 import type { PopoverRootProps, PopoverContentProps, PopoverTriggerProps, PopoverArrowProps } from "./types";
 
-const PopoverRoot = ({ children, defaultOpen, onOpenChange, open }: PopoverRootProps) => {
+const PopoverRoot = ({ children, defaultOpen, onOpenChange, open, modal = true }: PopoverRootProps) => {
   return (
-    <PopoverPrimitive.Root modal defaultOpen={defaultOpen} open={open} onOpenChange={onOpenChange}>
+    <PopoverPrimitive.Root modal={modal} defaultOpen={defaultOpen} open={open} onOpenChange={onOpenChange}>
       {children}
     </PopoverPrimitive.Root>
   );
@@ -27,21 +27,26 @@ PopoverTrigger.displayName = "Popover.Trigger";
 
 const PopoverContent = ({
   children,
+  asChild,
   side = "top",
   align = "start",
   className,
   closeIcon,
   tone = "monochrome-dark",
   onOpenAutoFocus,
+
+  onCloseAutoFocus,
 }: PopoverContentProps) => {
   return (
     <PopoverPrimitive.Portal>
       <PopoverPrimitive.Content
         avoidCollisions
+        asChild={asChild}
         side={side}
         align={align}
         className={cn(sharedPopoverStyles, className)}
         onOpenAutoFocus={onOpenAutoFocus}
+        onCloseAutoFocus={onCloseAutoFocus}
       >
         {closeIcon && (
           <PopoverPrimitive.Close className="absolute top-1 right-1 focus-visible:outline-none" aria-label="Close">
