@@ -108,3 +108,8 @@ export type { SplitButtonProps } from "./components/SplitButton/types";
 export { Pill } from "./components/Pill";
 export * from "./components/Pill/types";
 export type { PillProps } from "./components/Pill/types";
+
+export { DatePicker } from "./components/Datepicker";
+export * from "./components/Datepicker/types";
+export type { DatePickerProps } from "./components/Datepicker/types";
+
