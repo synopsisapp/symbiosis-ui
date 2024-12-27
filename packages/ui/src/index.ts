@@ -117,3 +117,6 @@ export { DateField } from "./components/DateField";
 export * from "./components/DateField/types";
 export type { DateFieldProps } from "./components/DateField/types";
 
+export { DateRangeField } from "./components/DateRangeField";
+export * from "./components/DateRangeField/types";
+export type { DateRangeFieldProps } from "./components/DateRangeField/types";
