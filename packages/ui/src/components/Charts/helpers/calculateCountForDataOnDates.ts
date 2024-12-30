@@ -1,4 +1,3 @@
-import { isSameDay } from "date-fns/isSameDay";
 import { z } from "zod";
 
 type DataItems<T extends Record<string, string[]>> = T;
@@ -17,6 +16,11 @@ type CalculateCountForDataOnDatesInput<T extends Record<string, string[]>> = {
 
 type StringKeys<T> = Extract<keyof T, string>;
 
+function normalizeToUTCMidnight(dateString: string): Date {
+  const date = new Date(dateString);
+  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+}
+
 export function calculateCountForDataOnDates<T extends Record<string, string[]>>({
   data,
   startDate,
@@ -24,8 +28,8 @@ export function calculateCountForDataOnDates<T extends Record<string, string[]>>
   mode = "cumulative",
 }: CalculateCountForDataOnDatesInput<T>): DateAndModel<StringKeys<T>>[] {
   // Start from the startDate
-  const currentDate = new Date(startDate);
-  const endDateObj = new Date(endDate);
+  const currentDate = normalizeToUTCMidnight(startDate);
+  const endDateObj = normalizeToUTCMidnight(endDate);
 
   // Initialize the results array
   const results: DateAndModel<StringKeys<T>>[] = [];
@@ -38,13 +42,16 @@ export function calculateCountForDataOnDates<T extends Record<string, string[]>>
 
     // For each data item, calculate the count for the current date
     for (const name in data) {
+      const normalizedDates = data[name].map((date) => normalizeToUTCMidnight(date).getTime());
+      const currentTime = currentDate.getTime();
+
       let count = 0;
       if (mode === Mode.Enum.cumulative) {
         // For cumulative mode, count all dates up to and including the current date
-        count = data[name].filter((date) => new Date(date) <= currentDate).length;
+        count = normalizedDates.filter((time) => time <= currentTime).length;
       } else {
         // For daily mode, count only the dates that match the current date
-        count = data[name].filter((date) => isSameDay(new Date(date), currentDate)).length;
+        count = normalizedDates.filter((time) => time === currentTime).length;
       }
       currentResult[name] = count as DateAndModel<StringKeys<T>>[StringKeys<T>];
     }
@@ -52,7 +59,7 @@ export function calculateCountForDataOnDates<T extends Record<string, string[]>>
     results.push(currentResult);
 
     // Move to the next day
-    currentDate.setDate(currentDate.getDate() + 1);
+    currentDate.setUTCDate(currentDate.getUTCDate() + 1);
   }
 
   return results;

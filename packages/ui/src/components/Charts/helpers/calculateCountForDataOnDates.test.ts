@@ -174,8 +174,16 @@ describe("calculateCountForDataOnDates", () => {
 
   it("treats all dates as UTC, ignoring timezone information", () => {
     const dataWithTimezones = {
-      model1: ["2023-01-01T12:00:00+02:00", "2023-01-02T00:00:00Z", "2023-01-03T15:30:00-05:00"],
-      model2: ["2023-01-01T23:59:59+01:00", "2023-01-02T01:00:00-08:00", "2023-01-03T00:00:00Z"],
+      model1: [
+        "2023-01-01T12:00:00+02:00", // Jan 1 10:00 UTC
+        "2023-01-02T00:00:00Z", // Jan 2 00:00 UTC
+        "2023-01-03T15:30:00-05:00", // Jan 3 20:30 UTC
+      ],
+      model2: [
+        "2023-01-01T23:59:59+01:00", // Jan 1 22:59 UTC
+        "2023-01-02T01:00:00-08:00", // Jan 2 09:00 UTC
+        "2023-01-03T00:00:00Z", // Jan 3 00:00 UTC
+      ],
     };
 
     const result = calculateCountForDataOnDates({
@@ -186,9 +194,9 @@ describe("calculateCountForDataOnDates", () => {
     });
 
     expect(result).toEqual([
-      { date: "2023-01-01T00:00:00.000Z", model1: 1, model2: 0 },
-      { date: "2023-01-02T00:00:00.000Z", model1: 1, model2: 2 },
-      { date: "2023-01-03T00:00:00.000Z", model1: 1, model2: 1 },
+      { date: "2023-01-01T00:00:00.000Z", model1: 1, model2: 1 }, // Both have 1 event in UTC on Jan 1
+      { date: "2023-01-02T00:00:00.000Z", model1: 1, model2: 1 }, // Both have 1 event in UTC on Jan 2
+      { date: "2023-01-03T00:00:00.000Z", model1: 1, model2: 1 }, // Both have 1 event in UTC on Jan 3
     ]);
   });
 });
