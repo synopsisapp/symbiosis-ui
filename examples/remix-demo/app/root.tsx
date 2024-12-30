@@ -10,7 +10,7 @@ import { IconProvider } from "@synopsisapp/symbiosis-ui";
 // eslint-disable-next-line import/no-unresolved
 import stylesheet from "~/tailwind.css?url";
 // eslint-disable-next-line import/no-unresolved
-import symbiosisUIStylesheet from "/symbiosis-assets/symbiosis-ui.css?url";
+import symbiosisUIStylesheet from "/public/symbiosis-assets/symbiosis-ui.css?url";
 
 export const links: LinksFunction = () => {
   return [
