@@ -17,11 +17,11 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <IconProvider publicDir="/public">
+      <IconProvider>
         <Story />
       </IconProvider>
     ),
-  ]
+  ],
 };
 
 export default preview;

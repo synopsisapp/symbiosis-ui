@@ -5,11 +5,12 @@ import { defaultTheme } from "./tailwindTheme";
 
 
 export default defineConfig({
-  plugins: [react(),
+  plugins: [
+    react(),
     symbiosisUIPlugin({
-      iconsDir: './assets/icons',
+      iconsDir: "./assets/icons",
       tailwindTheme: defaultTheme,
-      publicDir: './public',
-    })
+      publicDir: "./",
+    }),
   ],
-})
+});
