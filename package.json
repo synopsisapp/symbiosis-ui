@@ -1,6 +1,6 @@
 {
   "name": "symbiosis-monorepo",
-  "private": false,
+  "private": true,
   "workspaces": [
     "packages/*",
     "examples/*"
@@ -9,9 +9,16 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "turbo run format"
+    "format": "turbo run format",
+    "release": "turbo run build && changeset publish",
+    "release:create": "npm exec changeset add"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.11",
     "turbo": "^1.13.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
