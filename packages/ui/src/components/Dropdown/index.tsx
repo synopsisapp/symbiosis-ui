@@ -63,8 +63,8 @@ const DropdownGroup = ({ children, label, className }: DropdownGroupProps) => {
   return (
     <DropdownMenu.Group className={cn(sharedDropdownGroupStyles, className)}>
       {label && (
-        <DropdownMenu.Label className={cn("flex items-center m-0 p-0.5 cursor-default text-inherit", className)}>
-          <Text variant="body-small-100" noTranslations weight="bold-100" className="text-inherit">
+        <DropdownMenu.Label className={cn("flex items-center m-0 p-0 cursor-default text-inherit", className)}>
+          <Text variant="body-small-200" noTranslations weight="bold-100" className="text-slate-500">
             {label}
           </Text>
         </DropdownMenu.Label>
