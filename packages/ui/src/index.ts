@@ -16,7 +16,8 @@ export type { IconButtonProps } from "./components/IconButton/types";
 export { Icon } from "./components/Icon";
 export * from "./components/Icon/types";
 export type { IconProps } from "./components/Icon/types";
-export { IconProvider } from "./components/Icon/IconContext";
+
+export { SymbiosisProvider } from "./providers/SymbiosisContext";
 
 export { Spinner } from "./components/Spinner";
 export * from "./components/Spinner/types";
