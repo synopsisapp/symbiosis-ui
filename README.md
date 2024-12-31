@@ -65,18 +65,18 @@ module.exports = {
 };
 ```
 
-### 2. Set up the IconProvider
+### 2. Set up the SymbiosisProvider
 
-Wrap your application with the `IconProvider`:
+Wrap your application with the `SymbiosisProvider`:
 
 ```jsx
-import { IconProvider } from '@synopsisapp/symbiosis-ui';
+import { SymbiosisProvider } from '@synopsisapp/symbiosis-ui';
 
 function App() {
   return (
-    <IconProvider publicDir="/public">
+    <SymbiosisProvider publicDir="/public" scheme="dark">
       {/* Your app components */}
-    </IconProvider>
+    </SymbiosisProvider>
   );
 }
 ```

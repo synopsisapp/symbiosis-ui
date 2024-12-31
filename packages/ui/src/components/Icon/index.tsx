@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cva } from "class-variance-authority";
 import type { IconProps } from "./types";
-import { IconContext } from "./IconContext";
+import { SymbiosisContext } from "../../providers/SymbiosisContext";
 import { cn } from "../../utils/cn";
 
 const iconClasses = cva(["flex items-center"], {
@@ -23,7 +23,7 @@ const iconClasses = cva(["flex items-center"], {
  * size: 'font' uses the size of the font of the parent element.
  */
 const Icon = ({ name, size = "font", className }: IconProps) => {
-  const { publicDir } = React.useContext(IconContext);
+  const { publicDir } = React.useContext(SymbiosisContext);
 
   return (
     <svg className={cn(iconClasses({ size }), className)}>
