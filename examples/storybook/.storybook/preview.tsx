@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import type { Preview } from "@storybook/react";
-import { IconProvider } from "@synopsisapp/symbiosis-ui";
+import { SymbiosisProvider } from "@synopsisapp/symbiosis-ui";
 import '../src/tailwind.css'
 import "../public/symbiosis-assets/symbiosis-ui.css"
 
@@ -17,9 +17,9 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <IconProvider>
+      <SymbiosisProvider scheme="light">
         <Story />
-      </IconProvider>
+      </SymbiosisProvider>
     ),
   ],
 };

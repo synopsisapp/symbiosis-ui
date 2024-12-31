@@ -1,4 +1,4 @@
-import { LinksFunction } from "@remix-run/node";
+import type { LinksFunction } from "@remix-run/node";
 import {
   Links,
   Meta,
@@ -6,7 +6,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import { IconProvider } from "@synopsisapp/symbiosis-ui";
+import { SymbiosisProvider } from "@synopsisapp/symbiosis-ui";
 // eslint-disable-next-line import/no-unresolved
 import stylesheet from "~/tailwind.css?url";
 // eslint-disable-next-line import/no-unresolved
@@ -29,11 +29,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <IconProvider>
+        <SymbiosisProvider>
           {children}
           <ScrollRestoration />
           <Scripts />
-        </IconProvider>
+        </SymbiosisProvider>
       </body>
     </html>
   );
