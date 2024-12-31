@@ -82,44 +82,46 @@ const DataTableHeaderSortButton = <TData, TValue>({
 };
 
 const SearchBar = ({
-	onSearchChange,
-	hasClearButton = true,
-	className,
+  onSearchChange,
+  hasClearButton = true,
+  className,
 }: {
-	onSearchChange?: (value: string) => void;
-	hasClearButton?: boolean;
-	className?: string;
+  onSearchChange?: (value: string) => void;
+  hasClearButton?: boolean;
+  className?: string;
 }) => {
-	const [search, setSearch] = React.useState('');
-	const debouncedOnChange = React.useMemo(
-		() => (onSearchChange ? debounce(onSearchChange, 300) : () => {}),
-		[onSearchChange]
-	);
+  const [search, setSearch] = React.useState("");
+  const debouncedOnChange = React.useMemo(
+    () => (onSearchChange ? debounce(onSearchChange, 300) : () => {}),
+    [onSearchChange],
+  );
 
-	return (
-		<div className='relative max-w-72 mb-4'>
-			<TextField
-				className={cn("[&_[data-symbiosis-textfield='field']]:pr-6", className)}
-				icon='symbiosis-search'
-				value={search}
-				onChange={(value) => {
-					setSearch(value);
-					debouncedOnChange(value);
-				}}
-			/>
-			{hasClearButton && Boolean(search) && (
-				<button
-					className='absolute right-2 top-1/2 -translate-y-1/2 z-10 text-slate-500'
-					type='button'
-					onClick={() => {
-						onSearchChange?.('');
-						setSearch('');
-					}}>
-					<Icon size='small-200' name='symbiosis-x' />
-				</button>
-			)}
-		</div>
-	);
+  return (
+    <div className="relative max-w-72 mb-4">
+      <TextField
+        className={cn("[&_[data-symbiosis-textfield='field']]:pr-6", className)}
+        icon="symbiosis-search"
+        value={search}
+        onChange={(value) => {
+          setSearch(value);
+          debouncedOnChange(value);
+        }}
+      />
+      {hasClearButton && Boolean(search) && (
+        <IconButton
+          variant="ghost"
+          tone="monochrome-dark"
+          size="small-200"
+          icon="symbiosis-x"
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 text-slate-500"
+          onPress={() => {
+            onSearchChange?.("");
+            setSearch("");
+          }}
+        />
+      )}
+    </div>
+  );
 };
 
 const SimpleColumn = <TData, TValue>({
