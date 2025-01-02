@@ -5,8 +5,7 @@ import { TextField } from "../TextField";
 import { Popover } from "../Popover";
 import { DatePicker } from "../Datepicker";
 import type { DateRangeFieldProps, Value } from "./types";
-import { getDateFormat } from "../DateField/utils";
-
+import { getDateFormat } from "../../helpers/getDateFormat";
 
 const DateRangeField = React.forwardRef(
   (
