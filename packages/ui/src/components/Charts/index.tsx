@@ -6,7 +6,7 @@ import { getTwColor } from "../../utils/getTwColor";
 
 import type { ChartConfig } from "./types";
 import { ChartContext, useChart } from "./hooks/useChart";
-import { getPayloadConfigFromPayload } from "./helpers/getPayloadConfigFromPayload";
+import { getPayloadConfigFromPayload } from "../../helpers/getPayloadConfigFromPayload";
 import { cn } from "../../utils/cn";
 import { THEMES } from "./constants";
 import { Text } from "../Text";

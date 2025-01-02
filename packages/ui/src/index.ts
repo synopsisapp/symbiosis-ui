@@ -72,7 +72,6 @@ export { shadcnPlugin } from "./tailwind/shadcn-plugin";
 export { Chart } from "./components/Charts";
 export * from "./components/Charts/types";
 export type { ChartConfig } from "./components/Charts/types";
-export * from "./components/Charts/helpers";
 
 export { SymbiosisAreaChart } from "./components/SymbiosisAreaChart";
 export * from "./components/SymbiosisAreaChart/types";
@@ -120,3 +119,7 @@ export type { DateFieldProps } from "./components/DateField/types";
 export { DateRangeField } from "./components/DateRangeField";
 export * from "./components/DateRangeField/types";
 export type { DateRangeFieldProps } from "./components/DateRangeField/types";
+
+export { getPayloadConfigFromPayload } from "./helpers/getPayloadConfigFromPayload";
+export { calculateCountForDataOnDates } from "./helpers/calculateCountForDataOnDates";
+export { getDateFormat } from "./helpers/getDateFormat";
