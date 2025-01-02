@@ -4,7 +4,6 @@ import type { Locale } from "date-fns";
 type BaseDateFieldProps = Omit<TextFieldProps, "value" | "onChange" | "defaultValue" | "icon"> & {
   value?: Date;
   onChange?: (date: Date) => void;
-  withDatePicker?: boolean;
   locale?: Locale;
 };
 
