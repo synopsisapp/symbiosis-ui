@@ -12,6 +12,7 @@ export type TextFieldProps = {
   disabled?: boolean;
   onChange?: (value: string) => void;
   onBlur?: (value: string) => void;
+  onFocus?: () => void;
   name?: string;
   defaultValue?: string;
   size?: Sizes;

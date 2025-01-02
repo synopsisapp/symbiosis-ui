@@ -43,6 +43,7 @@
     "fs-extra": "^11.2.0",
     "glob": "^10.3.10",
     "node-html-parser": "^6.1.13",
+    "react-day-picker": "^9.4.4",
     "rollup-plugin-node-builtins": "^2.1.2",
     "sonner": "^1.7.0",
     "tailwind-merge": "^2.4.0"

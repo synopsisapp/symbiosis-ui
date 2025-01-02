@@ -10,16 +10,19 @@ export type PopoverRootProps = {
   defaultOpen?: boolean;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  modal?: boolean;
 };
 
 export type PopoverContentProps = {
   children?: React.ReactNode;
+  asChild?: boolean;
   side?: RadixPopoverContentProps["side"];
   align?: RadixPopoverContentProps["align"];
   className?: string;
   closeIcon?: IconProps["name"];
   tone?: ButtonTone;
   onOpenAutoFocus?: (event: Event) => void;
+  onCloseAutoFocus?: (event: Event) => void;
 };
 
 export type PopoverArrowProps = RadixPopoverArrowProps & {

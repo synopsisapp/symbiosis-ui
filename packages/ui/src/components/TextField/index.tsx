@@ -23,6 +23,7 @@ const TextField = React.forwardRef(
       id,
       label,
       className,
+      onFocus,
     }: TextFieldProps,
     ref,
   ) => {
@@ -78,6 +79,7 @@ const TextField = React.forwardRef(
               aria-label={id}
               disabled={disabled}
               required={required}
+              onFocus={onFocus}
               onChange={(e) => {
                 onChange?.(e.target.value);
               }}
