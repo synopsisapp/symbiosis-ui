@@ -125,4 +125,5 @@ export { getPayloadConfigFromPayload } from "./helpers/getPayloadConfigFromPaylo
 export { calculateCountForDataOnDates } from "./helpers/calculateCountForDataOnDates";
 export { getDateFormat } from "./helpers/getDateFormat";
 
-export { Breadcrumb } from './components/Breadcrumb';
+export { Breadcrumb } from "./components/Breadcrumb";
+export { Select } from "./components/Select";
