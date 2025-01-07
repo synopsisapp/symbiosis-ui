@@ -21,5 +21,6 @@ declare namespace SymbiosisUI {
     | "symbiosis-toast-destructive"
     | "symbiosis-search"
     | "symbiosis-x"
-    | "symbiosis-calendar";
+    | "symbiosis-calendar"
+    | "symbiosis-chevron-up";
 }
