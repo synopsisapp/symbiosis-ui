@@ -1,6 +1,6 @@
 {
   "name": "@synopsisapp/symbiosis-ui",
-  "version": "0.0.18",
+  "version": "0.0.20",
   "license": "MIT",
   "type": "module",
   "main": "dist/symbiosis-ui.umd.js",
