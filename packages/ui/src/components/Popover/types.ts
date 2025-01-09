@@ -11,6 +11,7 @@ export type PopoverRootProps = {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   modal?: boolean;
+  ref?: React.Ref<HTMLButtonElement>;
 };
 
 export type PopoverContentProps = {
@@ -23,6 +24,7 @@ export type PopoverContentProps = {
   tone?: ButtonTone;
   onOpenAutoFocus?: (event: Event) => void;
   onCloseAutoFocus?: (event: Event) => void;
+  onFocusOutside?: (event: Event) => void;
 };
 
 export type PopoverArrowProps = RadixPopoverArrowProps & {

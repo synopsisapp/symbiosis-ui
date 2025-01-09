@@ -34,7 +34,7 @@ const PopoverContent = ({
   closeIcon,
   tone = "monochrome-dark",
   onOpenAutoFocus,
-
+  onFocusOutside,
   onCloseAutoFocus,
 }: PopoverContentProps) => {
   return (
@@ -47,6 +47,7 @@ const PopoverContent = ({
         className={cn(sharedPopoverStyles, className)}
         onOpenAutoFocus={onOpenAutoFocus}
         onCloseAutoFocus={onCloseAutoFocus}
+        onFocusOutside={onFocusOutside}
       >
         {closeIcon && (
           <PopoverPrimitive.Close className="absolute top-1 right-1 focus-visible:outline-none" aria-label="Close">
