@@ -123,3 +123,5 @@ export type { DateRangeFieldProps } from "./components/DateRangeField/types";
 export { getPayloadConfigFromPayload } from "./helpers/getPayloadConfigFromPayload";
 export { calculateCountForDataOnDates } from "./helpers/calculateCountForDataOnDates";
 export { getDateFormat } from "./helpers/getDateFormat";
+
+export { Breadcrumb } from './components/Breadcrumb';
