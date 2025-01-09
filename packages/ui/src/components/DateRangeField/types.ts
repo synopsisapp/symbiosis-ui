@@ -5,11 +5,13 @@ export type Value = {
   to?: Date;
 };
 
-type BaseDateRangeFieldProps = Omit<TextFieldProps, "value" | "onChange" | "defaultValue" | "icon"> & {
+type BaseDateRangeFieldProps = Omit<TextFieldProps, "value" | "onChange" | "defaultValue" | "icon" | "label"> & {
   value?: Value;
   onChange?: (range: Value) => void;
   withDatePicker?: boolean;
   locale?: Locale;
+  labelFrom?: string;
+  labelTo?: string;
 };
 
 type WithoutDatePicker = BaseDateRangeFieldProps & {

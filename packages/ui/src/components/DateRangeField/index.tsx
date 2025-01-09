@@ -18,7 +18,8 @@ const DateRangeField = React.forwardRef(
       name,
       size = "base",
       id,
-      label,
+      labelFrom,
+      labelTo,
       className,
       value,
       onChange,
@@ -36,6 +37,7 @@ const DateRangeField = React.forwardRef(
       from: value?.from,
       to: value?.to,
     });
+    const containerRef = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
       if (value?.from && isValid(value.from)) {
@@ -98,6 +100,12 @@ const DateRangeField = React.forwardRef(
       }
     };
 
+    const handleFocusOutside = (e: Event) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
     const selectedDates = selectedRange.from ? { from: selectedRange.from, to: selectedRange.to } : undefined;
 
     if (!datePickerProps.withDatePicker) {
@@ -114,7 +122,7 @@ const DateRangeField = React.forwardRef(
             name={`${name}-from`}
             size={size}
             id={`${id}-from`}
-            label={label}
+            label={labelFrom}
             className={className}
             value={fromInputValue}
             onChange={handleFromInputChange}
@@ -130,7 +138,7 @@ const DateRangeField = React.forwardRef(
             name={`${name}-to`}
             size={size}
             id={`${id}-to`}
-            label={label}
+            label={labelTo}
             className={className}
             value={toInputValue}
             onChange={handleToInputChange}
@@ -143,7 +151,7 @@ const DateRangeField = React.forwardRef(
     return (
       <Popover.Root open={isOpen} onOpenChange={setIsOpen}>
         <Popover.Trigger asChild>
-          <div className="flex gap-2">
+          <div ref={containerRef} className="flex gap-2">
             <TextField
               ref={ref}
               error={error}
@@ -155,7 +163,7 @@ const DateRangeField = React.forwardRef(
               name={`${name}-from`}
               size={size}
               id={`${id}-from`}
-              label={label}
+              label={labelFrom}
               className={className}
               value={fromInputValue}
               onChange={handleFromInputChange}
@@ -172,7 +180,7 @@ const DateRangeField = React.forwardRef(
               name={`${name}-to`}
               size={size}
               id={`${id}-to`}
-              label={label}
+              label={labelTo}
               className={className}
               value={toInputValue}
               onChange={handleToInputChange}
@@ -188,6 +196,7 @@ const DateRangeField = React.forwardRef(
           side="bottom"
           onOpenAutoFocus={(e) => e.preventDefault()}
           onCloseAutoFocus={(e) => e.preventDefault()}
+          onFocusOutside={handleFocusOutside}
           className="w-[max(var(--radix-popover-trigger-width),100%)] p-0 my-2"
         >
           <DatePicker
