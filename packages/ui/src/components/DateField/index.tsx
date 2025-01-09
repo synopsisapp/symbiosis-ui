@@ -123,7 +123,7 @@ const DateField = React.forwardRef(
           side="bottom"
           onOpenAutoFocus={(e) => e.preventDefault()}
           onCloseAutoFocus={(e) => e.preventDefault()}
-          className="w-[var(--radix-popover-trigger-width)] p-0 my-2"
+          className="w-[max(var(--radix-popover-trigger-width),100%)] p-0 my-2"
         >
           <DatePicker
             mode="single"
