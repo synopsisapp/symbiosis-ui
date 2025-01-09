@@ -8,11 +8,22 @@ const meta: Meta<DateRangeFieldProps> = {
   component: DateRangeField,
   tags: ["autodocs"],
   argTypes: {
-    label: {
+    labelFrom: {
       control: {
         type: "text",
       },
-      description: "Label for the DateRangeField",
+      description: "Label for the DateRangeField from",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    labelTo: {
+      control: {
+        type: "text",
+      },
+      description: "Label for the DateRangeField to",
       table: {
         type: {
           summary: "string",
@@ -127,9 +138,10 @@ export default meta;
 type Story = StoryObj<DateRangeFieldProps>;
 
 export const Default: Story = {
-  render: (args: DateRangeFieldProps) => <DateRangeField {...args} />,
+  render: (args: DateRangeFieldProps) => <DateRangeField {...args} className="w-20" />,
   args: {
-    label: "Default DateRangeField",
+    labelFrom: "From",
+    labelTo: "To",
     withDatePicker: true,
   },
 };
@@ -150,7 +162,8 @@ export const InForm: Story = {
     );
   },
   args: {
-    label: "DateRangeField in Form",
+    labelFrom: "From",
+    labelTo: "To",
     withDatePicker: true,
   },
 };
@@ -158,7 +171,8 @@ export const InForm: Story = {
 export const WithLocale: Story = {
   render: (args: DateRangeFieldProps) => <DateRangeField {...args} />,
   args: {
-    label: "DateRangeField with German Locale",
+    labelFrom: "From",
+    labelTo: "To",
     locale: de,
     withDatePicker: true,
   },
@@ -167,7 +181,8 @@ export const WithLocale: Story = {
 export const WithError: Story = {
   render: (args: DateRangeFieldProps) => <DateRangeField {...args} />,
   args: {
-    label: "DateRangeField with Error",
+    labelFrom: "From",
+    labelTo: "To",
     error: "Please select valid dates",
     required: true,
     withDatePicker: true,
@@ -177,7 +192,8 @@ export const WithError: Story = {
 export const WithHint: Story = {
   render: (args: DateRangeFieldProps) => <DateRangeField {...args} />,
   args: {
-    label: "DateRangeField with Hint",
+    labelFrom: "From",
+    labelTo: "To",
     hint: "Select your date range",
     withDatePicker: true,
   },
@@ -186,7 +202,8 @@ export const WithHint: Story = {
 export const Disabled: Story = {
   render: (args: DateRangeFieldProps) => <DateRangeField {...args} />,
   args: {
-    label: "Disabled DateRangeField",
+    labelFrom: "From",
+    labelTo: "To",
     disabled: true,
     placeholder: "Select dates",
     withDatePicker: true,
@@ -196,7 +213,8 @@ export const Disabled: Story = {
 export const WithDateRestrictions: Story = {
   render: (args: DateRangeFieldProps) => <DateRangeField {...args} />,
   args: {
-    label: "DateRangeField with Restrictions",
+    labelFrom: "From",
+    labelTo: "To",
     withDatePicker: true,
     disabledBefore: new Date(),
     disabledAfter: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
@@ -207,7 +225,8 @@ export const WithDateRestrictions: Story = {
 export const WithoutDatePicker: Story = {
   render: (args: DateRangeFieldProps) => <DateRangeField {...args} />,
   args: {
-    label: "DateRangeField without Picker",
+    labelFrom: "From",
+    labelTo: "To",
     withDatePicker: false,
     placeholder: "MM/DD/YYYY",
     hint: "Type the dates manually",
@@ -224,7 +243,8 @@ export const Controlled: Story = {
     return <DateRangeField {...args} value={value} onChange={setValue} />;
   },
   args: {
-    label: "Controlled DateRangeField",
+    labelFrom: "From",
+    labelTo: "To",
     withDatePicker: true,
     placeholder: "Select dates",
   },
@@ -240,7 +260,8 @@ const ControlledDateRangeField = () => {
 
   return (
     <DateRangeField
-      label="Controlled DateRangeField"
+      labelFrom="From"
+      labelTo="To"
       withDatePicker={true}
       placeholder="Select dates"
       value={value}
@@ -261,7 +282,8 @@ export const CustomStyled: Story = {
     <DateRangeField {...args} className="[&>div[data-symbiosis-textfield='hint']]:text-red-300" />
   ),
   args: {
-    label: "Custom Styled DateRangeField",
+    labelFrom: "From",
+    labelTo: "To",
     withDatePicker: true,
     hint: "This is a custom styled hint",
     placeholder: "Select dates",
