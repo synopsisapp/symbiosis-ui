@@ -5,6 +5,7 @@ import { Dropdown, DropdownMenuLabel, DropdownSimpleItem } from "../Dropdown";
 import { IconButton } from "../IconButton";
 import { iconButtonLeftBorderIconVariant } from "./styles";
 import type { SplitButtonProps } from "./types";
+import { Fragment } from "react/jsx-runtime";
 
 export const SplitButton = ({
   label,
@@ -55,13 +56,12 @@ export const SplitButton = ({
           <Dropdown.Content>
             {items.map((item) => {
               return (
-                <>
+                <Fragment key={`item-${item.text}`}>
                   {item.isSeparated && <Dropdown.Separator />}
                   {item.isSectionTitle ? (
                     <DropdownMenuLabel key={`label-${item.text}`} label={item.text} />
                   ) : (
                     <DropdownSimpleItem
-                      key={`item-${item.text}`}
                       text={item.text}
                       onSelect={() => {
                         item.onSelect?.();
@@ -69,7 +69,7 @@ export const SplitButton = ({
                       icon={item.icon}
                     />
                   )}
-                </>
+                </Fragment>
               );
             })}
           </Dropdown.Content>
