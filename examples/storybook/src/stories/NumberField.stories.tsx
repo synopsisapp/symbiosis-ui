@@ -253,7 +253,7 @@ const ControlledNumberField = () => {
 };
 
 export const CustomStyled: Story = {
-  render: (args) => <NumberField {...args} className="[&>div[data-symbiosis-numberField='hint']]:text-red-300" />,
+  render: (args) => <NumberField {...args} className="[&>div[data-symbiosis-numberfield='hint']]:text-red-300" />,
   args: {
     label: "Custom Styled NumberField",
     placeholder: "Enter number",

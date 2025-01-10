@@ -75,13 +75,13 @@ export const NumberField = ({
       }}
     >
       {label && (
-        <label data-symbiosis-numberField="label" htmlFor={formId} className={inputLabel({ size: "small-100" })}>
+        <label data-symbiosis-numberfield="label" htmlFor={formId} className={inputLabel({ size: "small-100" })}>
           {label}
         </label>
       )}
       <div className="flex items-center gap-1 relative w-full">
         <div
-          data-symbiosis-numberField="wrapper"
+          data-symbiosis-numberfield="wrapper"
           className={cn(
             inputWrapper({
               size: "base",
@@ -91,7 +91,7 @@ export const NumberField = ({
           )}
         >
           <div
-            data-symbiosis-numberField="number-field"
+            data-symbiosis-numberfield="number-field"
             className={cn(
               input({
                 size: "base",
@@ -103,7 +103,7 @@ export const NumberField = ({
             )}
           >
             <IconButton
-              data-symbiosis-numberField="decrement-button"
+              data-symbiosis-numberfield="decrement-button"
               icon="symbiosis-minus"
               onPress={() => decrement()}
               variant="ghost"
@@ -114,7 +114,7 @@ export const NumberField = ({
             />
             {icon && (
               <Icon
-                data-symbiosis-numberField="icon"
+                data-symbiosis-numberfield="icon"
                 name={icon}
                 className="absolute left-2 top-1/2 -translate-y-1/2 z-10 text-grays-500"
                 size="small-200"
@@ -122,7 +122,7 @@ export const NumberField = ({
             )}
             <input
               id={formId}
-              data-symbiosis-numberField="input"
+              data-symbiosis-numberfield="input"
               name={name}
               className="outline-none w-full h-full text-center hide-internal-input-elements"
               type="number"
@@ -160,7 +160,7 @@ export const NumberField = ({
               }}
             />
             <IconButton
-              data-symbiosis-numberField="increment-button"
+              data-symbiosis-numberfield="increment-button"
               icon="symbiosis-plus"
               onPress={() => increment()}
               variant="ghost"
@@ -173,7 +173,7 @@ export const NumberField = ({
         </div>
       </div>
       {hasError && (
-        <div className="flex gap-1 items-center" data-symbiosis-numberField="error">
+        <div className="flex gap-1 items-center" data-symbiosis-numberfield="error">
           <Icon name="symbiosis-exclamation-circle" size="small-200" className="text-red-600" />
           <Text noTranslations variant="body-small-200" className="m-0 text-red-600">
             {error}
@@ -181,7 +181,7 @@ export const NumberField = ({
         </div>
       )}
       {!hasError && hint && (
-        <div className="flex gap-1 items-center text-slate-400" data-symbiosis-numberField="hint">
+        <div className="flex gap-1 items-center text-slate-400" data-symbiosis-numberfield="hint">
           <Icon name="symbiosis-exclamation-circle" size="small-200" className="text-inherit" />
           <Text noTranslations variant="body-small-200" className="m-0 text-inherit">
             {hint}
