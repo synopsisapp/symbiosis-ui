@@ -13,6 +13,7 @@ export default defineConfig({
       external: [
         "@biomejs/biome",
         "@radix-ui/react-checkbox",
+        "@radix-ui/react-select",
         "@radix-ui/react-slot",
         "@radix-ui/react-tooltip",
         "@tailwindcss/typography",
