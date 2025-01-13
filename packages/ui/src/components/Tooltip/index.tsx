@@ -1,4 +1,5 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+import * as React from "react";
 import { Text } from "../Text";
 import { cn } from "../../utils/cn";
 import type { TooltipRootProps, TooltipContentProps, TooltipTriggerProps } from "./types";
@@ -24,9 +25,12 @@ export const TooltipContent = ({
   align = "center",
   alignOffset = 0,
   className,
+  skipComposition = false,
 }: TooltipContentProps) => {
+  const ContentWrapper = skipComposition ? React.Fragment : TooltipPrimitive.Portal;
+
   return (
-    <TooltipPrimitive.Portal>
+    <ContentWrapper>
       <TooltipPrimitive.Content
         avoidCollisions
         side={side}
@@ -44,7 +48,7 @@ export const TooltipContent = ({
           children
         )}
       </TooltipPrimitive.Content>
-    </TooltipPrimitive.Portal>
+    </ContentWrapper>
   );
 };
 
@@ -64,4 +68,5 @@ export const Tooltip = {
   Root: TooltipRoot,
   Content: TooltipContent,
   Trigger: TooltipTrigger,
+  Portal: TooltipPrimitive.Portal,
 };

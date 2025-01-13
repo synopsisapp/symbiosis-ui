@@ -16,6 +16,7 @@ export type DropdownContentProps = {
   children: React.ReactNode;
   side?: DropdownMenuContentProps["side"];
   className?: string;
+  skipComposition?: boolean;
 };
 
 export type DropdownItemProps = {

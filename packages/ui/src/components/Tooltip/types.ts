@@ -13,6 +13,7 @@ export type TooltipContentProps = {
   align?: "start" | "center" | "end";
   alignOffset?: number;
   className?: string;
+  skipComposition?: boolean;
 };
 
 export type TooltipTriggerProps = {
