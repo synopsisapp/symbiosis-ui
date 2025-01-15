@@ -1,5 +1,4 @@
 import type {
-  PopoverArrowProps as RadixPopoverArrowProps,
   PopoverContentProps as RadixPopoverContentProps,
 } from "@radix-ui/react-popover";
 import type { IconProps } from "../Icon/types";
@@ -27,7 +26,7 @@ export type PopoverContentProps = {
   onFocusOutside?: (event: Event) => void;
 };
 
-export type PopoverArrowProps = RadixPopoverArrowProps & {
+export type PopoverArrowProps = {
   className?: string;
 };
 
