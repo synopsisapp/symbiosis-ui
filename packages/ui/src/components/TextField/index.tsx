@@ -55,7 +55,7 @@ const TextField = React.forwardRef(
               <Icon
                 data-symbiosis-textfield="icon"
                 name={icon}
-                className={cn("absolute left-2 top-1/2 -translate-y-1/2 z-10 text-slate-500")}
+                className={cn("absolute left-2 top-1/2 -translate-y-1/2 text-slate-500")}
                 size="small-200"
               />
             )}
