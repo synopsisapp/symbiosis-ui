@@ -18,6 +18,7 @@ const meta: Meta<typeof Tooltip.Root> = {
 export default meta;
 
 type Story = StoryObj<typeof Tooltip.Root>;
+type StoryContent = StoryObj<typeof Tooltip.Content>;
 
 export const Uncontrolled: Story = {
   render: (args: TooltipProps["Root"]) => (
@@ -107,6 +108,24 @@ export const CustomContent: Story = {
       <Tooltip.Content className="bg-mainColors-light-200 rounded-none">
         <div>Popover content</div>
       </Tooltip.Content>
+    </Tooltip.Root>
+  ),
+};
+
+export const CustomSideAndAlign: StoryContent = {
+  args: {
+    side: "right",
+    sideOffset: 0,
+    align: "end",
+    alignOffset: -50,
+  },
+
+  render: (args: TooltipProps["Content"]) => (
+    <Tooltip.Root>
+      <Tooltip.Trigger>
+        <span>Hover me for custom side</span>
+      </Tooltip.Trigger>
+      <Tooltip.Content label="Custom side" {...args} />
     </Tooltip.Root>
   ),
 };

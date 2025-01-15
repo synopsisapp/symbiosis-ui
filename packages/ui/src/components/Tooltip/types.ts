@@ -8,6 +8,10 @@ export type TooltipRootProps = {
 export type TooltipContentProps = {
   children?: React.ReactNode;
   label?: string;
+  side?: "top" | "right" | "bottom" | "left";
+  sideOffset?: number;
+  align?: "start" | "center" | "end";
+  alignOffset?: number;
   className?: string;
 };
 

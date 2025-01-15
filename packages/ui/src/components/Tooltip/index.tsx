@@ -16,12 +16,28 @@ export const TooltipRoot = ({ children, defaultOpen, open, onOpenChange }: Toolt
 
 TooltipRoot.displayName = "Tooltip.Root";
 
-export const TooltipContent = ({ children, label, className }: TooltipContentProps) => {
+export const TooltipContent = ({
+  children,
+  label,
+  side = "top",
+  sideOffset = 5,
+  align = "center",
+  alignOffset = 0,
+  className,
+}: TooltipContentProps) => {
   return (
     <TooltipPrimitive.Portal>
-      <TooltipPrimitive.Content sideOffset={5} forceMount className={cn(sharedTooltipStyles, className)}>
+      <TooltipPrimitive.Content
+        avoidCollisions
+        side={side}
+        sideOffset={sideOffset}
+        align={align}
+        alignOffset={alignOffset}
+        forceMount
+        className={cn(sharedTooltipStyles, className)}
+      >
         {label ? (
-          <Text variant="body-small-200" noTranslations className="m-0 p-0">
+          <Text variant="body-small-200" noTranslations className="m-0 p-0 text-inherit">
             {label}
           </Text>
         ) : (
