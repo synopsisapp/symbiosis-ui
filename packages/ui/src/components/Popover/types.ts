@@ -22,15 +22,18 @@ export type PopoverContentProps = {
   align?: RadixPopoverContentProps["align"];
   alignOffset?: RadixPopoverContentProps["alignOffset"];
   className?: string;
-  closeIcon?: IconProps["name"];
-  closeButtonClassName?: string;
-  tone?: ButtonTone;
   onOpenAutoFocus?: (event: Event) => void;
   onCloseAutoFocus?: (event: Event) => void;
   onFocusOutside?: (event: Event) => void;
 };
 
 export type PopoverArrowProps = RadixPopoverArrowProps & {
+  className?: string;
+};
+
+export type PopoverCloseProps = {
+  icon: IconProps["name"];
+  tone: ButtonTone;
   className?: string;
 };
 

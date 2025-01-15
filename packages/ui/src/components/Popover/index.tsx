@@ -4,7 +4,13 @@ import { IconButton } from "../IconButton";
 import { cn } from "../../utils/cn";
 import { sharedPopoverStyles } from "./styles";
 
-import type { PopoverRootProps, PopoverContentProps, PopoverTriggerProps, PopoverArrowProps } from "./types";
+import type {
+  PopoverRootProps,
+  PopoverContentProps,
+  PopoverTriggerProps,
+  PopoverArrowProps,
+  PopoverCloseProps,
+} from "./types";
 
 const PopoverRoot = ({ children, defaultOpen, onOpenChange, open, modal = true }: PopoverRootProps) => {
   return (
@@ -33,9 +39,6 @@ const PopoverContent = ({
   align = "start",
   alignOffset = 0,
   className,
-  closeIcon,
-  closeButtonClassName,
-  tone = "monochrome-dark",
   onOpenAutoFocus,
   onFocusOutside,
   onCloseAutoFocus,
@@ -54,12 +57,6 @@ const PopoverContent = ({
         onCloseAutoFocus={onCloseAutoFocus}
         onFocusOutside={onFocusOutside}
       >
-        {closeIcon && (
-          <PopoverPrimitive.Close className="absolute top-1 right-1 focus-visible:outline-none" aria-label="Close">
-            <IconButton icon={closeIcon} tone={tone} variant="ghost" size="base" className="w-4 min-w-4 h-4 min-h-4" />
-          </PopoverPrimitive.Close>
-        )}
-
         {children}
       </PopoverPrimitive.Content>
     </PopoverPrimitive.Portal>
@@ -74,9 +71,21 @@ const PopoverArrow = ({ className }: PopoverArrowProps) => (
 
 PopoverArrow.displayName = "Popover.Arrow";
 
+const PopoverClose = ({ icon, tone, className }: PopoverCloseProps) => (
+  <PopoverPrimitive.Close
+    className={cn("absolute top-2 right-2 focus-visible:outline-none", className)}
+    aria-label="Close"
+  >
+    <IconButton icon={icon} tone={tone} variant="ghost" size="base" className="w-4 min-w-4 h-4 min-h-4" />
+  </PopoverPrimitive.Close>
+);
+
+PopoverClose.displayName = "Popover.Close";
+
 export const Popover = {
   Root: PopoverRoot,
   Trigger: PopoverTrigger,
+  Close: PopoverClose,
   Content: PopoverContent,
   Arrow: PopoverArrow,
 };
