@@ -1,5 +1,4 @@
 import type {
-  PopoverArrowProps as RadixPopoverArrowProps,
   PopoverContentProps as RadixPopoverContentProps,
 } from "@radix-ui/react-popover";
 import type { IconProps } from "../Icon/types";
@@ -18,16 +17,22 @@ export type PopoverContentProps = {
   children?: React.ReactNode;
   asChild?: boolean;
   side?: RadixPopoverContentProps["side"];
+  sideOffset?: RadixPopoverContentProps["sideOffset"];
   align?: RadixPopoverContentProps["align"];
+  alignOffset?: RadixPopoverContentProps["alignOffset"];
   className?: string;
-  closeIcon?: IconProps["name"];
-  tone?: ButtonTone;
   onOpenAutoFocus?: (event: Event) => void;
   onCloseAutoFocus?: (event: Event) => void;
   onFocusOutside?: (event: Event) => void;
 };
 
-export type PopoverArrowProps = RadixPopoverArrowProps & {
+export type PopoverArrowProps = {
+  className?: string;
+};
+
+export type PopoverCloseProps = {
+  icon: IconProps["name"];
+  tone: ButtonTone;
   className?: string;
 };
 
