@@ -39,27 +39,21 @@ const meta: Meta<PopoverProps["Root"] & PopoverProps["Content"]> = {
         type: "select",
       },
       options: ["top", "right", "bottom", "left"],
-      description: "Side of the popover",
+      description: "**Content:** Side of the popover",
       table: {
         type: { summary: "string" },
         defaultValue: { summary: "top" },
       },
     },
-    closeIcon: {
-      options: ["close", "edit"],
-      control: { type: "select" },
-      description: "Icon to use for the close button",
-      table: {
-        type: { summary: "string" },
+    align: {
+      control: {
+        type: "select",
       },
-    },
-    tone: {
-      options: ["monochrome-dark", "monochrome-light"],
-      control: { type: "select" },
-      description: "Tone of the popover",
+      options: ["left", "center", "right"],
+      description: "**Content:** Alignment of the popover",
       table: {
         type: { summary: "string" },
-        defaultValue: { summary: "monochrome-dark" },
+        defaultValue: { summary: "center" },
       },
     },
   },
@@ -71,14 +65,14 @@ type Story = StoryObj<PopoverProps["Root"] & PopoverProps["Content"]>;
 
 export const Default: Story = {
   render: (args) => {
-    const { closeIcon, side, tone, ...rootArgs } = args;
     return (
-      <Popover.Root {...rootArgs}>
+      <Popover.Root {...args}>
         <Popover.Trigger>
           <span>Open Popover</span>
         </Popover.Trigger>
-        <Popover.Content side={side} closeIcon={closeIcon} tone={tone}>
+        <Popover.Content>
           Popover content
+          <Popover.Close />
           <Popover.Arrow />
         </Popover.Content>
       </Popover.Root>
@@ -87,8 +81,7 @@ export const Default: Story = {
 };
 
 export const Controlled: Story = {
-  render: (args) => {
-    const { closeIcon, side, tone } = args;
+  render: () => {
     const [open, setOpen] = React.useState(false);
 
     return (
@@ -96,17 +89,13 @@ export const Controlled: Story = {
         <Popover.Trigger>
           <span>Open Popover</span>
         </Popover.Trigger>
-        <Popover.Content side={side} closeIcon={closeIcon} tone={tone}>
+        <Popover.Content>
           Popover content
+          <Popover.Close />
           <Popover.Arrow />
         </Popover.Content>
       </Popover.Root>
     );
-  },
-  args: {
-    side: "top",
-    closeIcon: "close",
-    tone: "monochrome-dark",
   },
   parameters: {
     docs: {
@@ -121,10 +110,11 @@ const ControlledPopover = () => {
     </Popover.Trigger>
     <Popover.Content side="top" closeIcon="close" tone="monochrome-dark">
       Popover content
+      <Popover.Close />
       <Popover.Arrow />
     </Popover.Content>
   </Popover.Root>
-} 
+}
         `,
         language: "tsx",
         type: "code",
@@ -133,24 +123,19 @@ const ControlledPopover = () => {
   },
 };
 
-export const CustomContent: Story = {
-  render: (args) => {
-    const { closeIcon, side, tone } = args;
+export const CustomContentAndSide: Story = {
+  render: () => {
     return (
       <Popover.Root>
         <Popover.Trigger>
           <span>Open Popover</span>
         </Popover.Trigger>
-        <Popover.Content side={side} closeIcon={closeIcon} tone={tone} className="bg-lime-200">
+        <Popover.Content className="bg-lime-200" side="left" align="center">
           <div>Popover content</div>
+          <Popover.Close icon="heart-filled" />
           <Popover.Arrow className="fill-lime-200" />
         </Popover.Content>
       </Popover.Root>
     );
-  },
-  args: {
-    side: "top",
-    closeIcon: "close",
-    tone: "monochrome-dark",
   },
 };

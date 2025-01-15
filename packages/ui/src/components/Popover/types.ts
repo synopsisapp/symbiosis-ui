@@ -31,8 +31,8 @@ export type PopoverArrowProps = {
 };
 
 export type PopoverCloseProps = {
-  icon: IconProps["name"];
-  tone: ButtonTone;
+  icon?: IconProps["name"];
+  tone?: ButtonTone;
   className?: string;
 };
 
