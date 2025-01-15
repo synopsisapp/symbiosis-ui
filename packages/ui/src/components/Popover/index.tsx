@@ -29,9 +29,12 @@ const PopoverContent = ({
   children,
   asChild,
   side = "top",
+  sideOffset = 5,
   align = "start",
+  alignOffset = 0,
   className,
   closeIcon,
+  closeButtonClassName,
   tone = "monochrome-dark",
   onOpenAutoFocus,
   onFocusOutside,
@@ -43,7 +46,9 @@ const PopoverContent = ({
         avoidCollisions
         asChild={asChild}
         side={side}
+        sideOffset={sideOffset}
         align={align}
+        alignOffset={alignOffset}
         className={cn(sharedPopoverStyles, className)}
         onOpenAutoFocus={onOpenAutoFocus}
         onCloseAutoFocus={onCloseAutoFocus}

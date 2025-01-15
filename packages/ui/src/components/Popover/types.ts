@@ -18,9 +18,12 @@ export type PopoverContentProps = {
   children?: React.ReactNode;
   asChild?: boolean;
   side?: RadixPopoverContentProps["side"];
+  sideOffset?: RadixPopoverContentProps["sideOffset"];
   align?: RadixPopoverContentProps["align"];
+  alignOffset?: RadixPopoverContentProps["alignOffset"];
   className?: string;
   closeIcon?: IconProps["name"];
+  closeButtonClassName?: string;
   tone?: ButtonTone;
   onOpenAutoFocus?: (event: Event) => void;
   onCloseAutoFocus?: (event: Event) => void;
