@@ -1,4 +1,6 @@
 import type { IconProps } from "../Icon/types";
+import type { Sizes } from "../../designSystemTokens";
+import type { TextWeight } from "../Text/types";
 
 export type TextAreaFieldProps = {
   label?: string;
@@ -15,5 +17,7 @@ export type TextAreaFieldProps = {
   defaultValue?: string;
   rows?: number;
   id?: string;
+  size?: Sizes;
+  labelWeight?: TextWeight;
   className?: string;
 };

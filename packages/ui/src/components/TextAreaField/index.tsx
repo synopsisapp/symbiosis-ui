@@ -4,7 +4,8 @@ import { cn } from "../../utils/cn";
 import { Text } from "../Text";
 
 import type { TextAreaFieldProps } from "./types";
-import { inputLabel, input } from "./styles";
+import { input } from "./styles";
+import { inputLabel } from "../TextField/styles";
 
 export const TextAreaField = ({
   error,
@@ -21,6 +22,8 @@ export const TextAreaField = ({
   id,
   label,
   onBlur,
+  size = "base",
+  labelWeight,
   className,
 }: TextAreaFieldProps) => {
   const formId = id ?? label ?? "";
@@ -34,7 +37,7 @@ export const TextAreaField = ({
         <label
           htmlFor={formId}
           data-symbiosis-textAreaField="label"
-          className={cn(inputLabel({ size: "small-100" }), "m-0")}
+          className={cn(inputLabel({ size, weight: labelWeight }), "m-0")}
         >
           {label}
         </label>

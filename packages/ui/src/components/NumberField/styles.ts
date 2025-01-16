@@ -66,17 +66,3 @@ const inputCva = cva(
   },
 );
 
-export interface InputLabelVariants extends VariantProps<typeof inputLabelCva> {}
-const inputLabelCva = cva([], {
-  variants: {
-    size: {
-      "small-200": [text({ variant: "body-small-200" })],
-      "small-100": [text({ variant: "body-small-100" })],
-      base: [text({ variant: "body-base" })],
-      "large-100": [text({ variant: "body-large-100" })],
-    },
-  },
-});
-
-export const inputLabel = ({ size = "small-100", ...rest }: InputLabelVariants) => cn(inputLabelCva({ size, ...rest }));
-

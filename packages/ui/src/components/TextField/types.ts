@@ -1,5 +1,6 @@
 import type { IconProps } from "../Icon/types";
 import type { Sizes } from "../../designSystemTokens";
+import type { TextWeight } from "../Text/types";
 
 export type TextFieldProps = {
   label?: string;
@@ -10,6 +11,7 @@ export type TextFieldProps = {
   placeholder?: string;
   icon?: IconProps["name"];
   disabled?: boolean;
+  labelWeight?: TextWeight;
   onChange?: (value: string) => void;
   onBlur?: (value: string) => void;
   onFocus?: () => void;

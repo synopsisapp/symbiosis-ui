@@ -20,6 +20,7 @@ const TextField = React.forwardRef(
       defaultValue,
       name,
       size = "base",
+      labelWeight,
       id,
       label,
       className,
@@ -41,6 +42,7 @@ const TextField = React.forwardRef(
             className={cn(
               inputLabel({
                 size,
+                weight: labelWeight,
               }),
               "m-0",
             )}

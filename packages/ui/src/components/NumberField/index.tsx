@@ -3,7 +3,8 @@ import { Icon } from "../Icon";
 import { IconButton } from "../IconButton";
 import { cn } from "../../utils/cn";
 import { Text } from "../Text";
-import { input, inputWrapper, inputLabel } from "./styles";
+import { input, inputWrapper } from "./styles";
+import { inputLabel } from "../TextField/styles";
 import type { NumberFieldProps } from "./types";
 
 export const NumberField = ({
@@ -22,6 +23,8 @@ export const NumberField = ({
   label,
   name,
   id,
+  size = "base",
+  labelWeight,
   onBlur,
   className,
 }: NumberFieldProps) => {
@@ -75,7 +78,11 @@ export const NumberField = ({
       }}
     >
       {label && (
-        <label data-symbiosis-numberfield="label" htmlFor={formId} className={inputLabel({ size: "small-100" })}>
+        <label
+          data-symbiosis-numberfield="label"
+          htmlFor={formId}
+          className={cn(inputLabel({ size, weight: labelWeight }), "m-0")}
+        >
           {label}
         </label>
       )}

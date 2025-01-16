@@ -52,5 +52,12 @@ export const inputLabel = cva([], {
       base: [text({ variant: "body-small-100" })],
       "large-100": [text({ variant: "body-base", weight: "bold-100" })],
     },
+    weight: {
+      "thin-200": [text({ weight: "thin-200" })],
+      "thin-100": [text({ weight: "thin-100" })],
+      base: [text({ weight: "base" })],
+      "bold-100": [text({ weight: "bold-100" })],
+      "bold-200": [text({ weight: "bold-200" })],
+    },
   },
 });

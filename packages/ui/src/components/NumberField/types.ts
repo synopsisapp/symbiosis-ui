@@ -1,5 +1,6 @@
 import type { IconProps } from "../Icon/types";
 import type { Sizes } from "../../designSystemTokens";
+import type { TextWeight } from "../Text/types";
 
 export type NumberFieldProps = {
   label?: string;
@@ -15,6 +16,7 @@ export type NumberFieldProps = {
   name?: string;
   defaultValue?: number;
   size?: Sizes;
+  labelWeight?: TextWeight;
   id?: string;
   className?: string;
   min?: number;

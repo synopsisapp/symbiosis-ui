@@ -135,6 +135,31 @@ const meta: Meta<TextAreaFieldProps> = {
         },
       },
     },
+    size: {
+      control: {
+        type: "select",
+        options: ["small-100", "small-200", "base", "large-100"],
+      },
+      description: "Size of the NumberField",
+      table: {
+        defaultValue: { summary: "base" },
+        type: {
+          summary: "small-100 | small-200 | base | large-100",
+        },
+      },
+    },
+    labelWeight: {
+      control: {
+        type: "select",
+        options: ["thin-200", "thin-100", "base", "bold-100", "bold-200"],
+      },
+      description: "Weight of the label",
+      table: {
+        type: {
+          summary: "thin-200 | thin-100 | base | bold-100 | bold-200",
+        },
+      },
+    },
     name: {
       control: {
         type: "text",

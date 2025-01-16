@@ -131,6 +131,18 @@ const meta: Meta<NumberFieldProps> = {
         },
       },
     },
+    labelWeight: {
+      control: {
+        type: "select",
+        options: ["thin-200", "thin-100", "base", "bold-100", "bold-200"],
+      },
+      description: "Weight of the label",
+      table: {
+        type: {
+          summary: "thin-200 | thin-100 | base | bold-100 | bold-200",
+        },
+      },
+    },
     icon: {
       control: {
         type: "text",
