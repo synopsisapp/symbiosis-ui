@@ -4,8 +4,7 @@ import { cn } from "../../utils/cn";
 import { Text } from "../Text";
 
 import type { TextAreaFieldProps } from "./types";
-import { input } from "./styles";
-import { inputLabel } from "../TextField/styles";
+import { input, inputLabel } from "../sharedStyles";
 
 export const TextAreaField = ({
   error,

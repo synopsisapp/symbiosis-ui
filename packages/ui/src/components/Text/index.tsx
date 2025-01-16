@@ -1,8 +1,7 @@
 import * as React from "react";
 import type { TextProps } from "./types";
 import { cn } from "../../utils/cn";
-
-import { text } from "./styles";
+import { text } from "../sharedStyles";
 
 export function TextTw({
   variant = "body-base",

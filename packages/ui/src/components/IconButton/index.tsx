@@ -3,7 +3,7 @@ import { Icon } from "../Icon";
 import { Text } from "../Text";
 import { Spinner } from "../Spinner";
 import type { IconButtonProps } from "./types";
-import { button, iconButton, iconSizeToTailwind } from "../Button/styles";
+import { button, iconButton, iconSizeToTailwind } from "../sharedStyles";
 import { cn } from "../../utils/cn";
 
 export const IconButton = React.forwardRef(

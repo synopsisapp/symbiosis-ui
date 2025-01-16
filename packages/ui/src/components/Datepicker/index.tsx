@@ -5,8 +5,7 @@ import { compareAsc } from "date-fns/compareAsc";
 
 import { IconButton } from "../IconButton";
 import { cn } from "../../utils/cn";
-import { button, iconButton } from "../Button/styles";
-import { text } from "../Text/styles";
+import { button, iconButton, text } from "../sharedStyles";
 import type { DatePickerProps } from "./types";
 
 const classNames = {
