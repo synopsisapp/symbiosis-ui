@@ -112,7 +112,7 @@ export const DropdownSimpleItem = ({ text, icon, onSelect, isDisabled, className
           <Icon name={icon} size={"small-200"} />
         </div>
       )}
-      <Text variant="body-small-200" noTranslations className="!my-0.5 !mx-0 text-inherit">
+      <Text variant="body-small-200" noTranslations className="my-0.5! mx-0! text-inherit">
         {text}
       </Text>
     </DropdownItem>

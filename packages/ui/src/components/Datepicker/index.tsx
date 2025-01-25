@@ -25,8 +25,8 @@ const classNames = {
       tone: "monochrome-dark",
     }),
     iconButton({ shape: "square" }),
-    "!bg-transparent",
-    "!text-slate-700",
+    "bg-transparent!",
+    "text-slate-700!",
   ),
   selected: cn(
     button({
@@ -34,7 +34,7 @@ const classNames = {
       tone: "monochrome-dark",
     }),
     iconButton({ shape: "square" }),
-    "[&[data-selected='true']:not([data-today='true'])>button]:!text-white",
+    "[&[data-selected='true']:not([data-today='true'])>button]:text-white!",
   ),
   day_button: cn(
     button({

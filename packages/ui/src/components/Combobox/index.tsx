@@ -138,7 +138,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                 onClick={() => setActiveIndex(-1)}
                 placeholder={placeholder}
                 className={cn(
-                  "ml-2 bg-transparent outline-none placeholder:text-slate-400 flex-1",
+                  "ml-2 bg-transparent outline-hidden placeholder:text-slate-400 flex-1",
                   activeIndex !== -1 && "caret-transparent",
                 )}
               />

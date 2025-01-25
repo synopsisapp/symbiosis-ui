@@ -103,7 +103,7 @@ const ModalOverlay = ({
     data-[state=open]:fixed
     data-[state=open]:inset-0
     data-[state=open]:transition-all
-    data-[state=open]:z-[998]
+    data-[state=open]:z-998
   "
     onClick={() => onPress?.()}
   />
