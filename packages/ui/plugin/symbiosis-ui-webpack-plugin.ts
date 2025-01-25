@@ -1,5 +1,4 @@
 import { generateIcons } from "./generateIcons";
-import { rebuildStyles } from "./rebuildStyles";
 import type { SymbiosisUIPluginOptions } from "./types";
 
 export class SymbiosisUIWebpackPlugin {
@@ -9,8 +8,6 @@ export class SymbiosisUIWebpackPlugin {
 
   constructor(options: SymbiosisUIPluginOptions = {}) {
     this.options = {
-      tailwindTheme: {},
-      tailwindContent: [],
       iconsDir: "assets/icons",
       publicDir: "public",
       verboseLogs: false,
@@ -64,19 +61,13 @@ export class SymbiosisUIWebpackPlugin {
     }
 
     console.log("Symbiosis UI Webpack Plugin: Generating assets");
-    const { iconsDir, publicDir, tailwindTheme, tailwindContent, verboseLogs } = this.options;
+    const { iconsDir, publicDir, verboseLogs } = this.options;
 
     try {
       await generateIcons({
         inputDir: iconsDir,
         outputDir: publicDir,
         verboseLogs,
-      });
-
-      await rebuildStyles({
-        userTheme: tailwindTheme,
-        userContent: tailwindContent,
-        outputDir: publicDir,
       });
 
       this.assetsGenerated = true;

@@ -6,7 +6,7 @@ export interface InputWrapperVariants extends VariantProps<typeof inputWrapperCv
 export const inputWrapper = ({ variant = "default", ...rest }: InputWrapperVariants) =>
   cn(inputWrapperCva({ variant, ...rest }));
 const inputWrapperCva = cva(
-  ["relative m-0 outline-none transition-all", "focus-within:ring-2 focus-within:ring-offset-1 rounded-md"],
+  ["relative m-0 outline-hidden transition-all", "focus-within:ring-2 focus-within:ring-offset-1 rounded-md"],
   {
     variants: {
       size: {
@@ -29,7 +29,7 @@ const inputCva = cva(
   [
     "justify-center p-3 rounded-md items-center border-1 bg-inherit",
     "relative",
-    "!m-0 flex items-center outline-none",
+    "m-0! flex items-center outline-hidden",
     "border border-solid",
   ],
   {
