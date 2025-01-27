@@ -42,9 +42,12 @@ const PopoverContent = ({
   onOpenAutoFocus,
   onFocusOutside,
   onCloseAutoFocus,
+  skipComposition = false,
 }: PopoverContentProps) => {
+  const ContentWrapper = skipComposition ? React.Fragment : PopoverPrimitive.Portal;
+
   return (
-    <PopoverPrimitive.Portal>
+    <ContentWrapper>
       <PopoverPrimitive.Content
         avoidCollisions
         asChild={asChild}
@@ -59,7 +62,7 @@ const PopoverContent = ({
       >
         {children}
       </PopoverPrimitive.Content>
-    </PopoverPrimitive.Portal>
+    </ContentWrapper>
   );
 };
 
@@ -88,4 +91,5 @@ export const Popover = {
   Close: PopoverClose,
   Content: PopoverContent,
   Arrow: PopoverArrow,
+  Portal: PopoverPrimitive.Portal,
 };

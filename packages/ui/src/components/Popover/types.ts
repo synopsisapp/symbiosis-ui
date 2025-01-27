@@ -24,6 +24,7 @@ export type PopoverContentProps = {
   onOpenAutoFocus?: (event: Event) => void;
   onCloseAutoFocus?: (event: Event) => void;
   onFocusOutside?: (event: Event) => void;
+  skipComposition?: boolean;
 };
 
 export type PopoverArrowProps = {

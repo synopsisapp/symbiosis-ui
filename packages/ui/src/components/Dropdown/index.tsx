@@ -1,5 +1,5 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-
+import * as React from "react";
 import { Icon } from "../Icon";
 
 import { StopPropagation } from "../StopPropagation";
@@ -35,15 +35,18 @@ const DropdownTrigger = ({ children, isDisabled, className, asChild }: DropdownT
 
 DropdownTrigger.displayName = "DropdownTrigger";
 
-const DropdownContent = ({ children, side, className }: DropdownContentProps) => {
+const DropdownContent = ({ children, side, className, skipComposition = false }: DropdownContentProps) => {
   const contentClasses = cn(sharedDropdownContentStyles, className);
+  const ContentWrapper = skipComposition ? React.Fragment : DropdownMenu.Portal;
 
   const shadowsOffset = 5;
 
   return (
-    <DropdownMenu.Content className={contentClasses} side={side} sideOffset={shadowsOffset} avoidCollisions>
-      {children}
-    </DropdownMenu.Content>
+    <ContentWrapper>
+      <DropdownMenu.Content className={contentClasses} side={side} sideOffset={shadowsOffset} avoidCollisions>
+        {children}
+      </DropdownMenu.Content>
+    </ContentWrapper>
   );
 };
 
