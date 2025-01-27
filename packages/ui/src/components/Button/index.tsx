@@ -84,6 +84,7 @@ export const Button = React.forwardRef((props: ButtonProps, ref) => {
       form={isButtonGuard(props) ? props.form : undefined}
       name={isButtonGuard(props) ? props.name : undefined}
       value={isButtonGuard(props) ? props.value : undefined}
+      data-loading={isLoading}
       className={cn(
         cn(
           button({
@@ -118,7 +119,9 @@ export const Button = React.forwardRef((props: ButtonProps, ref) => {
                   return "base";
               }
             })()}
-            variant={variant === "primary" ? "primary" : tone === "default" ? "secondary" : "currentColor"}
+            variant={
+              variant === "primary" ? "primary" : tone === "default" && !isDisabled ? "secondary" : "currentColor"
+            }
           />
         </div>
       ) : (

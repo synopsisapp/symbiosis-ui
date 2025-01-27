@@ -16,7 +16,7 @@ const inputWrapperCva = cva(
         "large-100": [buttonHeightSizing({ size: "large-100" }), text({ variant: "body-large-100" }), "my-0"],
       },
       variant: {
-        default: ["focus-within:ring-mainColors-base"],
+        default: ["focus-within:ring-main-base"],
         error: ["focus-within:ring-red-500", "text-red-500"],
       },
     },
@@ -35,7 +35,7 @@ const inputCva = cva(
   {
     variants: {
       variant: {
-        default: ["border-gray-400", "group-focus-within:border-mainColors-base"],
+        default: ["border-gray-400", "group-focus-within:border-main-base"],
         error: ["border-red-500", "text-red-500"],
       },
       size: {

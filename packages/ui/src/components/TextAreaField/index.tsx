@@ -47,7 +47,7 @@ export const TextAreaField = ({
             <Icon
               data-symbiosis-textAreaField="icon"
               name={icon}
-              className="absolute left-2 top-3 translate-y-[5px] z-10 text-grays-500"
+              className="absolute left-2 top-3 translate-y-[5px] z-10 text-gray-base"
               size="small-200"
             />
           )}

@@ -99,7 +99,7 @@ const SearchBar = ({
   return (
     <div className="relative max-w-72 mb-4">
       <TextField
-        className={cn("**:data-[symbiosis-textfield='field']:pr-6", className)}
+        className={cn("data-[symbiosis-textfield='field']:**:pr-6", className)}
         icon="symbiosis-search"
         value={search}
         onChange={(value) => {

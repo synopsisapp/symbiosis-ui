@@ -1,7 +1,7 @@
 import { cn } from "../../utils/cn";
 
 export const sharedDropdownContentStyles = cn(
-  "min-w-[150px] p-2 bg-white rounded-lg max-h-[50vh] shadow-lg border border-gray-100 relative overflow-y-auto z-20",
+  "min-w-[150px] p-2 bg-white rounded-lg max-h-[50vh] shadow-xs border border-gray-100 relative overflow-y-auto z-20",
   "origin-(--radix-dropdown-menu-content-transform-origin)",
   "animate-slide-up-and-fade",
 );

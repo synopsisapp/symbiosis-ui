@@ -117,7 +117,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
               ref={ref}
               className={cn(
                 "flex flex-wrap gap-1 p-1 py-2 bg-white rounded-lg border border-slate-400",
-                "focus-within:border-mainColors-base focus-within:ring-mainColors-base focus-within:ring-2 focus-within:ring-offset-1",
+                "focus-within:border-main-base focus-within:ring-main-base focus-within:ring-2 focus-within:ring-offset-1",
               )}
             >
               {selectedOptions.map((option) => (
@@ -153,7 +153,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           >
             <Command.List
               className={cn(
-                "p-2 flex flex-col gap-2 rounded-md scrollbar-thin scrollbar-track-transparent transition-colors scrollbar-thumb-rounded-lg w-full bg-white shadow-md z-10 border border-slate-500",
+                "p-2 flex flex-col gap-2 rounded-md scrollbar-thin scrollbar-track-transparent transition-colors scrollbar-thumb-rounded-lg w-full bg-white shadow-xs z-10 border border-slate-base",
               )}
             >
               {localOptions.map((option) => {
@@ -194,13 +194,13 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                   }}
                 >
                   {addNewOptionLabel ? (
-                    <Text variant="body-small-200" className="text-slate-500">
+                    <Text variant="body-small-200" className="text-slate-base">
                       {`${addNewOptionLabel} "${inputValue}"`}
                     </Text>
                   ) : (
                     <div className="flex items-center gap-2">
-                      <Icon name="symbiosis-plus" className="h-4 w-4 text-slate-500" />
-                      <Text variant="body-small-200" className="text-slate-500">
+                      <Icon name="symbiosis-plus" className="h-4 w-4 text-slate-base" />
+                      <Text variant="body-small-200" className="text-slate-base">
                         "{inputValue}"
                       </Text>
                     </div>
@@ -210,7 +210,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
 
               {!filteredOptions?.length && (
                 <Command.Empty>
-                  <Text variant="body-small-200" className="text-slate-500">
+                  <Text variant="body-small-200" className="text-slate-base">
                     {noResultsLabel}
                   </Text>
                 </Command.Empty>
