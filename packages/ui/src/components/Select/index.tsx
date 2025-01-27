@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { Icon } from "../Icon";
-import { text } from "../Text/styles";
+import { text } from "../sharedStyles";
 
 import { cn } from "../../utils/cn";
 

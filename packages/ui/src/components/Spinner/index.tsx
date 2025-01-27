@@ -1,4 +1,4 @@
-import { iconSizeToTailwind } from "../Button/styles";
+import { iconSizeToTailwind } from "../sharedStyles";
 import { cn } from "../../utils/cn";
 import type { SpinnerProps } from "./types";
 

@@ -1,7 +1,6 @@
 import { cn } from "../../utils/cn";
 import { cva, type VariantProps } from "class-variance-authority";
-import { buttonHeightSizing } from "../Button/styles";
-import { text } from "../Text/styles";
+import { buttonHeightSizing, text } from "../sharedStyles";
 
 export interface InputWrapperVariants extends VariantProps<typeof inputWrapperCva> {}
 export const inputWrapper = ({ variant = "default", ...rest }: InputWrapperVariants) =>

@@ -4,7 +4,7 @@ import { IconButton } from "../IconButton";
 import { cn } from "../../utils/cn";
 import { Text } from "../Text";
 import { input, inputWrapper } from "./styles";
-import { inputLabel } from "../TextField/styles";
+import { inputLabel } from "../sharedStyles";
 import type { NumberFieldProps } from "./types";
 
 export const NumberField = ({

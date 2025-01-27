@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { Icon } from "../Icon";
-import { text } from "../Text/styles";
+import { text } from "../sharedStyles";
 import { cn } from "../../utils/cn";
 
 const BreadcrumbRoot = React.forwardRef<HTMLElement, React.ComponentPropsWithoutRef<"nav">>(({ ...props }, ref) => (

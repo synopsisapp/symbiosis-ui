@@ -2,7 +2,7 @@ import * as React from "react";
 import { Icon } from "../Icon";
 import { Spinner } from "../Spinner";
 import { isButtonGuard, type ButtonProps } from "./types";
-import { button, iconSizeToTailwind } from "./styles";
+import { button, iconSizeToTailwind } from "../sharedStyles";
 import { Text } from "../Text";
 import { cn } from "../../utils/cn";
 

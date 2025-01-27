@@ -2,7 +2,7 @@ import * as React from "react";
 import { Icon } from "../Icon";
 import { cn } from "../../utils/cn";
 import { Text } from "../Text";
-import { input, inputLabel } from "./styles";
+import { input, inputLabel } from "../sharedStyles";
 import type { TextFieldProps } from "./types";
 
 const TextField = React.forwardRef(
