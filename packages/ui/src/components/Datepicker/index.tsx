@@ -137,7 +137,7 @@ export const DatePicker = ({
     },
     modifiersStyles: {
       booked: {
-        color: "bg-mainColors-light-100",
+        color: "bg-main-light-100",
         fontWeight: "bold",
       },
     },

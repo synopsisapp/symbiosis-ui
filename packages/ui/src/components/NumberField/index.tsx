@@ -123,7 +123,7 @@ export const NumberField = ({
               <Icon
                 data-symbiosis-numberfield="icon"
                 name={icon}
-                className="absolute left-2 top-1/2 -translate-y-1/2 z-10 text-grays-500"
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-10 text-gray-base"
                 size="small-200"
               />
             )}
