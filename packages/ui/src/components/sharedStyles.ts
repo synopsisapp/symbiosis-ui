@@ -355,7 +355,7 @@ export const input = ({ variant = "default", ...rest }: InputVariants) => cn(inp
 export interface InputVariants extends VariantProps<typeof inputCva> {}
 const inputCva = cva(
   [
-    "justify-center p-3 rounded-md items-center border border-slate-400 bg-inherit",
+    "justify-center p-3 rounded-lg items-center border border-slate-400 bg-inherit",
     "relative",
     "m-0! flex items-center outline-hidden",
     "disabled:border-gray-400 disabled:text-gray-400",

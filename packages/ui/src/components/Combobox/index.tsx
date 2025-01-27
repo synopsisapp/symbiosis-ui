@@ -153,7 +153,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           >
             <Command.List
               className={cn(
-                "p-2 flex flex-col gap-2 rounded-md scrollbar-thin scrollbar-track-transparent transition-colors scrollbar-thumb-rounded-lg w-full bg-white shadow-xs z-10 border border-slate-base",
+                "p-2 flex flex-col gap-2 rounded-lg scrollbar-thin scrollbar-track-transparent transition-colors scrollbar-thumb-rounded-lg w-full bg-white shadow-xs z-10 border border-slate-base",
               )}
             >
               {localOptions.map((option) => {

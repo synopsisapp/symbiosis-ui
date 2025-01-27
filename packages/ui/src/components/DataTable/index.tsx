@@ -369,7 +369,7 @@ const DataTable = <TData, TValue>({
         </div>
       )}
       {isSearchable && <SearchBar onSearchChange={setGlobalSearch} />}
-      <div className="rounded-md border border-slate-200 w-full flex-1 flex flex-col overflow-hidden">
+      <div className="rounded-lg border border-slate-200 w-full flex-1 flex flex-col overflow-hidden">
         <div className="flex flex-1 overflow-auto">
           <Table.Root>
             {!hiddenHeader && (
