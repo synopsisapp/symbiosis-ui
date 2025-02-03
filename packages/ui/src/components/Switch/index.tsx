@@ -16,6 +16,7 @@ const Switch = ({
   name,
   id,
   disabled,
+  contentAlignment = "label-first",
   className,
 }: SwitchProps) => {
   const [checked, setChecked] = React.useState(defaultChecked);
@@ -29,7 +30,7 @@ const Switch = ({
   return (
     <div className="flex items-center gap-3">
       {Boolean(label) && (
-        <label htmlFor={label}>
+        <label htmlFor={label} className={cn(contentAlignment === "switch-first" ? "order-1" : undefined)}>
           <Text
             noTranslations
             variant={(() => {

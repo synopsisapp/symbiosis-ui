@@ -57,10 +57,6 @@ export default defineConfig({
           "react-dom": "ReactDOM",
         },
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === "style.css") {
-            return "symbiosis-ui.css";
-          }
-
           return assetInfo.name ?? "assets/[name].[ext]";
         },
       },

@@ -42,7 +42,7 @@ const ModalContent: React.FC<React.PropsWithChildren<ModalContentProps>> = ({
 }) => (
   <ModalPrimitive.Content
     className={cn(
-      "fixed animate-slideUpModal w-full overflow-hidden bg-white px-0 pt-2 pb-0 rounded-tl-lg rounded-tr-lg rounded-bl-none rounded-br-none lg:pt-2 lg:rounded-lg lg:w-fit z-[999] bottom-0 left-0 lg:bottom-auto lg:inset-0 lg:m-auto lg:h-fit max-h-[80vh]",
+      "fixed animate-slideUpModal w-full overflow-hidden bg-white px-0 pt-2 pb-0 rounded-tl-lg rounded-tr-lg rounded-bl-none rounded-br-none lg:pt-2 lg:rounded-lg lg:w-fit z-999 bottom-0 left-0 lg:bottom-auto lg:inset-0 lg:m-auto lg:h-fit max-h-[80vh]",
       className,
     )}
   >
@@ -103,7 +103,7 @@ const ModalOverlay = ({
     data-[state=open]:fixed
     data-[state=open]:inset-0
     data-[state=open]:transition-all
-    data-[state=open]:z-[998]
+    data-[state=open]:z-998
   "
     onClick={() => onPress?.()}
   />

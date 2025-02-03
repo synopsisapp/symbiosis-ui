@@ -6,7 +6,7 @@ export interface InputWrapperVariants extends VariantProps<typeof inputWrapperCv
 export const inputWrapper = ({ variant = "default", ...rest }: InputWrapperVariants) =>
   cn(inputWrapperCva({ variant, ...rest }));
 const inputWrapperCva = cva(
-  ["relative m-0 outline-none transition-all", "focus-within:ring-2 focus-within:ring-offset-1 rounded-md"],
+  ["relative m-0 outline-hidden transition-all", "focus-within:ring-2 focus-within:ring-offset-1 rounded-lg"],
   {
     variants: {
       size: {
@@ -16,7 +16,7 @@ const inputWrapperCva = cva(
         "large-100": [buttonHeightSizing({ size: "large-100" }), text({ variant: "body-large-100" }), "my-0"],
       },
       variant: {
-        default: ["focus-within:ring-mainColors-base"],
+        default: ["focus-within:ring-main-base"],
         error: ["focus-within:ring-red-500", "text-red-500"],
       },
     },
@@ -27,15 +27,15 @@ export const input = ({ variant = "default", ...rest }: InputVariants) => cn(inp
 export interface InputVariants extends VariantProps<typeof inputCva> {}
 const inputCva = cva(
   [
-    "justify-center p-3 rounded-md items-center border-1 bg-inherit",
+    "justify-center p-3 rounded-lg items-center border-1 bg-inherit",
     "relative",
-    "!m-0 flex items-center outline-none",
+    "m-0! flex items-center outline-hidden",
     "border border-solid",
   ],
   {
     variants: {
       variant: {
-        default: ["border-gray-400", "group-focus-within:border-mainColors-base"],
+        default: ["border-gray-400", "group-focus-within:border-main-base"],
         error: ["border-red-500", "text-red-500"],
       },
       size: {

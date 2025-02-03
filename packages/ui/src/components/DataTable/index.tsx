@@ -99,7 +99,7 @@ const SearchBar = ({
   return (
     <div className="relative max-w-72 mb-4">
       <TextField
-        className={cn("[&_[data-symbiosis-textfield='field']]:pr-6", className)}
+        className={cn("data-[symbiosis-textfield='field']:**:pr-6", className)}
         icon="symbiosis-search"
         value={search}
         onChange={(value) => {
@@ -369,7 +369,7 @@ const DataTable = <TData, TValue>({
         </div>
       )}
       {isSearchable && <SearchBar onSearchChange={setGlobalSearch} />}
-      <div className="rounded-md border border-slate-200 w-full flex-1 flex flex-col overflow-hidden">
+      <div className="rounded-lg border border-slate-200 w-full flex-1 flex flex-col overflow-hidden">
         <div className="flex flex-1 overflow-auto">
           <Table.Root>
             {!hiddenHeader && (

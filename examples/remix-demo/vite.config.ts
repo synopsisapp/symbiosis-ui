@@ -2,7 +2,6 @@ import { vitePlugin as remix } from "@remix-run/dev";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { symbiosisUIPlugin } from "@synopsisapp/symbiosis-ui/plugin";
-import { defaultTheme } from "./tailwindTheme";
 
 export default defineConfig({
   plugins: [
@@ -15,10 +14,8 @@ export default defineConfig({
     }),
     tsconfigPaths(),
     symbiosisUIPlugin({
-      tailwindTheme: defaultTheme,
-      tailwindContent: [],
       iconsDir: "./assets/icons",
       publicDir: "./public",
-    })
+    }),
   ],
 });

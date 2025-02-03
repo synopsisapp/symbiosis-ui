@@ -123,7 +123,7 @@ export const NumberField = ({
               <Icon
                 data-symbiosis-numberfield="icon"
                 name={icon}
-                className="absolute left-2 top-1/2 -translate-y-1/2 z-10 text-grays-500"
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-10 text-gray-base"
                 size="small-200"
               />
             )}
@@ -131,7 +131,7 @@ export const NumberField = ({
               id={formId}
               data-symbiosis-numberfield="input"
               name={name}
-              className="outline-none w-full h-full text-center hide-internal-input-elements [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="outline-hidden w-full h-full text-center hide-internal-input-elements [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               type="number"
               ref={ref}
               defaultValue={defaultValue}

@@ -1,7 +1,7 @@
 import { cn } from "../../utils/cn";
 
 export const sharedPopoverStyles = cn(
-  "p-5 rounded-md bg-white relative shadow-lg",
+  "p-5 rounded-lg bg-white relative shadow-xs",
   "will-change-[transform,opacity]",
   "data-[state=delayed-open]:data-[side=top]:animate-slide-up-and-fade",
   "data-[state=delayed-open]:data-[side=right]:animate-slide-right-and-fade",

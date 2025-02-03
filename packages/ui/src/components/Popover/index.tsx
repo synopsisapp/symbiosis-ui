@@ -76,7 +76,7 @@ PopoverArrow.displayName = "Popover.Arrow";
 
 const PopoverClose = ({ icon = "symbiosis-x", tone = "monochrome-dark", className }: PopoverCloseProps) => (
   <PopoverPrimitive.Close
-    className={cn("absolute top-2 right-2 focus-visible:outline-none", className)}
+    className={cn("absolute top-2 right-2 focus-visible:outline-hidden", className)}
     aria-label="Close"
   >
     <IconButton icon={icon} tone={tone} variant="ghost" size="base" className="w-4 min-w-4 h-4 min-h-4" />
