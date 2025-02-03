@@ -3,7 +3,7 @@
 @import "../../../../packages/ui/src/tailwind.css" layer(theme);
 @plugin "tailwindcss-animate";
 
-@source "../../../packages/ui";
+@source "../../../../packages/ui";
 
 @theme {
   --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
