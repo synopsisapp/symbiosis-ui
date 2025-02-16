@@ -9,8 +9,14 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "turbo run format",
+    "lint:root:fix": "biome check . --write --unsafe",
+    "format:root:fix": "biome format . --write",
+    "lint:root": "biome check .",
+    "format:root": "biome format .",
+    "lint": "turbo run lint lint:root",
+    "lint:fix": "turbo run lint:root:fix",
+    "format": "turbo run format format:root",
+    "format:fix": "turbo run format:root:fix",
     "release:create": "dotenv -e .env.local -- node --disable-warning=ExperimentalWarning scripts/create-changeset.ts && git add .changeset/*.md && git commit -m 'chore: add changeset for release'"
   },
   "devDependencies": {
