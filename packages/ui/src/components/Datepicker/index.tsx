@@ -1,12 +1,12 @@
 import React from "react";
 import { DayPicker } from "react-day-picker";
-import type { OnSelectHandler, Matcher, PropsBase, DateRange } from "react-day-picker";
+import type { OnSelectHandler, Matcher, PropsBase } from "react-day-picker";
 import { compareAsc } from "date-fns/compareAsc";
 
 import { IconButton } from "../IconButton";
 import { cn } from "../../utils/cn";
 import { button, iconButton, text } from "../sharedStyles";
-import type { DatePickerProps } from "./types";
+import type { DatePickerProps, DateRange } from "./types";
 
 const classNames = {
   month: "space-y-4 flex-1",
@@ -65,6 +65,14 @@ export const DatePicker = ({
   ...props
 }: DatePickerProps) => {
   const [internalMonth, setInternalMonth] = React.useState(month ?? new Date());
+  const [showDefaultDate, setShowDefaultDate] = React.useState(
+    (props.mode === "single" && !!props.defaultDate) ||
+      (props.mode === "multiple" && !!props.defaultSelectedDates) ||
+      (props.mode === "range" &&
+        !!props.defaultSelectedDates &&
+        props.defaultSelectedDates.from &&
+        props.defaultSelectedDates.to),
+  );
 
   React.useEffect(() => {
     if (!month) return;
@@ -73,6 +81,7 @@ export const DatePicker = ({
 
   const singleHandler: OnSelectHandler<Date | undefined> = (date, triggerDate) => {
     if (props.mode === "single") {
+      setShowDefaultDate(false);
       props.onSelect?.({
         date: date,
         selectedDate: triggerDate,
@@ -82,6 +91,7 @@ export const DatePicker = ({
 
   const multipleHandler: OnSelectHandler<Date[] | undefined> = (dates, triggerDate) => {
     if (props.mode === "multiple") {
+      setShowDefaultDate(false);
       props.onSelect?.({
         dates: dates,
         selectedDate: triggerDate,
@@ -89,8 +99,9 @@ export const DatePicker = ({
     }
   };
 
-  const rangeHandler: OnSelectHandler<DateRange | undefined> = (range, triggerDate) => {
+  const rangeHandler: OnSelectHandler<DateRange> = (range, triggerDate) => {
     if (props.mode === "range") {
+      setShowDefaultDate(false);
       props.onSelect?.({
         date: range,
         selectedDate: triggerDate,
@@ -168,7 +179,7 @@ export const DatePicker = ({
             return (
               <DayPicker
                 mode="single"
-                selected={selectedDate}
+                selected={showDefaultDate ? props.defaultDate : selectedDate}
                 onSelect={singleHandler}
                 {...commonProps}
                 month={internalMonth}
@@ -182,7 +193,7 @@ export const DatePicker = ({
                 mode="multiple"
                 min={minSelectedCount}
                 max={maxSelectedCount}
-                selected={selectedDates}
+                selected={showDefaultDate ? props.defaultSelectedDates : selectedDates}
                 onSelect={multipleHandler}
                 {...commonProps}
                 month={internalMonth}
@@ -196,8 +207,20 @@ export const DatePicker = ({
                 mode="range"
                 min={minSelectedCount}
                 max={maxSelectedCount}
-                selected={selectedDates}
-                onSelect={rangeHandler}
+                selected={showDefaultDate ? props.defaultSelectedDates : selectedDates}
+                onSelect={(range, triggerDate, modifiers, event) => {
+                  if (range?.from) {
+                    rangeHandler(
+                      {
+                        from: range.from,
+                        to: range.to,
+                      },
+                      triggerDate,
+                      modifiers,
+                      event,
+                    );
+                  }
+                }}
                 {...commonProps}
                 month={internalMonth}
               />

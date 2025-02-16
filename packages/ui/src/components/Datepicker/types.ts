@@ -1,6 +1,12 @@
 import type { Locale } from "date-fns/locale";
 import type { Sizes } from "../../designSystemTokens";
 
+export type DateRange = {
+  from: Date;
+  to?: Date;
+};
+
+
 export type SingleProps = {
   mode: "single";
   selectedDate: Date;
@@ -11,6 +17,7 @@ export type SingleProps = {
     date?: Date;
     selectedDate: Date;
   }) => void;
+  defaultDate?: Date;
 };
 
 export type MultipleProps = {
@@ -25,26 +32,22 @@ export type MultipleProps = {
   }) => void;
   minSelectedCount?: number;
   maxSelectedCount?: number;
+  defaultSelectedDates?: Date[];
 };
 
 export type RangeProps = {
   mode: "range";
-  selectedDates?: {
-    from: Date;
-    to?: Date;
-  };
+  selectedDates?: DateRange;
   onSelect?: ({
     date,
     selectedDate,
   }: {
-    date?: {
-      from?: Date;
-      to?: Date;
-    };
+    date: DateRange;
     selectedDate: Date;
   }) => void;
   minSelectedCount?: number;
   maxSelectedCount?: number;
+  defaultSelectedDates?: Required<DateRange>;
 };
 
 export type CommonProps = {
