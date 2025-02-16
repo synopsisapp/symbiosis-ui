@@ -22,6 +22,7 @@ const DateRangeField = React.forwardRef(
       labelTo,
       className,
       value,
+      defaultValue,
       onChange,
       onBlur,
       onFocus,
@@ -34,8 +35,8 @@ const DateRangeField = React.forwardRef(
     const [fromInputValue, setFromInputValue] = React.useState("");
     const [toInputValue, setToInputValue] = React.useState("");
     const [selectedRange, setSelectedRange] = React.useState<Value>({
-      from: value?.from,
-      to: value?.to,
+      from: defaultValue ? defaultValue.from : value?.from,
+      to: defaultValue ? defaultValue.to : value?.to,
     });
     const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -46,7 +47,14 @@ const DateRangeField = React.forwardRef(
       if (value?.to && isValid(value.to)) {
         setToInputValue(format(value.to, getDateFormat(locale)));
       }
-    }, [value, locale]);
+
+      if (defaultValue?.from && !value?.from && isValid(defaultValue.from)) {
+        setFromInputValue(format(defaultValue.from, getDateFormat(locale)));
+      }
+      if (defaultValue?.to && !value?.to && isValid(defaultValue.to)) {
+        setToInputValue(format(defaultValue.to, getDateFormat(locale)));
+      }
+    }, [value, locale, defaultValue?.from, defaultValue?.to]);
 
     const handleFromInputChange = (value: string) => {
       setFromInputValue(value);

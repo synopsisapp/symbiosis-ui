@@ -5,6 +5,7 @@ type BaseDateFieldProps = Omit<TextFieldProps, "value" | "onChange" | "defaultVa
   value?: Date;
   onChange?: (date: Date) => void;
   locale?: Locale;
+  defaultValue?: Date;
 };
 
 type WithoutDatePicker = BaseDateFieldProps & {

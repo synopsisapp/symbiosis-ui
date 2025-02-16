@@ -7,6 +7,7 @@ export type Value = {
 
 type BaseDateRangeFieldProps = Omit<TextFieldProps, "value" | "onChange" | "defaultValue" | "icon" | "label"> & {
   value?: Value;
+  defaultValue?: Required<Value>;
   onChange?: (range: Value) => void;
   withDatePicker?: boolean;
   locale?: Locale;

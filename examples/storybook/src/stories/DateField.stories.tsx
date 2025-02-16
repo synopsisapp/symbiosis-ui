@@ -248,6 +248,16 @@ export const WithDateRestrictions: Story = {
   },
 };
 
+export const WithDefaultDate: Story = {
+  render: (args: DateFieldProps) => <DateField {...args} />,
+  args: {
+    label: "DateField with Default Date (2025-01-15)",
+    withDatePicker: true,
+    placeholder: "MM/DD/YYYY",
+    defaultValue: new Date("2025-01-15"),
+  },
+};
+
 export const WithoutDatePicker: Story = {
   render: (args: DateFieldProps) => <DateField {...args} />,
   args: {

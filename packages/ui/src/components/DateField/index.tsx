@@ -21,6 +21,7 @@ const DateField = React.forwardRef(
       label,
       className,
       value,
+      defaultValue,
       onChange,
       onBlur,
       onFocus,
@@ -32,7 +33,7 @@ const DateField = React.forwardRef(
     const [isOpen, setIsOpen] = React.useState(false);
     const [inputValue, setInputValue] = React.useState("");
     const [selectedDate, setSelectedDate] = React.useState<Date | undefined>(
-      value && isValid(value) ? value : undefined,
+      defaultValue && isValid(defaultValue) ? defaultValue : value && isValid(value) ? value : undefined,
     );
 
     const containerRef = React.useRef<HTMLDivElement>(null);
@@ -42,7 +43,12 @@ const DateField = React.forwardRef(
         setInputValue(format(value, getDateFormat(locale)));
         setSelectedDate(value);
       }
-    }, [value, locale]);
+
+      if (defaultValue && !value && isValid(defaultValue)) {
+        setInputValue(format(defaultValue, getDateFormat(locale)));
+        setSelectedDate(defaultValue);
+      }
+    }, [value, locale, defaultValue]);
 
     const handleInputChange = (value: string) => {
       setInputValue(value);
