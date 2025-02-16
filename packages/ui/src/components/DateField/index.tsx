@@ -19,6 +19,7 @@ const DateField = React.forwardRef(
       size = "base",
       id,
       label,
+      labelWeight,
       className,
       value,
       defaultValue,
@@ -89,6 +90,7 @@ const DateField = React.forwardRef(
           size={size}
           id={id}
           label={label}
+          labelWeight={labelWeight}
           className={className}
           value={inputValue}
           onChange={handleInputChange}
@@ -114,12 +116,13 @@ const DateField = React.forwardRef(
               required={required}
               hint={hint}
               placeholder={placeholder}
-              icon={"symbiosis-calendar"}
+              icon="symbiosis-calendar"
               disabled={disabled}
               name={name}
               size={size}
               id={id}
               label={label}
+              labelWeight={labelWeight}
               className={className}
               value={inputValue}
               onChange={handleInputChange}

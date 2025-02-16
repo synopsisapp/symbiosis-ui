@@ -20,6 +20,7 @@ const DateRangeField = React.forwardRef(
       id,
       labelFrom,
       labelTo,
+      labelWeight,
       className,
       value,
       defaultValue,
@@ -131,6 +132,7 @@ const DateRangeField = React.forwardRef(
             size={size}
             id={`${id}-from`}
             label={labelFrom}
+            labelWeight={labelWeight}
             className={className}
             value={fromInputValue}
             onChange={handleFromInputChange}
@@ -147,6 +149,7 @@ const DateRangeField = React.forwardRef(
             size={size}
             id={`${id}-to`}
             label={labelTo}
+            labelWeight={labelWeight}
             className={className}
             value={toInputValue}
             onChange={handleToInputChange}
@@ -172,6 +175,7 @@ const DateRangeField = React.forwardRef(
               size={size}
               id={`${id}-from`}
               label={labelFrom}
+              labelWeight={labelWeight}
               className={className}
               value={fromInputValue}
               onChange={handleFromInputChange}
@@ -189,6 +193,7 @@ const DateRangeField = React.forwardRef(
               size={size}
               id={`${id}-to`}
               label={labelTo}
+              labelWeight={labelWeight}
               className={className}
               value={toInputValue}
               onChange={handleToInputChange}
