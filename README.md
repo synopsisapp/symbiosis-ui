@@ -1,184 +1,163 @@
 # Symbiosis UI
 
-Symbiosis UI is a powerful and flexible React component library designed to accelerate your development process. It offers a suite of customizable UI components that seamlessly integrate with React-based projects, providing a robust foundation for building modern web applications.
+A modern React component library built on top of Radix UI and shadcn conventions, with built-in Tailwind CSS support, designed for building type-safe and theme-aware web applications.
 
 ## Features
 
-- Customizable components powered by Tailwind CSS
+- Pre-built React components with Tailwind CSS styling
+- Custom component compositions and patterns
 - Full TypeScript support
-- Seamless integration with popular frameworks (Next.js, Remix, Vite)
-- Advanced theming capabilities
-- Automated icon system with SVG sprite generation and type safety
-- Webpack and Vite plugins for effortless setup
+- Framework integration with Next.js, Remix and Vite
+- Theme system with CSS variables and Tailwind
+- Icon system with SVG sprite generation
+- Dark/light mode support
+
+## Version Compatibility
+
+- For Tailwind CSS v4.0.0 and above: Use latest version
+- For older Tailwind CSS versions: Use version 0.1.28 or below
 
 ## Installation
 
-Install Symbiosis UI via npm or yarn:
-
 ```bash
+# For Tailwind >= 4.0.0
 npm install @synopsisapp/symbiosis-ui
-# or
-yarn add @synopsisapp/symbiosis-ui
+
+# For older Tailwind versions
+npm install @synopsisapp/symbiosis-ui@0.1.28
 ```
 
 ## Setup
 
-### 1. Configure the Plugin
+### 1. Add the Plugin
 
-Choose the appropriate plugin based on your build tool:
+```js
+// filepath: vite.config.js or next.config.js
+import { symbiosisUIPlugin } from '@synopsisapp/symbiosis-ui/plugin'
 
-#### For Vite:
-
-```javascript
-// vite.config.js
-import { defineConfig } from 'vite';
-import { symbiosisUIPlugin } from '@synopsisapp/symbiosis-ui/plugin';
-
-export default defineConfig({
+export default {
   plugins: [
     symbiosisUIPlugin({
-      tailwindTheme: {}, // Your custom Tailwind theme
-      tailwindContent: [], // Additional content for Tailwind to scan
-      iconsDir: './assets/icons', // Directory containing your SVG icons
-      publicDir: './public', // Output directory for generated assets
-    }),
-  ],
-});
+      // Optional: SVG icons directory (default: 'assets/icons')
+      iconsDir: './assets/icons',
+      
+      // Optional: Output directory (default: 'public') 
+      publicDir: './public'
+    })
+  ]
+}
 ```
 
-#### For Webpack:
+### 2. Configure CSS
 
-```javascript
-// webpack.config.js
-const { SymbiosisUIWebpackPlugin } = require('@synopsisapp/symbiosis-ui/plugin');
+Your main CSS file needs two essential configurations:
 
-module.exports = {
-  // ... other webpack config
-  plugins: [
-    new SymbiosisUIWebpackPlugin({
-      tailwindTheme: {}, // Your custom Tailwind theme
-      tailwindContent: [], // Additional content for Tailwind to scan
-      iconsDir: './assets/icons', // Directory containing your SVG icons
-      publicDir: './public', // Output directory for generated assets
-    }),
-  ],
-};
+1. Import the theme layer from Symbiosis UI
+2. Configure the source path for Tailwind to detect component classes used by Symbiosis UI
+
+```css
+/* filepath: app.css (or global.css or whatever you use as your global css file) */
+@import 'tailwindcss';
+@import 'tailwindcss/utilities';
+@import '@synopsisapp/symbiosis-ui/src/tailwind.css' layer(theme);
+
+@plugin "tailwindcss-animate";
+
+/* Tell Tailwind where to find component classes */
+@source "@synopsisapp/symbiosis-ui";
+
+/* Optional: Default border color fix for Tailwind v4 */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
 ```
 
-### 2. Set up the SymbiosisProvider
-
-Wrap your application with the `SymbiosisProvider`:
+### 3. Add Provider
 
 ```jsx
-import { SymbiosisProvider } from '@synopsisapp/symbiosis-ui';
+import { SymbiosisProvider } from '@synopsisapp/symbiosis-ui'
 
 function App() {
   return (
-    <SymbiosisProvider publicDir="/public" scheme="dark">
-      {/* Your app components */}
+    <SymbiosisProvider scheme="light">
+      <YourApp />
     </SymbiosisProvider>
-  );
+  )
 }
 ```
-
-### 3. Import the Generated CSS
-
-Include the generated CSS file in your project. Add this to your main CSS file or entry point:
-
-```css
-@import '<publicDir>/symbiosis-assets/symbiosis-ui.css';
-```
-
-Replace `<publicDir>` with the actual path to your public directory.
-
-## Usage
-
-Here's a simple example of using a Symbiosis UI component:
-
-```jsx
-import { Button } from '@synopsisapp/symbiosis-ui';
-
-function MyComponent() {
-  return (
-    <Button 
-      label="Click me" 
-      variant="primary" 
-      onPress={() => console.log('Button clicked')} 
-    />
-  );
-}
-```
-
-## Components
-
-Symbiosis UI includes the following core components:
-
-- Button
-- IconButton
-- Icon
-- Spinner
-- Text
-
-Each component offers various props for customization. Refer to the component's type definitions for detailed information on available props.
 
 ## Theming
 
-Symbiosis UI leverages Tailwind CSS for styling. Customize the theme by providing your own Tailwind configuration through the plugin options. The library generates styles based on your custom theme, ensuring components align with your project's design system.
+The library uses CSS variables for theming. At minimum, you need to define your main color palette:
 
-## Icon System
-
-The Symbiosis UI icon system automates the process of working with SVG icons:
-
-1. Place SVG files in the `iconsDir` specified in the plugin configuration.
-2. The plugin generates:
-   - An SVG sprite (`<publicDir>/symbiosis-assets/sprite.svg`)
-   - TypeScript definitions (`<publicDir>/symbiosis-assets/types.d.ts`)
-   - A JSON array of icon names (`<publicDir>/symbiosis-assets/iconNames.json`)
-
-Use icons in your components with type safety:
-
-```tsx
-import { Icon } from '@synopsisapp/symbiosis-ui';
-
-function MyComponent() {
-  return <Icon name="my-custom-icon" />;
+```css
+@theme {
+  /* Default: Main Color Palette */
+  --color-main-light-400: #E6F3FF;
+  --color-main-light-300: #B3D4FF;
+  --color-main-light-200: #4490FF;
+  --color-main-light-100: #2252FF;
+  --color-main-base: #000aff;
+  --color-main-dark-100: #120BD4;
+  --color-main-dark-200: #2313AC;
+  --color-main-dark-300: #2C1787;
+  --color-main-dark-400: #2C1966;
+  --color-main-dark-500: #271747;
 }
 ```
 
-## Plugins
+<details>
+<summary>View all available theme options</summary>
 
-The Symbiosis UI plugins (for Webpack and Vite) handle asset generation, theming, and icon sprite creation. They accept these configuration options:
+The library supports extensive theming options including:
+- Gray and Slate color scales
+- Button variants (Primary, Outline, Ghost, Link)
+- Destructive states
+- Monochrome variants
+- Focus ring customization
 
-- `tailwindTheme`: (optional) Your custom Tailwind theme object.
-- `tailwindContent`: (optional) Additional content paths for Tailwind to scan.
-- `iconsDir`: (optional) Directory containing your SVG icons (default: 'assets/icons').
-- `publicDir`: (optional) Output directory for generated assets (default: 'public').
+Available theme variables can be found in our [theme configuration file](https://github.com/synopsisapp/symbiosis-ui/blob/main/packages/ui/src/tailwind.css).
 
-## Examples
+</details>
 
-Explore example projects demonstrating Symbiosis UI integration:
+## Components
 
-- Next.js: `examples/nextjs-demo`
-- Remix: `examples/remix-demo`
-- Storybook: `examples/storybook`
+Browse our component library and view live examples at [symbiosis.synopsisapp.com](https://symbiosis.synopsisapp.com/)
 
-These examples showcase setup and usage in various environments.
+Our components are built on top of Radix UI primitives and shadcn conventions, with additional custom compositions and patterns specific to Symbiosis UI.
+
+## Icons
+
+1. Place SVG files in your icons directory
+2. The plugin generates:
+   - SVG sprite
+   - TypeScript types 
+   - Icon names list
+
+```tsx
+<Icon name="my-icon" />
+```
 
 ## Development
 
-To contribute or run Symbiosis UI locally:
-
-1. Clone the repository
-2. Install dependencies: `npm install` or `yarn`
-3. Build the library: `npm run build` or `yarn build`
-4. Run tests: `npm test` or `yarn test`
+```bash
+git clone https://github.com/synopsisapp/symbiosis-ui.git
+cd symbiosis-ui
+npm install
+npm run build
+npm test
+```
 
 ## License
 
-Symbiosis UI is released under the MIT License. See the LICENSE file for details.
+MIT
 
 ## Support
 
-For issues, feature requests, or questions, please open an issue on the GitHub repository.
-
-We're excited for you to experience the power and flexibility of Symbiosis UI in your projects!
+For questions and issues, please open a GitHub issue.
