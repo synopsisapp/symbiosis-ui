@@ -1,5 +1,7 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+// biome-ignore lint/style/useNodejsImportProtocol: <explanation>
+import path from "path";
+// biome-ignore lint/style/useNodejsImportProtocol: <explanation>
+import { fileURLToPath } from "url";
 import fsExtra from "fs-extra";
 import { glob } from "glob";
 import { parse } from "node-html-parser";
