@@ -222,6 +222,20 @@ export const WithDateRestrictions: Story = {
   },
 };
 
+export const WithDefaultDate: Story = {
+  render: (args: DateRangeFieldProps) => <DateRangeField {...args} />,
+  args: {
+    labelFrom: "From",
+    labelTo: "To",
+    withDatePicker: true,
+    defaultValue: {
+      from: new Date("2025-01-15"),
+      to: new Date("2025-01-22"),
+    },
+    hint: "Default date range is 2025-01-15 to 2025-01-22",
+  },
+};
+
 export const WithoutDatePicker: Story = {
   render: (args: DateRangeFieldProps) => <DateRangeField {...args} />,
   args: {

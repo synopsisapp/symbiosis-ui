@@ -1,4 +1,7 @@
-import type { ToasterProps as ToasterPrimitiveProps, ToastClassnames } from "sonner";
+import type {
+  ToastClassnames,
+  ToasterProps as ToasterPrimitiveProps,
+} from "sonner";
 
 export type ToasterProps = {
   position?: ToasterPrimitiveProps["position"];

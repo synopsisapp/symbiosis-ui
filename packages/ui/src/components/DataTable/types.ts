@@ -1,4 +1,11 @@
-import type { SortingState, ColumnPinningState, AccessorFn, CellContext, SortingFnOption, SortDirection } from "@tanstack/react-table";
+import type {
+  AccessorFn,
+  CellContext,
+  ColumnPinningState,
+  SortDirection,
+  SortingFnOption,
+  SortingState,
+} from "@tanstack/react-table";
 import type { IconProps } from "../Icon/types";
 
 export type SortStatus = false | SortDirection;
@@ -30,7 +37,9 @@ export type ActionMenu<TData> =
     }
   | undefined;
 
-export type ActionColumnProps<TData, TValue> = ActionTextColumnProps<TData> | ActionCellColumnProps<TData, TValue>;
+export type ActionColumnProps<TData, TValue> =
+  | ActionTextColumnProps<TData>
+  | ActionCellColumnProps<TData, TValue>;
 
 export type ActionTextColumnProps<TData> = {
   id: "actions";
@@ -44,7 +53,10 @@ export type ActionCellColumnProps<TData, TValue> = {
   cell: (item: CellContext<TData, TValue>) => React.ReactNode;
 };
 
-export type DataTableColumnProps<TData, TValue> = (ColumnProps<TData, TValue> | ActionColumnProps<TData, TValue>) & {
+export type DataTableColumnProps<TData, TValue> = (
+  | ColumnProps<TData, TValue>
+  | ActionColumnProps<TData, TValue>
+) & {
   onSort?: (sorting: SortStatus, columnId: string) => void;
 };
 

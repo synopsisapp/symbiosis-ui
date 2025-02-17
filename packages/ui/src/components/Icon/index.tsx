@@ -1,8 +1,8 @@
-import * as React from "react";
 import { cva } from "class-variance-authority";
-import type { IconProps } from "./types";
+import * as React from "react";
 import { SymbiosisContext } from "../../providers/SymbiosisContext";
 import { cn } from "../../utils/cn";
+import type { IconProps } from "./types";
 
 const iconClasses = cva(["flex items-center"], {
   variants: {

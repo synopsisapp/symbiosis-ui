@@ -1,4 +1,4 @@
-import type { ButtonVariant, BaseProps } from "../Button/types";
+import type { BaseProps, ButtonVariant } from "../Button/types";
 import type { IconProps } from "../Icon/types";
 
 export type SplitButtonItemProps = {

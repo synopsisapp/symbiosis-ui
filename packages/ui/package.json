@@ -6,11 +6,7 @@
   "main": "dist/symbiosis-ui.umd.js",
   "module": "dist/symbiosis-ui.es.js",
   "types": "dist/src/index.d.ts",
-  "files": [
-    "dist",
-    "src",
-    "internal-assets"
-  ],
+  "files": ["dist", "src", "internal-assets"],
   "exports": {
     "./plugin": {
       "types": "./dist/plugin/index.d.ts",
@@ -32,10 +28,10 @@
     "build:plugin": "vite build -c vite.config.plugin.ts && npm run build:plugin:types",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "lint:check": "biome lint .",
-    "lint:fix": "biome lint --write .",
-    "format:check": "biome format .",
-    "format:fix": "biome format --write .",
+    "lint:fix": "biome check . --write --unsafe",
+    "format:fix": "biome format . --write",
+    "lint": "biome check .",
+    "format": "biome format .",
     "test:watch": "vitest",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage"
@@ -72,7 +68,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "recharts": "^2.12.7",
-    "tailwindcss": "^3.3.2",
+    "tailwindcss": "^4.0.0",
     "tailwindcss-animate": "^1.0.6",
     "webpack": "^5.64.4",
     "zod": "^3.23.8"
@@ -84,6 +80,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.1",
+    "@tailwindcss/postcss": "^4.0.0",
     "@testing-library/react": "^14.2.1",
     "@testing-library/user-event": "^14.5.2",
     "@types/fs-extra": "^11.0.4",
@@ -94,7 +91,7 @@
     "autoprefixer": "^10.4.19",
     "jsdom": "^24.0.0",
     "postcss": "^8.4.39",
-    "tailwindcss": "^3.4.4",
+    "tailwindcss": "^4.0.0",
     "tsx": "^4.16.2",
     "typescript": "^5.5.3",
     "vite": "^5.3.3",

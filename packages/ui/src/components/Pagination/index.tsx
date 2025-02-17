@@ -1,8 +1,8 @@
 import * as React from "react";
-import { IconButton } from "../IconButton";
-import { Icon } from "../Icon";
 import { usePagination } from "../../hooks/usePagination";
 import { cn } from "../../utils/cn";
+import { Icon } from "../Icon";
+import { IconButton } from "../IconButton";
 import type { PaginationProps } from "./types";
 
 const Pagination = ({
@@ -32,7 +32,7 @@ const Pagination = ({
   }, [activePage]);
 
   return (
-    <div className={cn("flex gap-2 items-center", className)}>
+    <div className={cn("flex items-center gap-2", className)}>
       {hasEdges && (
         <IconButton
           variant="ghost"
@@ -45,7 +45,14 @@ const Pagination = ({
       )}
       {range.map((page, idx) => {
         if (page === "dots") {
-          return <Icon name="symbiosis-dots" size={size} className="text-slate-700" key={idx + page} />;
+          return (
+            <Icon
+              name="symbiosis-dots"
+              size={size}
+              className="text-slate-700"
+              key={idx + page}
+            />
+          );
         }
 
         return (

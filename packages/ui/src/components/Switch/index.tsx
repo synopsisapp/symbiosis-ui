@@ -1,10 +1,10 @@
-import * as React from "react";
 import * as SwitchPrimitives from "@radix-ui/react-switch";
 import { motion } from "framer-motion";
+import * as React from "react";
 
 import { cn } from "../../utils/cn";
 import { Text } from "../Text";
-import { switchSizes, thumbStyles, sharedSwitchStyles } from "./styles";
+import { sharedSwitchStyles, switchSizes, thumbStyles } from "./styles";
 import type { SwitchProps } from "./types";
 
 const Switch = ({
@@ -16,6 +16,7 @@ const Switch = ({
   name,
   id,
   disabled,
+  contentAlignment = "label-first",
   className,
 }: SwitchProps) => {
   const [checked, setChecked] = React.useState(defaultChecked);
@@ -29,7 +30,12 @@ const Switch = ({
   return (
     <div className="flex items-center gap-3">
       {Boolean(label) && (
-        <label htmlFor={label}>
+        <label
+          htmlFor={label}
+          className={cn(
+            contentAlignment === "switch-first" ? "order-1" : undefined,
+          )}
+        >
           <Text
             noTranslations
             variant={(() => {

@@ -1,11 +1,13 @@
 import { sharedButtonStyles } from "./Button/styles";
 
-import { cn } from "../utils/cn";
-import { cva, type VariantProps } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
 import type { Sizes } from "../designSystemTokens";
+import { cn } from "../utils/cn";
 
-export const buttonHeightSizing = ({ size }: ButtonHeightSizingVariants) => buttonHeightSizingCva({ size });
-export interface ButtonHeightSizingVariants extends VariantProps<typeof buttonHeightSizingCva> {}
+export const buttonHeightSizing = ({ size }: ButtonHeightSizingVariants) =>
+  buttonHeightSizingCva({ size });
+export interface ButtonHeightSizingVariants
+  extends VariantProps<typeof buttonHeightSizingCva> {}
 export const buttonHeightSizingCva = cva([], {
   variants: {
     size: {
@@ -24,42 +26,56 @@ const buttonCva = cva([sharedButtonStyles], {
   variants: {
     variant: {
       primary: [
-        "bg-mainColors-base",
-        "text-white",
-        "border-mainColors-base",
-        "border-[1px]",
-        "border-solid",
-        "dark-scheme:hover:bg-mainColors-dark-100 light-scheme:hover:bg-mainColors-light-100",
-        "dark-scheme:hover:border-mainColors-dark-100 light-scheme:hover:border-mainColors-light-100",
-        "active:bg-mainColors-dark-20",
-        "active:border-mainColors-dark-20",
-        "disabled:bg-gray-400",
-        "disabled:border-gray-400",
+        "bg-[var(--symbiosis-btn-primary-bg)]",
+        "text-[var(--symbiosis-btn-primary-text)]",
+        "border-[var(--symbiosis-btn-primary-bg)]",
+        "border border-solid",
+        "hover:bg-[var(--symbiosis-btn-primary-hover)]",
+        "hover:border-[var(--symbiosis-btn-primary-hover)]",
+        "active:bg-[var(--symbiosis-btn-primary-active)]",
+        "active:border-[var(--symbiosis-btn-primary-active)]",
+        "disabled:bg-[var(--symbiosis-btn-primary-disabled)]",
+        "disabled:border-[var(--symbiosis-btn-primary-disabled)]",
       ],
       outline: [
-        "bg-transparent",
-        "text-mainColors-dark-100",
-        "border-mainColors-dark-100",
+        "bg-[var(--symbiosis-btn-outline-bg)]",
+        "text-[var(--symbiosis-btn-outline-text)]",
+        "border-[var(--symbiosis-btn-outline-text)]",
         "border-[1px]",
         "border-solid",
-        "hover:bg-mainColors-light-400",
-        "active:bg-mainColors-light-300",
-        "disabled:border-gray-400",
-        "disabled:text-grays-400",
+        "hover:bg-[var(--symbiosis-btn-outline-hover)]",
+        "active:bg-[var(--symbiosis-btn-outline-active)]",
+        "disabled:border-[var(--symbiosis-btn-outline-disabled)]",
+        "disabled:text-[var(--symbiosis-btn-outline-disabled)]",
+        "hover:disabled:bg-[unset]",
+        "active:disabled:bg-[unset]",
       ],
       ghost: [
-        "bg-transparent",
-        "text-mainColors-dark-100",
-        "hover:bg-mainColors-light-400",
-        "active:bg-mainColors-light-300",
-        "disabled:text-grays-400",
+        "bg-[var(--symbiosis-btn-ghost-bg)]",
+        "text-[var(--symbiosis-btn-ghost-text)]",
+        "hover:bg-[var(--symbiosis-btn-ghost-hover)]",
+        "active:bg-[var(--symbiosis-btn-ghost-active)]",
+        "disabled:text-[var(--symbiosis-btn-ghost-disabled)]",
+        "hover:disabled:bg-[unset]",
+        "active:disabled:bg-[unset]",
+        // ghost variant has no border so `before` needs to be 1px smaller on each side
+        "before:w-[calc(100%+calc((var(--symbiosis-btn-focus-ring-size)-2px)*2))]",
+        "before:h-[calc(100%+calc((var(--symbiosis-btn-focus-ring-size)-2px)*2))]",
+        "before:top-[calc(-1*(var(--symbiosis-btn-focus-ring-size)-2px))]",
+        "before:left-[calc(-1*(var(--symbiosis-btn-focus-ring-size)-2px))]",
       ],
       link: [
-        "bg-transparent",
-        "text-mainColors-dark-100",
+        "bg-[var(--symbiosis-btn-link-bg)]",
+        "text-[var(--symbiosis-btn-link-text)]",
         "underline",
-        "active:bg-mainColors-light-400",
-        "disabled:text-grays-400",
+        "active:bg-[var(--symbiosis-btn-link-active)]",
+        "disabled:text-[var(--symbiosis-btn-link-disabled)]",
+        "active:disabled:bg-[unset]",
+        // ghost variant has no border so `before` needs to be 1px smaller on each side
+        "before:w-[calc(100%+calc((var(--symbiosis-btn-focus-ring-size)-2px)*2))]",
+        "before:h-[calc(100%+calc((var(--symbiosis-btn-focus-ring-size)-2px)*2))]",
+        "before:top-[calc(-1*(var(--symbiosis-btn-focus-ring-size)-2px))]",
+        "before:left-[calc(-1*(var(--symbiosis-btn-focus-ring-size)-2px))]",
       ],
     },
     layout: {
@@ -75,7 +91,7 @@ const buttonCva = cva([sharedButtonStyles], {
         "min-h-auto",
         "h-auto",
         "my-0 mx-1",
-        "py-0.5 !px-1",
+        "py-0.5 px-1!",
       ],
     },
     size: {
@@ -87,8 +103,16 @@ const buttonCva = cva([sharedButtonStyles], {
     tone: {
       default: [],
       destructive: [],
-      "monochrome-light": ["group btn-mono btn-mono-light"],
-      "monochrome-dark": ["group btn-mono btn-mono-dark"],
+      "monochrome-light": [
+        "group btn-mono btn-mono-light",
+        "before:border-[var(--symbiosis-btn-monochrome-light-primary-text)]",
+      ],
+      "monochrome-dark": [
+        "group btn-mono btn-mono-dark",
+        "before:border-[var(--symbiosis-btn-monochrome-dark--primary-bg)]",
+        "focus:before:border-[var(--symbiosis-btn-monochrome-dark-primary-bg)]",
+        "focus-within:before:border-[var(--symbiosis-btn-monochrome-dark-primary-bg)]",
+      ],
     },
     isDisabled: {
       true: ["cursor-not-allowed	"],
@@ -104,169 +128,167 @@ const buttonCva = cva([sharedButtonStyles], {
       variant: "primary",
       tone: "destructive",
       className: [
-        "bg-red-600",
-        "border-red-600",
-        "dark-scheme:hover:bg-red-700 light-scheme:hover:bg-red-500",
-        "dark-scheme:hover:border-red-700 light-scheme:hover:border-red-500",
-        "active:bg-red-800",
-        "active:border-red-800",
-        "focus:before:border-red-800",
-        "focus-within:before:border-red-800",
-        "disabled:bg-gray-400",
-        "disabled:border-gray-400",
+        "bg-[var(--symbiosis-btn-destructive-primary-bg)]",
+        "text-[var(--symbiosis-btn-destructive-primary-text)]",
+        "border-[var(--symbiosis-btn-destructive-primary-bg)]",
+        "before:border-[var(--symbiosis-btn-destructive-primary-bg)]",
+        "active:bg-[var(--symbiosis-btn-destructive-primary-active)]",
+        "active:border-[var(--symbiosis-btn-destructive-primary-active)]",
+        "hover:border-[var(--symbiosis-btn-destructive-primary-hover)]",
+        "hover:bg-[var(--symbiosis-btn-destructive-primary-hover)]",
+        "disabled:bg-[var(--symbiosis-btn-primary-disabled)]",
+        "disabled:border-[var(--symbiosis-btn-primary-disabled)]",
       ],
     },
     {
       variant: "outline",
       tone: "destructive",
       className: [
-        "text-red-600",
-        "border-red-600",
-        "dark-scheme:hover:bg-red-500 light-scheme:hover:bg-red-500",
-        "active:bg-red-100",
-        "focus:before:border-red-700",
-        "focus-within:before:border-red-700",
-        "disabled:border-gray-400",
-        "disabled:text-grays-400",
+        "bg-[var(--symbiosis-btn-destructive-outline-bg)]",
+        "text-[var(--symbiosis-btn-destructive-outline-text)]",
+        "border-[var(--symbiosis-btn-destructive-outline-text)]",
+        "before:border-[var(--symbiosis-btn-destructive-outline-text)]",
+        "hover:bg-[var(--symbiosis-btn-destructive-outline-hover)]",
+        "active:bg-[var(--symbiosis-btn-destructive-outline-active)]",
+        "disabled:border-[var(--symbiosis-btn-outline-disabled)]",
+        "disabled:text-[var(--symbiosis-btn-outline-disabled)]",
       ],
     },
     {
       variant: "ghost",
       tone: "destructive",
       className: [
-        "text-red-600",
-        "dark-scheme:hover:bg-red-100 light-scheme:hover:bg-red-100",
-        "active:bg-red-200",
-        "focus:before:border-red-700",
-        "focus-within:before:border-red-700",
-        "disabled:text-grays-400",
+        "bg-[var(--symbiosis-btn-destructive-ghost-bg)]",
+        "text-[var(--symbiosis-btn-destructive-ghost-text)]",
+        "before:border-[var(--symbiosis-btn-destructive-ghost-text)]",
+        "hover:bg-[var(--symbiosis-btn-destructive-ghost-hover)]",
+        "active:bg-[var(--symbiosis-btn-destructive-ghost-active)]",
+        "disabled:text-[var(--symbiosis-btn-ghost-disabled)]",
       ],
     },
     {
       variant: "link",
       tone: "destructive",
       className: [
-        "text-red-600",
-        "active:bg-red-200",
-        "focus:before:border-red-700",
-        "focus-within:before:border-red-700",
-        "disabled:text-grays-400",
+        "text-[var(--symbiosis-btn-destructive-text-dark)]",
+        "active:bg-[var(--color-red-light-400)]",
+        "focus:before:border-[var(--symbiosis-btn-destructive-focus)]",
+        "focus-within:before:border-[var(--symbiosis-btn-destructive-focus)]",
+        "disabled:text-[var(--symbiosis-btn-link-disabled)]",
       ],
     },
     {
       variant: "primary",
       tone: "monochrome-light",
       className: [
-        "bg-white",
-        "border-white",
-        "text-slate-600",
-        "dark-scheme:hover:bg-gray-200 light-scheme:hover:bg-gray-200",
-        "dark-scheme:hover:border-gray-200 light-scheme:hover:border-gray-200",
-        "active:bg-gray-300",
-        "active:border-gray-300",
-        "focus:before:border-slate-600",
-        "focus-within:before:border-slate-600",
-        "disabled:bg-gray-400",
-        "disabled:border-gray-400",
+        "bg-[var(--symbiosis-btn-monochrome-light-primary-bg)]",
+        "text-[var(--symbiosis-btn-monochrome-light-primary-text)]",
+        "border-[var(--symbiosis-btn-monochrome-light-primary-bg)]",
+        "before:border-[var(--symbiosis-btn-monochrome-light-primary-bg)]",
+        "hover:bg-[var(--symbiosis-btn-monochrome-light-primary-hover)]",
+        "hover:border-[var(--symbiosis-btn-monochrome-light-primary-hover)]",
+        "active:bg-[var(--symbiosis-btn-monochrome-light-primary-active)]",
+        "active:border-[var(--symbiosis-btn-monochrome-light-primary-active)]",
+        "disabled:bg-[var(--symbiosis-btn-primary-disabled)]",
+        "disabled:border-[var(--symbiosis-btn-primary-disabled)]",
       ],
     },
     {
       variant: "primary",
       tone: "monochrome-dark",
       className: [
-        "bg-slate-700",
-        "border-slate-700",
-        "text-white",
-        "dark-scheme:hover:bg-slate-800 light-scheme:hover:bg-slate-600",
-        "dark-scheme:hover:border-slate-800 light-scheme:hover:border-slate-600",
-        "active:bg-slate-900",
-        "active:border-slate-900",
-        "focus:before:border-slate-900",
-        "focus-within:before:border-slate-900",
-        "disabled:bg-gray-400",
-        "disabled:border-gray-400",
+        "bg-[var(--symbiosis-btn-monochrome-dark-primary-bg)]",
+        "text-[var(--symbiosis-btn-monochrome-dark-primary-text)]",
+        "border-[var(--symbiosis-btn-monochrome-dark-primary-bg)]",
+        "hover:bg-[var(--symbiosis-btn-monochrome-dark-primary-hover)]",
+        "hover:border-[var(--symbiosis-btn-monochrome-dark-primary-hover)]",
+        "active:bg-[var(--symbiosis-btn-monochrome-dark-primary-active)]",
+        "active:border-[var(--symbiosis-btn-monochrome-dark-primary-active)]",
+        "disabled:bg-[var(--symbiosis-btn-primary-disabled)]",
+        "disabled:border-[var(--symbiosis-btn-primary-disabled)]",
       ],
     },
     {
       variant: "outline",
       tone: "monochrome-light",
       className: [
-        "bg-white/5",
-        "border-white",
-        "text-white",
-        "dark-scheme:hover:bg-gray-200/10 light-scheme:hover:bg-gray-200/10",
-        "active:bg-gray-300/30",
-        "focus:before:border-slate-600",
-        "focus-within:before:border-slate-600",
-        "disabled:border-gray-400",
-        "disabled:text-grays-400",
+        "bg-[var(--symbiosis-btn-monochrome-light-outline-bg)]",
+        "border-[var(--symbiosis-btn-monochrome-light-outline-border)]",
+        "before:border-[var(--symbiosis-btn-monochrome-light-outline-border)]",
+        "text-[var(--symbiosis-btn-monochrome-light-outline-border)]",
+        "hover:bg-[var(--symbiosis-btn-monochrome-light-outline-hover)]",
+        "hover:text-[var(--symbiosis-btn-monochrome-light-outline-text)]",
+        "active:bg-[var(--symbiosis-btn-monochrome-light-outline-active)]",
+        "disabled:border-[var(--symbiosis-btn-outline-disabled)]",
+        "disabled:text-[var(--symbiosis-btn-outline-disabled)]",
+        "data-[loading=true]:text-[var(--symbiosis-btn-monochrome-light-outline-text)]",
       ],
     },
     {
       variant: "outline",
       tone: "monochrome-dark",
       className: [
-        "bg-slate-700/0",
-        "border-slate-700",
-        "text-slate-700",
-        "dark-scheme:hover:bg-slate-700/10 light-scheme:hover:bg-slate-700/10",
-        "active:bg-slate-800/20",
-        "focus:before:border-slate-900",
-        "focus-within:before:border-slate-900",
-        "disabled:border-gray-400",
-        "disabled:text-grays-400",
+        "bg-[var(--symbiosis-btn-monochrome-dark-outline-bg)]",
+        "border-[var(--symbiosis-btn-monochrome-dark-outline-text)]",
+        "hover:bg-[var(--symbiosis-btn-monochrome-dark-outline-hover)]",
+        "text-[var(--symbiosis-btn-monochrome-dark-outline-text)]",
+        "active:bg-[var(--symbiosis-btn-monochrome-dark-outline-active)]",
+        "disabled:border-[var(--symbiosis-btn-outline-disabled)]",
+        "disabled:text-[var(--symbiosis-btn-outline-disabled)]",
       ],
     },
     {
       variant: "ghost",
       tone: "monochrome-light",
       className: [
-        "bg-white/0",
-        "text-white",
-        "dark-scheme:hover:bg-gray-100/10 light-scheme:hover:bg-gray-100/10",
-        "active:bg-gray-200/30",
-        "focus:before:border-slate-600",
-        "focus-within:before:border-slate-600",
-        "disabled:text-grays-400",
+        "bg-[var(--symbiosis-btn-monochrome-light-ghost-bg)]",
+        "before:border-[var(--symbiosis-btn-monochrome-light-ghost-border)]",
+        "text-[var(--symbiosis-btn-monochrome-light-ghost-text)]",
+        "hover:bg-[var(--symbiosis-btn-monochrome-light-ghost-hover)]",
+        "hover:text-[var(--symbiosis-btn-monochrome-light-ghost-hover-text)]",
+        "active:bg-[var(--symbiosis-btn-monochrome-light-ghost-active)]",
+        "disabled:border-[var(--symbiosis-btn-outline-disabled)]",
+        "disabled:text-[var(--symbiosis-btn-outline-disabled)]",
+        "data-[loading=true]:text-[var(--symbiosis-btn-monochrome-light-outline-text)]",
       ],
     },
     {
       variant: "ghost",
       tone: "monochrome-dark",
       className: [
-        "bg-slate-700/0",
-        "text-slate-700",
-        "dark-scheme:hover:bg-slate-700/10 light-scheme:hover:bg-slate-700/10",
-        "active:bg-slate-800/20",
-        "focus:before:border-slate-900",
-        "focus-within:before:border-slate-900",
-        "disabled:text-grays-400",
+        "bg-[var(--symbiosis-btn-monochrome-dark-ghost-bg)]",
+        "text-[var(--symbiosis-btn-monochrome-dark-ghost-text)]",
+        "active:bg-[var(--symbiosis-btn-monochrome-dark-ghost-active)]",
+        "disabled:text-[var(--symbiosis-btn-ghost-disabled)]",
+        "hover:bg-[var(--symbiosis-btn-monochrome-dark-ghost-hover)]",
+        "active:bg-[var(--symbiosis-btn-monochrome-dark-ghost-active)]",
       ],
     },
     {
       variant: "link",
       tone: "monochrome-light",
       className: [
-        "bg-white/0",
-        "text-white",
-        "dark-scheme:hover:bg-gray-100/10 light-scheme:hover:bg-gray-100/10",
-        "active:bg-gray-200/30",
-        "focus:before:border-slate-600",
-        "focus-within:before:border-slate-600",
-        "disabled:text-grays-400",
+        "bg-[var(--symbiosis-btn-monochrome-light-link-bg)]",
+        "text-[var(--symbiosis-btn-monochrome-light-link-text)]",
+        "border-[var(--symbiosis-btn-monochrome-light-link-border)]",
+        "before:border-[var(--symbiosis-btn-monochrome-light-link-border)]",
+        "active:bg-[var(--symbiosis-btn-monochrome-light-link-active)]",
+        "active:text-[var(--symbiosis-btn-monochrome-light-ghost-active-text)]",
+        "disabled:text-[var(--symbiosis-btn-link-disabled)]",
+        "hover:disabled:bg-[unset]",
+        "data-[loading=true]:text-[var(--symbiosis-btn-monochrome-light-link-active-text)]",
       ],
     },
     {
       variant: "link",
       tone: "monochrome-dark",
       className: [
-        "bg-slate-700/0",
-        "text-slate-700",
-        "dark-scheme:hover:bg-slate-700/10 light-scheme:hover:bg-slate-700/10",
-        "active:bg-slate-800/20",
-        "focus:before:border-slate-900",
-        "focus-within:before:border-slate-900",
-        "disabled:text-grays-400",
+        "bg-[var(--symbiosis-btn-monochrome-dark-link-bg)]",
+        "text-[var(--symbiosis-btn-monochrome-dark-link-text)]",
+        "active:bg-[var(--symbiosis-btn-monochrome-dark-link-active)]",
+        "disabled:text-[var(--symbiosis-btn-link-disabled)]",
+        "hover:disabled:bg-[unset]",
+        "active:bg-[var(--symbiosis-btn-monochrome-dark-link-active)]",
       ],
     },
     {
@@ -277,13 +299,21 @@ const buttonCva = cva([sharedButtonStyles], {
   ],
 });
 
-export const iconButton = (variants: IconButtonVariants & ButtonHeightSizingVariants) =>
-  cn(iconButtonCva({ shape: variants.shape, size: variants.size }), buttonHeightSizing({ size: variants.size }));
-export interface IconButtonVariants extends VariantProps<typeof iconButtonCva> {}
+export const iconButton = (
+  variants: IconButtonVariants & ButtonHeightSizingVariants,
+) =>
+  cn(
+    iconButtonCva({ shape: variants.shape, size: variants.size }),
+    buttonHeightSizing({ size: variants.size }),
+  );
+export interface IconButtonVariants
+  extends VariantProps<typeof iconButtonCva> {}
 const iconButtonCva = cva(["justify-center p-0 items-center"], {
   variants: {
     shape: {
-      circle: ["rounded-full focus:before:rounded-full focus-within:before:rounded-full"],
+      circle: [
+        "rounded-full focus:before:rounded-full focus-within:before:rounded-full",
+      ],
       square: [],
     },
     size: {
@@ -296,10 +326,34 @@ const iconButtonCva = cva(["justify-center p-0 items-center"], {
 });
 
 export const iconSizeToTailwind: Record<Sizes, string> = {
-  "small-200": cn("w-[12px]", "h-[12px]", "min-w-[12px]", "min-h-[12px]", "text-[12px]"),
-  "small-100": cn("w-[14px]", "h-[14px]", "min-w-[14px]", "min-h-[14px]", "text-[14px]"),
-  base: cn("w-[16px]", "h-[16px]", "min-w-[16px]", "min-h-[16px]", "text-[16px]"),
-  "large-100": cn("w-[18px]", "h-[18px]", "min-w-[18px]", "min-h-[18px]", "text-[18px]"),
+  "small-200": cn(
+    "w-[12px]",
+    "h-[12px]",
+    "min-w-[12px]",
+    "min-h-[12px]",
+    "text-[12px]",
+  ),
+  "small-100": cn(
+    "w-[14px]",
+    "h-[14px]",
+    "min-w-[14px]",
+    "min-h-[14px]",
+    "text-[14px]",
+  ),
+  base: cn(
+    "w-[16px]",
+    "h-[16px]",
+    "min-w-[16px]",
+    "min-h-[16px]",
+    "text-[16px]",
+  ),
+  "large-100": cn(
+    "w-[18px]",
+    "h-[18px]",
+    "min-w-[18px]",
+    "min-h-[18px]",
+    "text-[18px]",
+  ),
 };
 
 export const text = cva(["mx-0 my-2", "text-slate-600"], {
@@ -331,13 +385,14 @@ export const text = cva(["mx-0 my-2", "text-slate-600"], {
   ],
 });
 
-export const input = ({ variant = "default", ...rest }: InputVariants) => cn(inputCva({ variant, ...rest }));
+export const input = ({ variant = "default", ...rest }: InputVariants) =>
+  cn(inputCva({ variant, ...rest }));
 export interface InputVariants extends VariantProps<typeof inputCva> {}
 const inputCva = cva(
   [
-    "justify-center p-3 rounded-md items-center border border-slate-400 bg-inherit",
+    "justify-center p-3 rounded-lg items-center border border-slate-400 bg-inherit",
     "relative",
-    "!m-0 flex items-center outline-none",
+    "m-0! flex items-center outline-hidden",
     "disabled:border-gray-400 disabled:text-gray-400",
     "focus-within:ring-2 focus-within:ring-offset-1",
     "placeholder-slate-400",
@@ -345,7 +400,7 @@ const inputCva = cva(
   {
     variants: {
       variant: {
-        default: ["focus-within:border-mainColors-base focus-within:ring-mainColors-base"],
+        default: ["focus-within:border-main-base focus-within:ring-main-base"],
         error: ["text-red-500 border-red-500 focus-within:ring-red-500"],
       },
       size: {
@@ -392,4 +447,3 @@ export const inputLabel = cva([], {
     },
   },
 });
-

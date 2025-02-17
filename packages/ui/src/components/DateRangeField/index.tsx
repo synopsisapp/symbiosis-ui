@@ -1,11 +1,11 @@
-import * as React from "react";
 import { format, isValid, parse } from "date-fns";
+import * as React from "react";
 
-import { TextField } from "../TextField";
-import { Popover } from "../Popover";
-import { DatePicker } from "../Datepicker";
-import type { DateRangeFieldProps, Value } from "./types";
 import { getDateFormat } from "../../helpers/getDateFormat";
+import { DatePicker } from "../Datepicker";
+import { Popover } from "../Popover";
+import { TextField } from "../TextField";
+import type { DateRangeFieldProps, Value } from "./types";
 
 const DateRangeField = React.forwardRef(
   (
@@ -20,8 +20,10 @@ const DateRangeField = React.forwardRef(
       id,
       labelFrom,
       labelTo,
+      labelWeight,
       className,
       value,
+      defaultValue,
       onChange,
       onBlur,
       onFocus,
@@ -34,8 +36,8 @@ const DateRangeField = React.forwardRef(
     const [fromInputValue, setFromInputValue] = React.useState("");
     const [toInputValue, setToInputValue] = React.useState("");
     const [selectedRange, setSelectedRange] = React.useState<Value>({
-      from: value?.from,
-      to: value?.to,
+      from: defaultValue ? defaultValue.from : value?.from,
+      to: defaultValue ? defaultValue.to : value?.to,
     });
     const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -46,7 +48,14 @@ const DateRangeField = React.forwardRef(
       if (value?.to && isValid(value.to)) {
         setToInputValue(format(value.to, getDateFormat(locale)));
       }
-    }, [value, locale]);
+
+      if (defaultValue?.from && !value?.from && isValid(defaultValue.from)) {
+        setFromInputValue(format(defaultValue.from, getDateFormat(locale)));
+      }
+      if (defaultValue?.to && !value?.to && isValid(defaultValue.to)) {
+        setToInputValue(format(defaultValue.to, getDateFormat(locale)));
+      }
+    }, [value, locale, defaultValue?.from, defaultValue?.to]);
 
     const handleFromInputChange = (value: string) => {
       setFromInputValue(value);
@@ -101,12 +110,17 @@ const DateRangeField = React.forwardRef(
     };
 
     const handleFocusOutside = (e: Event) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
 
-    const selectedDates = selectedRange.from ? { from: selectedRange.from, to: selectedRange.to } : undefined;
+    const selectedDates = selectedRange.from
+      ? { from: selectedRange.from, to: selectedRange.to }
+      : undefined;
 
     if (!datePickerProps.withDatePicker) {
       return (
@@ -123,6 +137,7 @@ const DateRangeField = React.forwardRef(
             size={size}
             id={`${id}-from`}
             label={labelFrom}
+            labelWeight={labelWeight}
             className={className}
             value={fromInputValue}
             onChange={handleFromInputChange}
@@ -139,6 +154,7 @@ const DateRangeField = React.forwardRef(
             size={size}
             id={`${id}-to`}
             label={labelTo}
+            labelWeight={labelWeight}
             className={className}
             value={toInputValue}
             onChange={handleToInputChange}
@@ -164,6 +180,7 @@ const DateRangeField = React.forwardRef(
               size={size}
               id={`${id}-from`}
               label={labelFrom}
+              labelWeight={labelWeight}
               className={className}
               value={fromInputValue}
               onChange={handleFromInputChange}
@@ -181,6 +198,7 @@ const DateRangeField = React.forwardRef(
               size={size}
               id={`${id}-to`}
               label={labelTo}
+              labelWeight={labelWeight}
               className={className}
               value={toInputValue}
               onChange={handleToInputChange}
@@ -197,7 +215,7 @@ const DateRangeField = React.forwardRef(
           onOpenAutoFocus={(e) => e.preventDefault()}
           onCloseAutoFocus={(e) => e.preventDefault()}
           onFocusOutside={handleFocusOutside}
-          className="w-[max(var(--radix-popover-trigger-width),100%)] p-0 my-2"
+          className="my-2 w-[max(var(--radix-popover-trigger-width),100%)] p-0"
         >
           <DatePicker
             mode="range"

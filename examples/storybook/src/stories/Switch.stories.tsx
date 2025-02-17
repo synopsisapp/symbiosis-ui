@@ -1,85 +1,93 @@
 
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Switch, type SwitchProps } from "@synopsisapp/symbiosis-ui";
+import { Switch, type SwitchProps, SwitchSizes, SwitchContentAlignment } from "@synopsisapp/symbiosis-ui";
 
 const meta: Meta<SwitchProps> = {
-	title: "Components/Switch",
-	component: Switch,
-	tags: ["autodocs"],
-	argTypes: {
-		name: {
-			control: {
-				type: "text",
-			},
-			description:
-				"The name of the switch. Submitted with its owning form as part of a name/value pair.",
-			table: {
-				type: {
-					summary: "string",
-				},
-			},
-		},
-		size: {
-			control: "select",
-			options: ["base", "small-100", "small-200", "large-100"],
-			description: "The size of the switch",
-			table: {
-				defaultValue: { summary: "base" },
-				type: {
-					summary: "base | small-100 | small-200 | large-100",
-				},
-			},
-		},
-		defaultChecked: {
-			control: false,
-			description:
-				"The value of the radio item that should be checked when initially rendered. Use when you do not need to control the state of the radio items.",
-			table: {
-				type: {
-					summary: "string",
-				},
-			},
-		},
-		onCheckedChange: {
-			control: false,
-			description:
-				"Event handler called when the value of the radio group changes",
-			table: {
-				type: {
-					summary: "(checked: string) => void | undefined",
-				},
-			},
-		},
-		label: {
-			control: "text",
-			description: "The label for the switch",
-			table: {
-				type: {
-					summary: "string",
-				},
-			},
-		},
-		value: {
-			control: "boolean",
-			description: "The value given as data when submitted with a name.",
-			table: {
-				type: {
-					summary: "boolean",
-				},
-			},
-		},
-		disabled: {
-			control: "boolean",
-			description:
-				"When true, prevents the user from interacting with the switch.",
-			table: {
-				type: {
-					summary: "boolean",
-				},
-			},
-		},
-	},
+  title: "Components/Switch",
+  component: Switch,
+  tags: ["autodocs"],
+  argTypes: {
+    name: {
+      control: {
+        type: "text",
+      },
+      description: "The name of the switch. Submitted with its owning form as part of a name/value pair.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    size: {
+      control: "select",
+      options: SwitchSizes.options,
+      description: "The size of the switch",
+      table: {
+        defaultValue: { summary: SwitchSizes.enum.base },
+        type: {
+          summary: SwitchSizes.options.join(" | "),
+        },
+      },
+    },
+    contentAlignment: {
+      control: "select",
+      options: SwitchContentAlignment.options,
+      description: "The alignment of the content",
+      table: {
+        defaultValue: { summary: SwitchContentAlignment.enum["label-first"] },
+        type: {
+          summary: SwitchContentAlignment.options.join(" | "),
+        },
+      },
+    },
+    defaultChecked: {
+      control: false,
+      description:
+        "The value of the radio item that should be checked when initially rendered. Use when you do not need to control the state of the radio items.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    onCheckedChange: {
+      control: false,
+      description: "Event handler called when the value of the radio group changes",
+      table: {
+        type: {
+          summary: "(checked: string) => void | undefined",
+        },
+      },
+    },
+    label: {
+      control: "text",
+      description: "The label for the switch",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    value: {
+      control: "boolean",
+      description: "The value given as data when submitted with a name.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    disabled: {
+      control: "boolean",
+      description: "When true, prevents the user from interacting with the switch.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+  },
 };
 
 export default meta;

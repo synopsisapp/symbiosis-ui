@@ -1,3 +1,30 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import 'tailwindcss/utilities';
+@import "../../../packages/ui/src/tailwind.css" layer(theme);
+
+@plugin "tailwindcss-animate";
+
+@source "../../../packages/ui";
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@theme {
+    /* Default Theme Colors */
+    --color-main-light-400: #E0F2F1;
+    --color-main-light-300: #B2DFDB;
+    --color-main-light-200: #80CBC4;
+    --color-main-light-100: #4DB6AC;
+    --color-main-base: #26A69A;
+    --color-main-dark-100: #009688;
+    --color-main-dark-200: #00897B;
+    --color-main-dark-300: #00796B;
+    --color-main-dark-400: #00695C;
+  }

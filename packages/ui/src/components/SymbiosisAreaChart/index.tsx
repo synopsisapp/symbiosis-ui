@@ -1,9 +1,9 @@
 import * as React from "react";
 
+import { cn } from "../../utils/cn";
 import { Chart } from "../Charts";
 import type { ChartConfig, ChartDataPoint } from "../Charts/types";
 import type { SymbiosisAreaChartProps } from "./types";
-import { cn } from "../../utils/cn";
 
 const SymbiosisAreaChart = ({
   data,
@@ -32,7 +32,10 @@ const SymbiosisAreaChart = ({
   }, []);
 
   return (
-    <Chart.Container config={config} className={cn("aspect-auto h-[250px] w-full", className)}>
+    <Chart.Container
+      config={config}
+      className={cn("aspect-auto h-[250px] w-full", className)}
+    >
       <Chart.AreaChart data={data}>
         {generateGradients(data, config)}
         <Chart.CartesianGrid vertical={false} />
@@ -48,23 +51,32 @@ const SymbiosisAreaChart = ({
           cursor={false}
           content={
             <Chart.TooltipContent
-              labelFormatter={tooltipLabelFormatter ?? defaultTooltipLabelFormatter}
+              labelFormatter={
+                tooltipLabelFormatter ?? defaultTooltipLabelFormatter
+              }
               indicator="dot"
               className={tooltipClassName}
             />
           }
         />
         {generateAreas(data, config)}
-        <Chart.Legend content={<Chart.LegendContent className={legendClassName} />} />
+        <Chart.Legend
+          content={<Chart.LegendContent className={legendClassName} />}
+        />
       </Chart.AreaChart>
     </Chart.Container>
   );
 };
 
-function generateGradients<T extends ChartDataPoint>(chartData: T[], chartConfig: ChartConfig) {
+function generateGradients<T extends ChartDataPoint>(
+  chartData: T[],
+  chartConfig: ChartConfig,
+) {
   if (chartData.length === 0) return null;
 
-  const dataKeys = Object.keys(chartData[0]).filter((key) => key !== "date" && typeof chartData[0][key] === "number");
+  const dataKeys = Object.keys(chartData[0]).filter(
+    (key) => key !== "date" && typeof chartData[0][key] === "number",
+  );
 
   return (
     <defs>
@@ -80,8 +92,16 @@ function generateGradients<T extends ChartDataPoint>(chartData: T[], chartConfig
                 x2="0"
                 y2="1"
               >
-                <stop offset="5%" stopColor={`var(--color-${key})`} stopOpacity={0.8} />
-                <stop offset="95%" stopColor={`var(--color-${key})`} stopOpacity={0.1} />
+                <stop
+                  offset="5%"
+                  stopColor={`var(--color-${key})`}
+                  stopOpacity={0.8}
+                />
+                <stop
+                  offset="95%"
+                  stopColor={`var(--color-${key})`}
+                  stopOpacity={0.1}
+                />
               </linearGradient>
             );
           }
@@ -92,10 +112,15 @@ function generateGradients<T extends ChartDataPoint>(chartData: T[], chartConfig
   );
 }
 
-function generateAreas<T extends ChartDataPoint>(chartData: T[], chartConfig: ChartConfig) {
+function generateAreas<T extends ChartDataPoint>(
+  chartData: T[],
+  chartConfig: ChartConfig,
+) {
   if (chartData.length === 0) return [];
 
-  const dataKeys = Object.keys(chartData[0]).filter((key) => key !== "date" && typeof chartData[0][key] === "number");
+  const dataKeys = Object.keys(chartData[0]).filter(
+    (key) => key !== "date" && typeof chartData[0][key] === "number",
+  );
 
   return dataKeys
     .map((key) => {

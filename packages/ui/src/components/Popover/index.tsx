@@ -1,20 +1,31 @@
-import * as React from "react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
-import { IconButton } from "../IconButton";
+import * as React from "react";
 import { cn } from "../../utils/cn";
+import { IconButton } from "../IconButton";
 import { sharedPopoverStyles } from "./styles";
 
 import type {
-  PopoverRootProps,
-  PopoverContentProps,
-  PopoverTriggerProps,
   PopoverArrowProps,
   PopoverCloseProps,
+  PopoverContentProps,
+  PopoverRootProps,
+  PopoverTriggerProps,
 } from "./types";
 
-const PopoverRoot = ({ children, defaultOpen, onOpenChange, open, modal = true }: PopoverRootProps) => {
+const PopoverRoot = ({
+  children,
+  defaultOpen,
+  onOpenChange,
+  open,
+  modal = true,
+}: PopoverRootProps) => {
   return (
-    <PopoverPrimitive.Root modal={modal} defaultOpen={defaultOpen} open={open} onOpenChange={onOpenChange}>
+    <PopoverPrimitive.Root
+      modal={modal}
+      defaultOpen={defaultOpen}
+      open={open}
+      onOpenChange={onOpenChange}
+    >
       {children}
     </PopoverPrimitive.Root>
   );
@@ -22,12 +33,13 @@ const PopoverRoot = ({ children, defaultOpen, onOpenChange, open, modal = true }
 
 PopoverRoot.displayName = "Popover.Root";
 
-const PopoverTrigger = React.forwardRef<HTMLButtonElement, PopoverTriggerProps>(({ children, asChild }, ref) => (
-  <PopoverPrimitive.Trigger ref={ref} asChild={asChild}>
-    {children}
-  </PopoverPrimitive.Trigger>
-));
-
+const PopoverTrigger = React.forwardRef<HTMLButtonElement, PopoverTriggerProps>(
+  ({ children, asChild }, ref) => (
+    <PopoverPrimitive.Trigger ref={ref} asChild={asChild}>
+      {children}
+    </PopoverPrimitive.Trigger>
+  ),
+);
 
 PopoverTrigger.displayName = "Popover.Trigger";
 
@@ -44,7 +56,9 @@ const PopoverContent = ({
   onCloseAutoFocus,
   skipComposition = false,
 }: PopoverContentProps) => {
-  const ContentWrapper = skipComposition ? React.Fragment : PopoverPrimitive.Portal;
+  const ContentWrapper = skipComposition
+    ? React.Fragment
+    : PopoverPrimitive.Portal;
 
   return (
     <ContentWrapper>
@@ -74,12 +88,25 @@ const PopoverArrow = ({ className }: PopoverArrowProps) => (
 
 PopoverArrow.displayName = "Popover.Arrow";
 
-const PopoverClose = ({ icon = "symbiosis-x", tone = "monochrome-dark", className }: PopoverCloseProps) => (
+const PopoverClose = ({
+  icon = "symbiosis-x",
+  tone = "monochrome-dark",
+  className,
+}: PopoverCloseProps) => (
   <PopoverPrimitive.Close
-    className={cn("absolute top-2 right-2 focus-visible:outline-none", className)}
+    className={cn(
+      "absolute top-2 right-2 focus-visible:outline-hidden",
+      className,
+    )}
     aria-label="Close"
   >
-    <IconButton icon={icon} tone={tone} variant="ghost" size="base" className="w-4 min-w-4 h-4 min-h-4" />
+    <IconButton
+      icon={icon}
+      tone={tone}
+      variant="ghost"
+      size="base"
+      className="h-4 min-h-4 w-4 min-w-4"
+    />
   </PopoverPrimitive.Close>
 );
 

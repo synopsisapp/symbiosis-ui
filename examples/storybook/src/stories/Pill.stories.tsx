@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Pill, type PillProps } from "@synopsisapp/symbiosis-ui";
+import { Pill, PillVariant, PillTone, PillSizes } from "@synopsisapp/symbiosis-ui";
 
-const meta: Meta<PillProps> = {
+console.log("PillTone", PillTone.options);
+const meta: Meta<typeof Pill> = {
   title: "Components/Pill",
   component: Pill,
   tags: ["autodocs"],
@@ -20,39 +21,36 @@ const meta: Meta<PillProps> = {
     variant: {
       control: {
         type: "select",
-        options: ["primary", "outline"],
       },
+      options: PillVariant.options,
       description: "Visual style variant of the pill",
       table: {
-        defaultValue: { summary: "primary" },
         type: {
-          summary: "primary | outline",
+          summary: PillVariant.options.join(" | "),
         },
       },
     },
     tone: {
       control: {
         type: "select",
-        options: ["default", "destructive"],
       },
+      options: PillTone.options,
       description: "Color tone of the pill",
       table: {
-        defaultValue: { summary: "default" },
         type: {
-          summary: "default | destructive",
+          summary: PillTone.options.join(" | "),
         },
       },
     },
     size: {
       control: {
         type: "select",
-        options: ["small-200", "small-100", "base", "large-100"],
       },
+      options: PillSizes.options,
       description: "Size of the pill",
       table: {
-        defaultValue: { summary: "base" },
         type: {
-          summary: "small-200 | small-100 | base | large-100",
+          summary: PillSizes.options.join(" | "),
         },
       },
     },
@@ -73,7 +71,6 @@ const meta: Meta<PillProps> = {
       },
       description: "Whether the pill has fully rounded corners",
       table: {
-        defaultValue: { summary: "true" },
         type: {
           summary: "boolean",
         },
@@ -92,14 +89,14 @@ const meta: Meta<PillProps> = {
 };
 
 export default meta;
-type Story = StoryObj<PillProps>;
+type Story = StoryObj<typeof Pill>;
 
 export const Default: Story = {
   render: (args) => <Pill {...args} />,
   args: {
     label: "Default Pill",
-    variant: "primary",
-    tone: "default",
+    variant: PillVariant.enum.primary,
+    tone: PillTone.enum.default,
   },
 };
 
@@ -107,8 +104,8 @@ export const WithIcon: Story = {
   render: (args) => <Pill {...args} />,
   args: {
     label: "Pill with Icon",
-    variant: "primary",
-    tone: "default",
+    variant: PillVariant.enum.primary,
+    tone: PillTone.enum.default,
     leftIcon: "symbiosis-minus",
   },
 };
@@ -124,8 +121,8 @@ export const Closeable: Story = {
   ),
   args: {
     label: "Closeable Pill",
-    variant: "primary",
-    tone: "default",
+    variant: PillVariant.enum.primary,
+    tone: PillTone.enum.default,
 
     onClose: () => alert("Pill closed!"),
   },
@@ -141,8 +138,8 @@ export const DifferentSizes: Story = {
     </div>
   ),
   args: {
-    variant: "primary",
-    tone: "default",
+    variant: PillVariant.enum.primary,
+    tone: PillTone.enum.default,
   },
 };
 
@@ -156,7 +153,7 @@ export const Variants: Story = {
     </div>
   ),
   args: {
-    tone: "default",
+    tone: PillTone.enum.default,
   },
 };
 
@@ -164,8 +161,8 @@ export const NonRounded: Story = {
   render: (args) => <Pill {...args} />,
   args: {
     label: "Non-rounded Pill",
-    variant: "primary",
-    tone: "default",
+    variant: PillVariant.enum.primary,
+    tone: PillTone.enum.default,
     isRounded: false,
   },
 };

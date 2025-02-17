@@ -1,27 +1,41 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
-  "organizeImports": {
-    "enabled": true
-  },
+  "$schema": "https://biomejs.dev/schemas/1.8.1/schema.json",
+  "organizeImports": { "enabled": true },
   "formatter": {
+    "enabled": true,
+    "lineWidth": 80,
     "indentStyle": "space",
-    "lineWidth": 120
-  },
-  "javascript": {
-    "formatter": {
-      "lineWidth": 120
-    }
+    "indentWidth": 2
   },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
-      "style": {
-        "useNodejsImportProtocol": "off"
+      "complexity": {
+        "noForEach": "off"
+      },
+      "correctness": {
+        "noUnusedVariables": "warn"
+      },
+      "nursery": {
+        "useSortedClasses": "warn",
+        "noUnusedFunctionParameters": "warn"
       }
     }
   },
   "files": {
-    "ignore": ["**/node_modules/**", "**/dist/**"]
+    "ignore": [
+      "**/*.config.js",
+      "**/*.config.cjs",
+      "dist",
+      "pnpm-lock.yaml",
+      "**/build",
+      "**/public/build",
+      "**/playwright-report",
+      "**/storybook-static",
+      "**/node_modules/**",
+      "**/dist/**",
+      "examples/**/*"
+    ]
   }
 }

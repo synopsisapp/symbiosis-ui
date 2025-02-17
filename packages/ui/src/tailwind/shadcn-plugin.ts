@@ -1,4 +1,3 @@
-import { fontFamily } from "tailwindcss/defaultTheme";
 import plugin from "tailwindcss/plugin";
 
 export const shadcnPlugin = plugin(
@@ -125,10 +124,6 @@ export const shadcnPlugin = plugin(
           lg: "var(--radius)",
           md: "calc(var(--radius) - 2px)",
           sm: "calc(var(--radius) - 4px)",
-        },
-        fontFamily: {
-          cal: ["Inter", ...fontFamily.sans],
-          sans: ["Inter", ...fontFamily.sans],
         },
         keyframes: {
           "fade-up": {

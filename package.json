@@ -1,25 +1,33 @@
 {
   "name": "symbiosis-monorepo",
+  "type": "module",
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "examples/*"
-  ],
+  "workspaces": ["packages/*", "examples/*"],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "turbo run format",
-    "release": "turbo run build && changeset publish",
-    "release:create": "npm exec changeset add"
+    "lint:root:fix": "biome check . --write --unsafe",
+    "format:root:fix": "biome format . --write",
+    "lint:root": "biome check .",
+    "format:root": "biome format .",
+    "lint": "turbo run lint lint:root",
+    "lint:fix": "turbo run lint:root:fix",
+    "format": "turbo run format format:root",
+    "format:fix": "turbo run format:root:fix",
+    "release:create": "dotenv -e .env.local -- node --disable-warning=ExperimentalWarning scripts/create-changeset.ts && git add .changeset/*.md && git commit -m 'chore: add changeset for release'"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.11",
+    "@octokit/rest": "^21.1.1",
+    "dotenv": "^16.4.7",
     "turbo": "^2.3.3"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "engines": {
+    "node": "23.8.0"
   },
   "packageManager": "npm@10.8.1"
 }

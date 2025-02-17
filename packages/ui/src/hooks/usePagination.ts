@@ -20,7 +20,9 @@ export function usePagination({
   onChange,
 }: PaginationParams) {
   const _total = Math.max(Math.trunc(total), 0);
-  const [activePage, setActivePage] = React.useState(Math.min(page || initialPage, _total));
+  const [activePage, setActivePage] = React.useState(
+    Math.min(page || initialPage, _total),
+  );
 
   const setPage = (pageNumber: number) => {
     if (pageNumber <= 0) {
@@ -68,7 +70,10 @@ export function usePagination({
     }
 
     const leftSiblingIndex = Math.max(activePage - siblings, 1 + boundaries);
-    const rightSiblingIndex = Math.min(activePage + siblings, _total - boundaries);
+    const rightSiblingIndex = Math.min(
+      activePage + siblings,
+      _total - boundaries,
+    );
 
     const shouldShowLeftDots = leftSiblingIndex > boundaries + 2;
     const shouldShowRightDots = rightSiblingIndex < _total - boundaries;
@@ -76,13 +81,21 @@ export function usePagination({
     if (!shouldShowLeftDots && shouldShowRightDots) {
       const leftItemCount = siblings * 2 + boundaries + 2;
       const rightItemCount = boundaries + 1;
-      return [...range(1, leftItemCount), DOTS, ...range(_total - rightItemCount + 2, _total)];
+      return [
+        ...range(1, leftItemCount),
+        DOTS,
+        ...range(_total - rightItemCount + 2, _total),
+      ];
     }
 
     if (shouldShowLeftDots && !shouldShowRightDots) {
       const leftItemCount = boundaries + 1;
       const rightItemCount = siblings * 2 + boundaries + 2;
-      return [...range(1, leftItemCount), DOTS, ...range(_total - rightItemCount + 2, _total)];
+      return [
+        ...range(1, leftItemCount),
+        DOTS,
+        ...range(_total - rightItemCount + 2, _total),
+      ];
     }
 
     return [

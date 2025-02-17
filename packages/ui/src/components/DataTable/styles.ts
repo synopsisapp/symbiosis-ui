@@ -1,6 +1,6 @@
-import { cva, type VariantProps } from "class-variance-authority";
-import { sharedTableRowBottomBorderStyles } from "../Table/styles";
+import { type VariantProps, cva } from "class-variance-authority";
 import { cn } from "../../utils/cn";
+import { sharedTableRowBottomBorderStyles } from "../Table/styles";
 
 export const tableCellStyles = cva("sticky z-10 transition-colors pl-[22px]", {
   variants: {

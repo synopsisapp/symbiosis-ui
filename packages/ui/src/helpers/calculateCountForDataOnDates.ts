@@ -18,10 +18,14 @@ type StringKeys<T> = Extract<keyof T, string>;
 
 function normalizeToUTCMidnight(dateString: string): Date {
   const date = new Date(dateString);
-  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+  return new Date(
+    Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()),
+  );
 }
 
-export function calculateCountForDataOnDates<T extends Record<string, string[]>>({
+export function calculateCountForDataOnDates<
+  T extends Record<string, string[]>,
+>({
   data,
   startDate,
   endDate,
@@ -42,7 +46,9 @@ export function calculateCountForDataOnDates<T extends Record<string, string[]>>
 
     // For each data item, calculate the count for the current date
     for (const name in data) {
-      const normalizedDates = data[name].map((date) => normalizeToUTCMidnight(date).getTime());
+      const normalizedDates = data[name].map((date) =>
+        normalizeToUTCMidnight(date).getTime(),
+      );
       const currentTime = currentDate.getTime();
 
       let count = 0;

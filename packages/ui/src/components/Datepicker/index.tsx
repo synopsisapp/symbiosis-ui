@@ -1,12 +1,12 @@
+import { compareAsc } from "date-fns/compareAsc";
 import React from "react";
 import { DayPicker } from "react-day-picker";
-import type { OnSelectHandler, Matcher, PropsBase, DateRange } from "react-day-picker";
-import { compareAsc } from "date-fns/compareAsc";
+import type { Matcher, OnSelectHandler, PropsBase } from "react-day-picker";
 
-import { IconButton } from "../IconButton";
 import { cn } from "../../utils/cn";
+import { IconButton } from "../IconButton";
 import { button, iconButton, text } from "../sharedStyles";
-import type { DatePickerProps } from "./types";
+import type { DatePickerProps, DateRange } from "./types";
 
 const classNames = {
   month: "space-y-4 flex-1",
@@ -25,8 +25,8 @@ const classNames = {
       tone: "monochrome-dark",
     }),
     iconButton({ shape: "square" }),
-    "!bg-transparent",
-    "!text-slate-700",
+    "bg-transparent!",
+    "text-slate-700!",
   ),
   selected: cn(
     button({
@@ -34,7 +34,7 @@ const classNames = {
       tone: "monochrome-dark",
     }),
     iconButton({ shape: "square" }),
-    "[&[data-selected='true']:not([data-today='true'])>button]:!text-white",
+    "[&[data-selected='true']:not([data-today='true'])>button]:text-white!",
   ),
   day_button: cn(
     button({
@@ -47,8 +47,16 @@ const classNames = {
   outside: "opacity-70",
   disabled: "opacity-50",
   hidden: "invisible",
-  button_previous: cn(button({ variant: "outline", tone: "monochrome-dark" }), iconButton({ shape: "square" }), "z-10"),
-  button_next: cn(button({ variant: "outline", tone: "monochrome-dark" }), iconButton({ shape: "square" }), "z-10"),
+  button_previous: cn(
+    button({ variant: "outline", tone: "monochrome-dark" }),
+    iconButton({ shape: "square" }),
+    "z-10",
+  ),
+  button_next: cn(
+    button({ variant: "outline", tone: "monochrome-dark" }),
+    iconButton({ shape: "square" }),
+    "z-10",
+  ),
 };
 
 export const DatePicker = ({
@@ -65,14 +73,26 @@ export const DatePicker = ({
   ...props
 }: DatePickerProps) => {
   const [internalMonth, setInternalMonth] = React.useState(month ?? new Date());
+  const [showDefaultDate, setShowDefaultDate] = React.useState(
+    (props.mode === "single" && !!props.defaultDate) ||
+      (props.mode === "multiple" && !!props.defaultSelectedDates) ||
+      (props.mode === "range" &&
+        !!props.defaultSelectedDates &&
+        props.defaultSelectedDates.from &&
+        props.defaultSelectedDates.to),
+  );
 
   React.useEffect(() => {
     if (!month) return;
     setInternalMonth(month);
   }, [month]);
 
-  const singleHandler: OnSelectHandler<Date | undefined> = (date, triggerDate) => {
+  const singleHandler: OnSelectHandler<Date | undefined> = (
+    date,
+    triggerDate,
+  ) => {
     if (props.mode === "single") {
+      setShowDefaultDate(false);
       props.onSelect?.({
         date: date,
         selectedDate: triggerDate,
@@ -80,8 +100,12 @@ export const DatePicker = ({
     }
   };
 
-  const multipleHandler: OnSelectHandler<Date[] | undefined> = (dates, triggerDate) => {
+  const multipleHandler: OnSelectHandler<Date[] | undefined> = (
+    dates,
+    triggerDate,
+  ) => {
     if (props.mode === "multiple") {
+      setShowDefaultDate(false);
       props.onSelect?.({
         dates: dates,
         selectedDate: triggerDate,
@@ -89,8 +113,9 @@ export const DatePicker = ({
     }
   };
 
-  const rangeHandler: OnSelectHandler<DateRange | undefined> = (range, triggerDate) => {
+  const rangeHandler: OnSelectHandler<DateRange> = (range, triggerDate) => {
     if (props.mode === "range") {
+      setShowDefaultDate(false);
       props.onSelect?.({
         date: range,
         selectedDate: triggerDate,
@@ -137,7 +162,7 @@ export const DatePicker = ({
     },
     modifiersStyles: {
       booked: {
-        color: "bg-mainColors-light-100",
+        color: "bg-main-light-100",
         fontWeight: "bold",
       },
     },
@@ -148,7 +173,11 @@ export const DatePicker = ({
       Chevron: ({ orientation }) => {
         return (
           <IconButton
-            icon={orientation === "left" ? "symbiosis-chevron-left" : "symbiosis-chevron-right"}
+            icon={
+              orientation === "left"
+                ? "symbiosis-chevron-left"
+                : "symbiosis-chevron-right"
+            }
             variant="ghost"
             isCircle={false}
             tone="monochrome-dark"
@@ -168,7 +197,7 @@ export const DatePicker = ({
             return (
               <DayPicker
                 mode="single"
-                selected={selectedDate}
+                selected={showDefaultDate ? props.defaultDate : selectedDate}
                 onSelect={singleHandler}
                 {...commonProps}
                 month={internalMonth}
@@ -182,7 +211,9 @@ export const DatePicker = ({
                 mode="multiple"
                 min={minSelectedCount}
                 max={maxSelectedCount}
-                selected={selectedDates}
+                selected={
+                  showDefaultDate ? props.defaultSelectedDates : selectedDates
+                }
                 onSelect={multipleHandler}
                 {...commonProps}
                 month={internalMonth}
@@ -196,8 +227,22 @@ export const DatePicker = ({
                 mode="range"
                 min={minSelectedCount}
                 max={maxSelectedCount}
-                selected={selectedDates}
-                onSelect={rangeHandler}
+                selected={
+                  showDefaultDate ? props.defaultSelectedDates : selectedDates
+                }
+                onSelect={(range, triggerDate, modifiers, event) => {
+                  if (range?.from) {
+                    rangeHandler(
+                      {
+                        from: range.from,
+                        to: range.to,
+                      },
+                      triggerDate,
+                      modifiers,
+                      event,
+                    );
+                  }
+                }}
                 {...commonProps}
                 month={internalMonth}
               />

@@ -105,7 +105,7 @@ export const CustomContent: Story = {
       <Tooltip.Trigger>
         <span>Hover me</span>
       </Tooltip.Trigger>
-      <Tooltip.Content className="bg-mainColors-light-200 rounded-none">
+      <Tooltip.Content className="bg-main-light-200 rounded-none">
         <div>Popover content</div>
       </Tooltip.Content>
     </Tooltip.Root>

@@ -1,11 +1,11 @@
-import * as React from "react";
 import { format, isValid, parse } from "date-fns";
+import * as React from "react";
 
-import { TextField } from "../TextField";
-import { Popover } from "../Popover";
-import { DatePicker } from "../Datepicker";
-import type { DateFieldProps } from "./types";
 import { getDateFormat } from "../../helpers/getDateFormat";
+import { DatePicker } from "../Datepicker";
+import { Popover } from "../Popover";
+import { TextField } from "../TextField";
+import type { DateFieldProps } from "./types";
 
 const DateField = React.forwardRef(
   (
@@ -19,8 +19,10 @@ const DateField = React.forwardRef(
       size = "base",
       id,
       label,
+      labelWeight,
       className,
       value,
+      defaultValue,
       onChange,
       onBlur,
       onFocus,
@@ -32,7 +34,11 @@ const DateField = React.forwardRef(
     const [isOpen, setIsOpen] = React.useState(false);
     const [inputValue, setInputValue] = React.useState("");
     const [selectedDate, setSelectedDate] = React.useState<Date | undefined>(
-      value && isValid(value) ? value : undefined,
+      defaultValue && isValid(defaultValue)
+        ? defaultValue
+        : value && isValid(value)
+          ? value
+          : undefined,
     );
 
     const containerRef = React.useRef<HTMLDivElement>(null);
@@ -42,7 +48,12 @@ const DateField = React.forwardRef(
         setInputValue(format(value, getDateFormat(locale)));
         setSelectedDate(value);
       }
-    }, [value, locale]);
+
+      if (defaultValue && !value && isValid(defaultValue)) {
+        setInputValue(format(defaultValue, getDateFormat(locale)));
+        setSelectedDate(defaultValue);
+      }
+    }, [value, locale, defaultValue]);
 
     const handleInputChange = (value: string) => {
       setInputValue(value);
@@ -64,7 +75,10 @@ const DateField = React.forwardRef(
     };
 
     const handleFocusOutside = (e: Event) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -83,6 +97,7 @@ const DateField = React.forwardRef(
           size={size}
           id={id}
           label={label}
+          labelWeight={labelWeight}
           className={className}
           value={inputValue}
           onChange={handleInputChange}
@@ -108,12 +123,13 @@ const DateField = React.forwardRef(
               required={required}
               hint={hint}
               placeholder={placeholder}
-              icon={"symbiosis-calendar"}
+              icon="symbiosis-calendar"
               disabled={disabled}
               name={name}
               size={size}
               id={id}
               label={label}
+              labelWeight={labelWeight}
               className={className}
               value={inputValue}
               onChange={handleInputChange}
@@ -134,7 +150,7 @@ const DateField = React.forwardRef(
             onOpenAutoFocus={(e) => e.preventDefault()}
             onCloseAutoFocus={(e) => e.preventDefault()}
             onFocusOutside={handleFocusOutside}
-            className="w-[max(var(--radix-popover-trigger-width),100%)] p-0 my-2"
+            className="my-2 w-[max(var(--radix-popover-trigger-width),100%)] p-0"
           >
             <DatePicker
               mode="single"

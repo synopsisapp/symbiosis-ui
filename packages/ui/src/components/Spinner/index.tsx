@@ -1,24 +1,31 @@
-import { iconSizeToTailwind } from "../sharedStyles";
 import { cn } from "../../utils/cn";
+import { iconSizeToTailwind } from "../sharedStyles";
 import type { SpinnerProps } from "./types";
 
 const primaryColors = cn(
   "border-white/30",
   "border-t-white",
-  "group-[.btn-mono-light]:border-grays-400/30",
-  "group-[.btn-mono-light]:border-t-grays-600",
+  "group-[.btn-mono-light]:border-[var(--color-gray-light-200)]",
+  "group-[.btn-mono-light]:border-t-[var(--color-gray-dark-100)]",
 );
 
 const secondaryColors = cn(
-  "border-mainColors-base/30",
-  "border-t-mainColors-base",
-  "group-disabled:border-t-grays-600",
-  "group-disabled:border-grays-400",
+  "border-main-base/30",
+  "border-t-[var(--symbiosis-btn-outline-text)]",
+  "group-disabled:border-t-[var(--color-gray-dark-100)]",
+  "group-disabled:border-[var(--color-gray-light-400)]/30",
 );
 
-const inheritColors = cn("border-grays-600/40", "border-t-current");
+const inheritColors = cn(
+  "border-[var(--color-gray-light-200)]",
+  "border-t-current",
+);
 
-export const Spinner = ({ isLoading, size = "base", variant = "secondary" }: SpinnerProps) => {
+export const Spinner = ({
+  isLoading,
+  size = "base",
+  variant = "secondary",
+}: SpinnerProps) => {
   if (!isLoading) {
     return null;
   }
@@ -26,7 +33,7 @@ export const Spinner = ({ isLoading, size = "base", variant = "secondary" }: Spi
   return (
     <div
       className={cn(
-        "border-2 rounded-full animate-spin",
+        "animate-spin rounded-full border-2",
         iconSizeToTailwind[size],
         variant === "primary" && primaryColors,
         variant === "secondary" && secondaryColors,

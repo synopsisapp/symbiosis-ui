@@ -1,11 +1,11 @@
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { motion } from "framer-motion";
 
-import { Text } from "../Text";
-import { sharedButtonStyles } from "../Button/styles";
-import type { RadioDotProps, RadioRootProps, RadioItemProps } from "./types";
 import { cn } from "../../utils/cn";
+import { sharedButtonStyles } from "../Button/styles";
+import { Text } from "../Text";
 import { radioItemCva, sharedRadioItemStyles } from "./styles";
+import type { RadioDotProps, RadioItemProps, RadioRootProps } from "./types";
 
 const RadioRoot = ({
   name,
@@ -26,7 +26,7 @@ const RadioRoot = ({
       id={id ?? name}
       orientation={orientation}
       className={cn(
-        "flex flex-col gap-3 items-start",
+        "flex flex-col items-start gap-3",
         {
           "flex-row": orientation === "horizontal",
         },
@@ -40,18 +40,32 @@ const RadioRoot = ({
 
 RadioRoot.displayName = "RadioRoot";
 
-const RadioItemStyledPrimitive = ({ value, size, required, className, disabled = false }: RadioDotProps) => {
+const RadioItemStyledPrimitive = ({
+  value,
+  size,
+  required,
+  className,
+  disabled = false,
+}: RadioDotProps) => {
   return (
     <RadioGroupPrimitive.Item
       value={value}
       disabled={disabled}
       id={value}
-      className={cn(sharedButtonStyles, sharedRadioItemStyles, radioItemCva({ size }), className)}
+      className={cn(
+        sharedButtonStyles,
+        sharedRadioItemStyles,
+        radioItemCva({ size }),
+        className,
+      )}
       required={required}
     >
       <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
         <motion.div
-          className={cn("aspect-square rounded-full bg-current", radioItemCva({ size }))}
+          className={cn(
+            "aspect-square rounded-full bg-current",
+            radioItemCva({ size }),
+          )}
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 0.6, opacity: 1 }}
           transition={{
@@ -63,7 +77,14 @@ const RadioItemStyledPrimitive = ({ value, size, required, className, disabled =
   );
 };
 
-const RadioItem = ({ value, size = "base", label, className, disabled, required }: RadioItemProps) => {
+const RadioItem = ({
+  value,
+  size = "base",
+  label,
+  className,
+  disabled,
+  required,
+}: RadioItemProps) => {
   return (
     <div className="flex items-center gap-1">
       <RadioItemStyledPrimitive
@@ -76,7 +97,7 @@ const RadioItem = ({ value, size = "base", label, className, disabled, required 
       {!!label && (
         <label
           htmlFor={value}
-          className="flex gap-3 items-center cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+          className="flex cursor-pointer items-center gap-3 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
         >
           <Text
             noTranslations

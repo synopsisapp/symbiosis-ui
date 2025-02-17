@@ -1,10 +1,14 @@
-import type { TextFieldProps } from "../TextField/types";
 import type { Locale } from "date-fns";
+import type { TextFieldProps } from "../TextField/types";
 
-type BaseDateFieldProps = Omit<TextFieldProps, "value" | "onChange" | "defaultValue" | "icon"> & {
+type BaseDateFieldProps = Omit<
+  TextFieldProps,
+  "value" | "onChange" | "defaultValue" | "icon"
+> & {
   value?: Date;
   onChange?: (date: Date) => void;
   locale?: Locale;
+  defaultValue?: Date;
 };
 
 type WithoutDatePicker = BaseDateFieldProps & {

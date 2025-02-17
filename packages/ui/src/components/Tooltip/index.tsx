@@ -1,14 +1,28 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import * as React from "react";
-import { Text } from "../Text";
 import { cn } from "../../utils/cn";
-import type { TooltipRootProps, TooltipContentProps, TooltipTriggerProps } from "./types";
+import { Text } from "../Text";
 import { sharedTooltipStyles } from "./styles";
+import type {
+  TooltipContentProps,
+  TooltipRootProps,
+  TooltipTriggerProps,
+} from "./types";
 
-export const TooltipRoot = ({ children, defaultOpen, open, onOpenChange }: TooltipRootProps) => {
+export const TooltipRoot = ({
+  children,
+  defaultOpen,
+  open,
+  onOpenChange,
+}: TooltipRootProps) => {
   return (
     <TooltipPrimitive.Provider>
-      <TooltipPrimitive.Root delayDuration={100} open={open} onOpenChange={onOpenChange} defaultOpen={defaultOpen}>
+      <TooltipPrimitive.Root
+        delayDuration={100}
+        open={open}
+        onOpenChange={onOpenChange}
+        defaultOpen={defaultOpen}
+      >
         {children}
       </TooltipPrimitive.Root>
     </TooltipPrimitive.Provider>
@@ -27,7 +41,9 @@ export const TooltipContent = ({
   className,
   skipComposition = false,
 }: TooltipContentProps) => {
-  const ContentWrapper = skipComposition ? React.Fragment : TooltipPrimitive.Portal;
+  const ContentWrapper = skipComposition
+    ? React.Fragment
+    : TooltipPrimitive.Portal;
 
   return (
     <ContentWrapper>
@@ -41,7 +57,11 @@ export const TooltipContent = ({
         className={cn(sharedTooltipStyles, className)}
       >
         {label ? (
-          <Text variant="body-small-200" noTranslations className="m-0 p-0 text-inherit">
+          <Text
+            variant="body-small-200"
+            noTranslations
+            className="m-0 p-0 text-inherit"
+          >
             {label}
           </Text>
         ) : (

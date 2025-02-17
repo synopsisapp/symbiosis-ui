@@ -133,7 +133,7 @@ const ControlledCombobox = () => {
 };
 
 export const CustomStyled: Story = {
-  render: (args) => <Combobox {...args} className="[&_[data-symbiosis-combobox=trigger]]:bg-red-300" />,
+  render: (args) => <Combobox {...args} className="**:data-[symbiosis-combobox=trigger]:bg-red-300" />,
   args: {
     options: defaultOptions,
     placeholder: "Custom styled combobox...",

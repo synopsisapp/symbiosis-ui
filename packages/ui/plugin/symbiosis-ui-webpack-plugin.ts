@@ -1,5 +1,4 @@
 import { generateIcons } from "./generateIcons";
-import { rebuildStyles } from "./rebuildStyles";
 import type { SymbiosisUIPluginOptions } from "./types";
 
 export class SymbiosisUIWebpackPlugin {
@@ -9,8 +8,6 @@ export class SymbiosisUIWebpackPlugin {
 
   constructor(options: SymbiosisUIPluginOptions = {}) {
     this.options = {
-      tailwindTheme: {},
-      tailwindContent: [],
       iconsDir: "assets/icons",
       publicDir: "public",
       verboseLogs: false,
@@ -32,7 +29,9 @@ export class SymbiosisUIWebpackPlugin {
     const webpack = await import("webpack").catch(() => null);
 
     if (!webpack?.default) {
-      console.warn("Webpack is not installed. SymbiosisUIWebpackPlugin will not be applied.");
+      console.warn(
+        "Webpack is not installed. SymbiosisUIWebpackPlugin will not be applied.",
+      );
       return;
     }
 
@@ -64,7 +63,7 @@ export class SymbiosisUIWebpackPlugin {
     }
 
     console.log("Symbiosis UI Webpack Plugin: Generating assets");
-    const { iconsDir, publicDir, tailwindTheme, tailwindContent, verboseLogs } = this.options;
+    const { iconsDir, publicDir, verboseLogs } = this.options;
 
     try {
       await generateIcons({
@@ -73,17 +72,14 @@ export class SymbiosisUIWebpackPlugin {
         verboseLogs,
       });
 
-      await rebuildStyles({
-        userTheme: tailwindTheme,
-        userContent: tailwindContent,
-        outputDir: publicDir,
-      });
-
       this.assetsGenerated = true;
       this.lastOptionsHash = currentOptionsHash;
       console.log("Symbiosis UI Webpack Plugin: Assets generated successfully");
     } catch (error) {
-      console.error("Symbiosis UI Webpack Plugin: Error generating assets - ", error);
+      console.error(
+        "Symbiosis UI Webpack Plugin: Error generating assets - ",
+        error,
+      );
       throw error;
     }
   }
