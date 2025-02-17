@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Icon } from "../Icon";
-import { Text } from "../Text";
-import { Spinner } from "../Spinner";
-import type { IconButtonProps } from "./types";
-import { button, iconButton, iconSizeToTailwind } from "../sharedStyles";
 import { cn } from "../../utils/cn";
+import { Icon } from "../Icon";
+import { Spinner } from "../Spinner";
+import { Text } from "../Text";
+import { button, iconButton, iconSizeToTailwind } from "../sharedStyles";
+import type { IconButtonProps } from "./types";
 
 export const IconButton = React.forwardRef(
   (
@@ -83,11 +83,15 @@ export const IconButton = React.forwardRef(
           }),
           className,
         )}
-        style={isLoading && buttonWidth ? { width: `${buttonWidth}px`, height: `${buttonWidth}px` } : undefined}
+        style={
+          isLoading && buttonWidth
+            ? { width: `${buttonWidth}px`, height: `${buttonWidth}px` }
+            : undefined
+        }
         {...restProps}
       >
         {isLoading ? (
-          <div className="flex w-full h-full items-center justify-center">
+          <div className="flex h-full w-full items-center justify-center">
             <Spinner
               isLoading
               size={(() => {
@@ -104,7 +108,13 @@ export const IconButton = React.forwardRef(
                     return "base";
                 }
               })()}
-              variant={variant === "primary" ? "primary" : tone === "default" ? "secondary" : "currentColor"}
+              variant={
+                variant === "primary"
+                  ? "primary"
+                  : tone === "default"
+                    ? "secondary"
+                    : "currentColor"
+              }
             />
           </div>
         ) : (
@@ -115,7 +125,11 @@ export const IconButton = React.forwardRef(
               </div>
             )}
             {value && (
-              <Text noTranslations variant="body-small-100" className={cn("text-inherit")}>
+              <Text
+                noTranslations
+                variant="body-small-100"
+                className={cn("text-inherit")}
+              >
                 {value}
               </Text>
             )}

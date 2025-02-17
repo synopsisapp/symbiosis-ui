@@ -22,4 +22,3 @@ export const iconSizeToPx: Record<Sizes, number> = {
   base: 16,
   "large-100": 18,
 };
-

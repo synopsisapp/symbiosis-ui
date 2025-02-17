@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Icon } from "../Icon";
 import { cn } from "../../utils/cn";
+import { Icon } from "../Icon";
 import { Text } from "../Text";
 
-import type { TextAreaFieldProps } from "./types";
 import { input, inputLabel } from "../sharedStyles";
+import type { TextAreaFieldProps } from "./types";
 
 export const TextAreaField = ({
   error,
@@ -31,7 +31,7 @@ export const TextAreaField = ({
   const hasError = Boolean(error);
 
   return (
-    <div className={cn("flex flex-col w-full gap-1", className)}>
+    <div className={cn("flex w-full flex-col gap-1", className)}>
       {label && (
         <label
           htmlFor={formId}
@@ -41,13 +41,13 @@ export const TextAreaField = ({
           {label}
         </label>
       )}
-      <div className="flex items-center gap-1 relative flex-1">
-        <div className="h-auto flex-1 flex">
+      <div className="relative flex flex-1 items-center gap-1">
+        <div className="flex h-auto flex-1">
           {icon && (
             <Icon
               data-symbiosis-textAreaField="icon"
               name={icon}
-              className="absolute left-2 top-3 translate-y-[5px] z-10 text-gray-base"
+              className="absolute top-3 left-2 z-10 translate-y-[5px] text-gray-base"
               size="small-200"
             />
           )}
@@ -82,17 +82,39 @@ export const TextAreaField = ({
         </div>
       </div>
       {hasError && (
-        <div className="flex gap-1 items-center" data-symbiosis-textAreaField="error">
-          <Icon name="symbiosis-exclamation-circle" size="small-200" className="text-red-600" />
-          <Text noTranslations variant="body-small-200" className="m-0 text-red-600">
+        <div
+          className="flex items-center gap-1"
+          data-symbiosis-textAreaField="error"
+        >
+          <Icon
+            name="symbiosis-exclamation-circle"
+            size="small-200"
+            className="text-red-600"
+          />
+          <Text
+            noTranslations
+            variant="body-small-200"
+            className="m-0 text-red-600"
+          >
             {error}
           </Text>
         </div>
       )}
       {!hasError && hint && (
-        <div className="flex gap-1 items-center text-slate-400" data-symbiosis-textAreaField="hint">
-          <Icon name="symbiosis-exclamation-circle" size="small-200" className="text-inherit" />
-          <Text noTranslations variant="body-small-200" className="m-0 text-inherit">
+        <div
+          className="flex items-center gap-1 text-slate-400"
+          data-symbiosis-textAreaField="hint"
+        >
+          <Icon
+            name="symbiosis-exclamation-circle"
+            size="small-200"
+            className="text-inherit"
+          />
+          <Text
+            noTranslations
+            variant="body-small-200"
+            className="m-0 text-inherit"
+          >
             {hint}
           </Text>
         </div>

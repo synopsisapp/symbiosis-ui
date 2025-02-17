@@ -1,8 +1,6 @@
-import type {
-  PopoverContentProps as RadixPopoverContentProps,
-} from "@radix-ui/react-popover";
-import type { IconProps } from "../Icon/types";
+import type { PopoverContentProps as RadixPopoverContentProps } from "@radix-ui/react-popover";
 import type { ButtonTone } from "../Button/types";
+import type { IconProps } from "../Icon/types";
 
 export type PopoverRootProps = {
   children: React.ReactNode;

@@ -1,5 +1,5 @@
-import type { IconProps } from "../Icon/types";
 import type { Sizes } from "../../designSystemTokens";
+import type { IconProps } from "../Icon/types";
 import type { TextWeight } from "../Text/types";
 
 export type TextFieldProps = {

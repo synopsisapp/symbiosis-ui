@@ -2,8 +2,14 @@ import z from "zod";
 import { Sizes } from "../../designSystemTokens";
 import { ButtonTone, ButtonVariant } from "../Button/types";
 
-export const PillVariant = z.enum([ButtonVariant.enum.primary, ButtonVariant.enum.outline]);
-export const PillTone = z.enum([ButtonTone.enum.default, ButtonTone.enum.destructive]);
+export const PillVariant = z.enum([
+  ButtonVariant.enum.primary,
+  ButtonVariant.enum.outline,
+]);
+export const PillTone = z.enum([
+  ButtonTone.enum.default,
+  ButtonTone.enum.destructive,
+]);
 export const PillSizes = z.enum([
   Sizes.enum["small-200"],
   Sizes.enum["small-100"],

@@ -2,7 +2,7 @@ import colors from "tailwindcss/colors";
 
 export function getTwColor(color: string): string {
   if (color.startsWith("bg-") || color.startsWith("text-")) {
-    const [prefix, colorName, shade] = color.split("-");
+    const [_prefix, colorName, shade] = color.split("-");
 
     if (colorName in colors) {
       const colorSet = colors[colorName as keyof typeof colors];

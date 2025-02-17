@@ -1,42 +1,45 @@
-import * as React from "react";
 import {
+  type CellContext,
   type ColumnDef,
+  type HeaderContext,
   type SortingState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  getFilteredRowModel,
   useReactTable,
-  type HeaderContext,
-  type CellContext,
 } from "@tanstack/react-table";
-import { Text } from "../Text";
-import { Dropdown } from "../Dropdown";
-import { IconButton } from "../IconButton";
+import debounce from "lodash/debounce";
+import * as React from "react";
+import { cn } from "../../utils/cn";
 import { Button } from "../Button";
 import { Checkbox } from "../Checkbox";
+import { Dropdown } from "../Dropdown";
+import { Icon } from "../Icon";
+import { IconButton } from "../IconButton";
 import { Pagination } from "../Pagination";
 import { Table } from "../Table";
+import { Text } from "../Text";
+import { TextField } from "../TextField";
+import { tableCellStyles } from "./styles";
 import type {
-  DataTableColumnProps,
   ActionColumnProps,
   ActionTextColumnProps,
   ColumnProps,
+  DataTableColumnProps,
   DataTableProps,
   SortStatus,
 } from "./types";
-import { cn } from "../../utils/cn";
-import { tableCellStyles } from "./styles";
-import { TextField } from '../TextField';
-import { Icon } from '../Icon';
-import debounce from 'lodash/debounce';
 
 const DataTableHeaderSortButton = <TData, TValue>({
   column,
   label,
   onSort,
-}: HeaderContext<TData, TValue> & { label: string, onSort?: (sorting: SortStatus, columnId: string) => void }) => {
+}: HeaderContext<TData, TValue> & {
+  label: string;
+  onSort?: (sorting: SortStatus, columnId: string) => void;
+}) => {
   const isSorted = column.getIsSorted();
 
   const sortIcon = React.useMemo(() => {
@@ -54,7 +57,7 @@ const DataTableHeaderSortButton = <TData, TValue>({
     switch (isSorted) {
       case "asc":
         column.toggleSorting(true, false);
-        onSort?.('desc', column.id);
+        onSort?.("desc", column.id);
         break;
       case "desc":
         column.clearSorting();
@@ -62,7 +65,7 @@ const DataTableHeaderSortButton = <TData, TValue>({
         break;
       default:
         column.toggleSorting(false, false);
-        onSort?.('asc', column.id);
+        onSort?.("asc", column.id);
         break;
     }
   }, [isSorted, column, onSort]);
@@ -97,7 +100,7 @@ const SearchBar = ({
   );
 
   return (
-    <div className="relative max-w-72 mb-4">
+    <div className="relative mb-4 max-w-72">
       <TextField
         className={cn("data-[symbiosis-textfield='field']:**:pr-6", className)}
         icon="symbiosis-search"
@@ -113,7 +116,7 @@ const SearchBar = ({
           tone="monochrome-dark"
           size="small-200"
           icon="symbiosis-x"
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 text-slate-500"
+          className="-translate-y-1/2 absolute top-1/2 right-2 z-10 text-slate-500"
           onPress={() => {
             onSearchChange?.("");
             setSearch("");
@@ -130,16 +133,29 @@ const SimpleColumn = <TData, TValue>({
   ...unknownColumn
 }: DataTableColumnProps<TData, TValue>): ColumnDef<TData, TValue> => {
   if (id !== "actions") {
-    const { accessorFn, header, isSortable = false, ...restColumn } = unknownColumn as ColumnProps<TData, TValue>;
+    const {
+      accessorFn,
+      header,
+      isSortable = false,
+      ...restColumn
+    } = unknownColumn as ColumnProps<TData, TValue>;
     return {
       id,
       accessorFn,
       sortingFn: restColumn.sortingFn ?? "auto",
       header: (props: HeaderContext<TData, TValue>) =>
         isSortable ? (
-          <DataTableHeaderSortButton {...props} label={header ?? id} onSort={onSort} />
+          <DataTableHeaderSortButton
+            {...props}
+            label={header ?? id}
+            onSort={onSort}
+          />
         ) : (
-          <Text noTranslations variant="body-small-100" className="leading-none">
+          <Text
+            noTranslations
+            variant="body-small-100"
+            className="leading-none"
+          >
             {header}
           </Text>
         ),
@@ -201,7 +217,9 @@ const SimpleColumn = <TData, TValue>({
   };
 };
 
-const SelectableColumn = <TData, TValue>(onRowSelectionChange?: (rows: TData[]) => void) => ({
+const SelectableColumn = <TData, TValue>(
+  onRowSelectionChange?: (rows: TData[]) => void,
+) => ({
   id: "select",
   header: (props: HeaderContext<TData, TValue>) => (
     <Checkbox
@@ -210,7 +228,9 @@ const SelectableColumn = <TData, TValue>(onRowSelectionChange?: (rows: TData[]) 
       onChange={(value) => {
         props.table.toggleAllRowsSelected(value);
         if (value) {
-          onRowSelectionChange?.(props.table.getCoreRowModel().flatRows.map((r) => r.original));
+          onRowSelectionChange?.(
+            props.table.getCoreRowModel().flatRows.map((r) => r.original),
+          );
         } else {
           onRowSelectionChange?.([]);
         }
@@ -222,11 +242,17 @@ const SelectableColumn = <TData, TValue>(onRowSelectionChange?: (rows: TData[]) 
     <Checkbox
       value={props.row.getIsSelected()}
       onChange={(value) => {
-        const newSelectedRows = [...props.table.getFilteredSelectedRowModel().rows.map((r) => r.original)];
+        const newSelectedRows = [
+          ...props.table
+            .getFilteredSelectedRowModel()
+            .rows.map((r) => r.original),
+        ];
         if (value) {
           newSelectedRows.push(props.row.original);
         } else {
-          const index = newSelectedRows.findIndex((r) => r === props.row.original);
+          const index = newSelectedRows.findIndex(
+            (r) => r === props.row.original,
+          );
           newSelectedRows.splice(index, 1);
         }
         props.row.toggleSelected(!!value);
@@ -255,10 +281,12 @@ const DataTable = <TData, TValue>({
   className,
   selectedRows,
   defaultSorting,
-  onSort
+  onSort,
 }: DataTableProps<TData, TValue>) => {
-  const [globalSearch, setGlobalSearch] = React.useState('');
-  const [sorting, setSorting] = React.useState<SortingState>(defaultSorting ?? []);
+  const [globalSearch, setGlobalSearch] = React.useState("");
+  const [sorting, setSorting] = React.useState<SortingState>(
+    defaultSorting ?? [],
+  );
 
   const [rowSelection, setRowSelection] = React.useState(() => {
     const selectedRowsById: Record<string, boolean> = {};
@@ -270,8 +298,15 @@ const DataTable = <TData, TValue>({
   });
 
   const finalColumns = React.useMemo(() => {
-    const adjustedColumns = columns.map((column) => SimpleColumn<TData, TValue>({ ...column, onSort }));
-    return isSelectable ? [SelectableColumn<TData, TValue>(onRowSelectionChange), ...adjustedColumns] : adjustedColumns;
+    const adjustedColumns = columns.map((column) =>
+      SimpleColumn<TData, TValue>({ ...column, onSort }),
+    );
+    return isSelectable
+      ? [
+          SelectableColumn<TData, TValue>(onRowSelectionChange),
+          ...adjustedColumns,
+        ]
+      : adjustedColumns;
   }, [columns, isSelectable, onRowSelectionChange, onSort]);
 
   const controlledRowSelection = React.useMemo(() => {
@@ -333,9 +368,9 @@ const DataTable = <TData, TValue>({
   const hasSelectedRows = table.getFilteredSelectedRowModel().rows.length > 0;
 
   return (
-    <div className={cn("flex flex-1 w-full flex-col", className)}>
+    <div className={cn("flex w-full flex-1 flex-col", className)}>
       {Boolean(headerActions?.length) && (
-        <div className="min-h-12 w-full flex justify-end">
+        <div className="flex min-h-12 w-full justify-end">
           {hasSelectedRows && (
             <Dropdown.Root>
               <Dropdown.Trigger>
@@ -357,7 +392,11 @@ const DataTable = <TData, TValue>({
                         text={action.text}
                         icon={action.icon}
                         onSelect={() =>
-                          action.onSelect(table.getFilteredSelectedRowModel().rows.map((r) => r.original))
+                          action.onSelect(
+                            table
+                              .getFilteredSelectedRowModel()
+                              .rows.map((r) => r.original),
+                          )
                         }
                       />
                     );
@@ -369,7 +408,7 @@ const DataTable = <TData, TValue>({
         </div>
       )}
       {isSearchable && <SearchBar onSearchChange={setGlobalSearch} />}
-      <div className="rounded-lg border border-slate-200 w-full flex-1 flex flex-col overflow-hidden">
+      <div className="flex w-full flex-1 flex-col overflow-hidden rounded-lg border border-slate-200">
         <div className="flex flex-1 overflow-auto">
           <Table.Root>
             {!hiddenHeader && (
@@ -388,7 +427,7 @@ const DataTable = <TData, TValue>({
                         <Table.Head
                           key={header.id}
                           className={cn(
-                            "whitespace-nowrap z-30",
+                            "z-30 whitespace-nowrap",
                             tableCellStyles({
                               pinedPosition,
                               isSelectable,
@@ -398,7 +437,10 @@ const DataTable = <TData, TValue>({
                         >
                           {header.isPlaceholder
                             ? null
-                            : flexRender(header.column.columnDef.header, header.getContext())}
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext(),
+                              )}
                         </Table.Head>
                       );
                     })}
@@ -409,7 +451,10 @@ const DataTable = <TData, TValue>({
             <Table.Body>
               {table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map((row) => (
-                  <Table.Row key={row.id} data-state={row.getIsSelected() && "selected"}>
+                  <Table.Row
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
                     {row.getVisibleCells().map((cell) => {
                       const pinedPosition = cell.column.getIsPinned();
                       const columnIndex = cell.column.getIndex();
@@ -425,7 +470,10 @@ const DataTable = <TData, TValue>({
                             }),
                           )}
                         >
-                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
                         </Table.Cell>
                       );
                     })}
@@ -433,7 +481,10 @@ const DataTable = <TData, TValue>({
                 ))
               ) : (
                 <Table.Row>
-                  <Table.Cell colSpan={columns.length} className="h-24 text-center">
+                  <Table.Cell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
                     {noResultsFoundText ?? "No results found"}
                   </Table.Cell>
                 </Table.Row>
@@ -442,7 +493,7 @@ const DataTable = <TData, TValue>({
           </Table.Root>
         </div>
         {maxPerPage && data.length > table.getState().pagination.pageSize && (
-          <div className="w-full flex justify-center py-3">
+          <div className="flex w-full justify-center py-3">
             <Pagination
               total={table.getPageCount()}
               initialPage={table.getState().pagination.pageIndex + 1}

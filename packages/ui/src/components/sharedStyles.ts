@@ -1,11 +1,13 @@
 import { sharedButtonStyles } from "./Button/styles";
 
-import { cn } from "../utils/cn";
-import { cva, type VariantProps } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
 import type { Sizes } from "../designSystemTokens";
+import { cn } from "../utils/cn";
 
-export const buttonHeightSizing = ({ size }: ButtonHeightSizingVariants) => buttonHeightSizingCva({ size });
-export interface ButtonHeightSizingVariants extends VariantProps<typeof buttonHeightSizingCva> {}
+export const buttonHeightSizing = ({ size }: ButtonHeightSizingVariants) =>
+  buttonHeightSizingCva({ size });
+export interface ButtonHeightSizingVariants
+  extends VariantProps<typeof buttonHeightSizingCva> {}
 export const buttonHeightSizingCva = cva([], {
   variants: {
     size: {
@@ -297,13 +299,21 @@ const buttonCva = cva([sharedButtonStyles], {
   ],
 });
 
-export const iconButton = (variants: IconButtonVariants & ButtonHeightSizingVariants) =>
-  cn(iconButtonCva({ shape: variants.shape, size: variants.size }), buttonHeightSizing({ size: variants.size }));
-export interface IconButtonVariants extends VariantProps<typeof iconButtonCva> {}
+export const iconButton = (
+  variants: IconButtonVariants & ButtonHeightSizingVariants,
+) =>
+  cn(
+    iconButtonCva({ shape: variants.shape, size: variants.size }),
+    buttonHeightSizing({ size: variants.size }),
+  );
+export interface IconButtonVariants
+  extends VariantProps<typeof iconButtonCva> {}
 const iconButtonCva = cva(["justify-center p-0 items-center"], {
   variants: {
     shape: {
-      circle: ["rounded-full focus:before:rounded-full focus-within:before:rounded-full"],
+      circle: [
+        "rounded-full focus:before:rounded-full focus-within:before:rounded-full",
+      ],
       square: [],
     },
     size: {
@@ -316,10 +326,34 @@ const iconButtonCva = cva(["justify-center p-0 items-center"], {
 });
 
 export const iconSizeToTailwind: Record<Sizes, string> = {
-  "small-200": cn("w-[12px]", "h-[12px]", "min-w-[12px]", "min-h-[12px]", "text-[12px]"),
-  "small-100": cn("w-[14px]", "h-[14px]", "min-w-[14px]", "min-h-[14px]", "text-[14px]"),
-  base: cn("w-[16px]", "h-[16px]", "min-w-[16px]", "min-h-[16px]", "text-[16px]"),
-  "large-100": cn("w-[18px]", "h-[18px]", "min-w-[18px]", "min-h-[18px]", "text-[18px]"),
+  "small-200": cn(
+    "w-[12px]",
+    "h-[12px]",
+    "min-w-[12px]",
+    "min-h-[12px]",
+    "text-[12px]",
+  ),
+  "small-100": cn(
+    "w-[14px]",
+    "h-[14px]",
+    "min-w-[14px]",
+    "min-h-[14px]",
+    "text-[14px]",
+  ),
+  base: cn(
+    "w-[16px]",
+    "h-[16px]",
+    "min-w-[16px]",
+    "min-h-[16px]",
+    "text-[16px]",
+  ),
+  "large-100": cn(
+    "w-[18px]",
+    "h-[18px]",
+    "min-w-[18px]",
+    "min-h-[18px]",
+    "text-[18px]",
+  ),
 };
 
 export const text = cva(["mx-0 my-2", "text-slate-600"], {
@@ -351,7 +385,8 @@ export const text = cva(["mx-0 my-2", "text-slate-600"], {
   ],
 });
 
-export const input = ({ variant = "default", ...rest }: InputVariants) => cn(inputCva({ variant, ...rest }));
+export const input = ({ variant = "default", ...rest }: InputVariants) =>
+  cn(inputCva({ variant, ...rest }));
 export interface InputVariants extends VariantProps<typeof inputCva> {}
 const inputCva = cva(
   [
@@ -412,4 +447,3 @@ export const inputLabel = cva([], {
     },
   },
 });
-

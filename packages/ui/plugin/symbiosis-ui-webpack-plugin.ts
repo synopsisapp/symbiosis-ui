@@ -29,7 +29,9 @@ export class SymbiosisUIWebpackPlugin {
     const webpack = await import("webpack").catch(() => null);
 
     if (!webpack?.default) {
-      console.warn("Webpack is not installed. SymbiosisUIWebpackPlugin will not be applied.");
+      console.warn(
+        "Webpack is not installed. SymbiosisUIWebpackPlugin will not be applied.",
+      );
       return;
     }
 
@@ -74,7 +76,10 @@ export class SymbiosisUIWebpackPlugin {
       this.lastOptionsHash = currentOptionsHash;
       console.log("Symbiosis UI Webpack Plugin: Assets generated successfully");
     } catch (error) {
-      console.error("Symbiosis UI Webpack Plugin: Error generating assets - ", error);
+      console.error(
+        "Symbiosis UI Webpack Plugin: Error generating assets - ",
+        error,
+      );
       throw error;
     }
   }

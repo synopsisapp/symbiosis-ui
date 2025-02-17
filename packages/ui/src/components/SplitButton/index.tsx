@@ -1,11 +1,10 @@
-
-import { Button } from "../Button";
+import { Fragment } from "react/jsx-runtime";
 import { cn } from "../../utils/cn";
+import { Button } from "../Button";
 import { Dropdown, DropdownMenuLabel, DropdownSimpleItem } from "../Dropdown";
 import { IconButton } from "../IconButton";
 import { iconButtonLeftBorderIconVariant } from "./styles";
 import type { SplitButtonProps } from "./types";
-import { Fragment } from "react/jsx-runtime";
 
 export const SplitButton = ({
   label,
@@ -59,7 +58,10 @@ export const SplitButton = ({
                 <Fragment key={`item-${item.text}`}>
                   {item.isSeparated && <Dropdown.Separator />}
                   {item.isSectionTitle ? (
-                    <DropdownMenuLabel key={`label-${item.text}`} label={item.text} />
+                    <DropdownMenuLabel
+                      key={`label-${item.text}`}
+                      label={item.text}
+                    />
                   ) : (
                     <DropdownSimpleItem
                       text={item.text}

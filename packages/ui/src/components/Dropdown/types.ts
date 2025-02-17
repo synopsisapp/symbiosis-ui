@@ -1,5 +1,5 @@
-import type { IconProps } from "../Icon/types";
 import type { DropdownMenuContentProps } from "@radix-ui/react-dropdown-menu";
+import type { IconProps } from "../Icon/types";
 
 export type DropdownRootProps = {
   children: React.ReactNode;

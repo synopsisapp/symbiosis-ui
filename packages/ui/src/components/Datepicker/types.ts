@@ -6,7 +6,6 @@ export type DateRange = {
   to?: Date;
 };
 
-
 export type SingleProps = {
   mode: "single";
   selectedDate: Date;
@@ -63,4 +62,5 @@ export type CommonProps = {
   numberOfMonths?: number;
 };
 
-export type DatePickerProps = CommonProps & (SingleProps | MultipleProps | RangeProps);
+export type DatePickerProps = CommonProps &
+  (SingleProps | MultipleProps | RangeProps);

@@ -17,7 +17,12 @@ export const checkboxSizes = cva([], {
       [Sizes.Enum["small-200"]]: ["h-2.5", "min-h-2.5", "w-2.5", "min-w-2.5"],
       [Sizes.Enum["small-100"]]: ["h-3", "min-h-3", "w-3", "min-w-3"],
       [Sizes.Enum.base]: ["h-3.5", "min-h-3.5", "w-3.5", "min-w-3.5"],
-      [Sizes.Enum["large-100"]]: ["h-[18px]", "min-h-[18px]", "w-[18px]", "min-w-[18px]"],
+      [Sizes.Enum["large-100"]]: [
+        "h-[18px]",
+        "min-h-[18px]",
+        "w-[18px]",
+        "min-w-[18px]",
+      ],
     },
   },
 });

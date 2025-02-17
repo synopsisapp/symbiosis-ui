@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Icon } from "../Icon";
 import { cn } from "../../utils/cn";
+import { Icon } from "../Icon";
 import { Text } from "../Text";
 import { input, inputLabel } from "../sharedStyles";
 import type { TextFieldProps } from "./types";
@@ -34,7 +34,7 @@ const TextField = React.forwardRef(
     const hasError = Boolean(error);
 
     return (
-      <div className={cn("flex flex-col flex-1 gap-1", className)}>
+      <div className={cn("flex flex-1 flex-col gap-1", className)}>
         {label && (
           <label
             htmlFor={formId}
@@ -48,16 +48,18 @@ const TextField = React.forwardRef(
             )}
           >
             {label}
-            {required && <span className="text-red-500 text-sm ml-1">*</span>}
+            {required && <span className="ml-1 text-red-500 text-sm">*</span>}
           </label>
         )}
-        <div className="flex items-center gap-1 relative flex-1">
+        <div className="relative flex flex-1 items-center gap-1">
           <div className={cn("flex-1", "flex")}>
             {icon && (
               <Icon
                 data-symbiosis-textfield="icon"
                 name={icon}
-                className={cn("absolute left-2 top-1/2 -translate-y-1/2 text-slate-500")}
+                className={cn(
+                  "-translate-y-1/2 absolute top-1/2 left-2 text-slate-500",
+                )}
                 size="small-200"
               />
             )}
@@ -92,17 +94,39 @@ const TextField = React.forwardRef(
           </div>
         </div>
         {hasError && (
-          <div className="flex gap-1 items-center" data-symbiosis-textfield="error">
-            <Icon name="symbiosis-exclamation-circle" size="small-200" className="text-red-600" />
-            <Text noTranslations variant="body-small-200" className="m-0 text-red-600">
+          <div
+            className="flex items-center gap-1"
+            data-symbiosis-textfield="error"
+          >
+            <Icon
+              name="symbiosis-exclamation-circle"
+              size="small-200"
+              className="text-red-600"
+            />
+            <Text
+              noTranslations
+              variant="body-small-200"
+              className="m-0 text-red-600"
+            >
               {error}
             </Text>
           </div>
         )}
         {!hasError && hint && (
-          <div className="flex gap-1 items-center text-slate-400" data-symbiosis-textfield="hint">
-            <Icon name="symbiosis-exclamation-circle" size="small-200" className="text-inherit" />
-            <Text noTranslations variant="body-small-200" className="m-0 text-inherit">
+          <div
+            className="flex items-center gap-1 text-slate-400"
+            data-symbiosis-textfield="hint"
+          >
+            <Icon
+              name="symbiosis-exclamation-circle"
+              size="small-200"
+              className="text-inherit"
+            />
+            <Text
+              noTranslations
+              variant="body-small-200"
+              className="m-0 text-inherit"
+            >
               {hint}
             </Text>
           </div>

@@ -1,8 +1,8 @@
 import * as React from "react";
 
+import { cn } from "../../utils/cn";
 import { Chart } from "../Charts";
 import type { SymbiosisBarChartProps } from "./types";
-import { cn } from "../../utils/cn";
 
 const SymbiosisBarChart = ({
   data,
@@ -31,7 +31,10 @@ const SymbiosisBarChart = ({
   }, []);
 
   const dataKeys = React.useMemo(
-    () => Object.keys(data[0]).filter((key) => key !== "date" && typeof data[0][key] === "number"),
+    () =>
+      Object.keys(data[0]).filter(
+        (key) => key !== "date" && typeof data[0][key] === "number",
+      ),
     [data],
   );
 
@@ -41,7 +44,10 @@ const SymbiosisBarChart = ({
   );
 
   return (
-    <Chart.Container config={config} className={cn("aspect-auto h-[250px] w-full", className)}>
+    <Chart.Container
+      config={config}
+      className={cn("aspect-auto h-[250px] w-full", className)}
+    >
       <Chart.BarChart data={data}>
         <Chart.CartesianGrid vertical={false} />
         <Chart.XAxis
@@ -55,23 +61,42 @@ const SymbiosisBarChart = ({
         <Chart.Tooltip
           content={
             <Chart.TooltipContent
-              labelFormatter={tooltipLabelFormatter ?? defaultTooltipLabelFormatter}
+              labelFormatter={
+                tooltipLabelFormatter ?? defaultTooltipLabelFormatter
+              }
               className={tooltipClassName}
             />
           }
         />
-        <Chart.Legend content={<Chart.LegendContent className={legendClassName} />} />
+        <Chart.Legend
+          content={<Chart.LegendContent className={legendClassName} />}
+        />
         {dataKeys.map(
           (key, index) =>
             config[key] && (
-              <Chart.Bar key={key} dataKey={key} stackId="a" fill={`var(--color-${key})`}>
+              <Chart.Bar
+                key={key}
+                dataKey={key}
+                stackId="a"
+                fill={`var(--color-${key})`}
+              >
                 {data.map((_, entryIndex) => {
-                  const isTopStack = zeroValues[entryIndex].slice(index + 1).every(Boolean);
-                  const isBottomStack = zeroValues[entryIndex].slice(0, index).every(Boolean);
+                  const isTopStack = zeroValues[entryIndex]
+                    .slice(index + 1)
+                    .every(Boolean);
+                  const isBottomStack = zeroValues[entryIndex]
+                    .slice(0, index)
+                    .every(Boolean);
                   return (
                     <Chart.Cell
                       key={`cell-${key}`}
-                      radius={isTopStack ? [2, 2, 0, 0] : isBottomStack ? [0, 0, 2, 2] : [0, 0, 0, 0]}
+                      radius={
+                        isTopStack
+                          ? [2, 2, 0, 0]
+                          : isBottomStack
+                            ? [0, 0, 2, 2]
+                            : [0, 0, 0, 0]
+                      }
                     />
                   );
                 })}

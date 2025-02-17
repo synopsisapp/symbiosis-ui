@@ -1,8 +1,8 @@
+import { resolve } from "node:path";
+import react from "@vitejs/plugin-react";
 // packages/ui/vite.config.ts
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
-import { resolve } from "node:path";
 
 export default defineConfig({
   plugins: [

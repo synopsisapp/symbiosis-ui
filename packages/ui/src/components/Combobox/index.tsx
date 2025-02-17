@@ -1,10 +1,10 @@
-import { Pill } from "../Pill";
-import { Command } from "../Command";
-import { cn } from "../../utils/cn";
 import { Command as CommandPrimitive } from "cmdk";
-import { Icon } from "../Icon";
 import * as React from "react";
 import { forwardRef } from "react";
+import { cn } from "../../utils/cn";
+import { Command } from "../Command";
+import { Icon } from "../Icon";
+import { Pill } from "../Pill";
 import { Popover } from "../Popover";
 import { Text } from "../Text";
 import type { ComboboxProps, Option } from "./types";
@@ -32,13 +32,18 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
     const [localOptions, setLocalOptions] = React.useState(options);
 
     const filteredOptions = React.useMemo(
-      () => localOptions.filter((opt) => opt.label.toLowerCase().includes(inputValue.toLowerCase())),
+      () =>
+        localOptions.filter((opt) =>
+          opt.label.toLowerCase().includes(inputValue.toLowerCase()),
+        ),
       [localOptions, inputValue],
     );
 
     const onValueChangeHandler = React.useCallback(
       (option: Option) => {
-        const isSelected = selectedOptions.some((selected) => selected.value === option.value);
+        const isSelected = selectedOptions.some(
+          (selected) => selected.value === option.value,
+        );
         const newSelectedOptions = isSelected
           ? selectedOptions.filter((item) => item.value !== option.value)
           : [...selectedOptions, option];
@@ -57,7 +62,12 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         if (!target) return;
 
         const moveCurrent = () => {
-          const newIndex = activeIndex - 1 <= 0 ? (selectedOptions.length - 1 === 0 ? -1 : 0) : activeIndex - 1;
+          const newIndex =
+            activeIndex - 1 <= 0
+              ? selectedOptions.length - 1 === 0
+                ? -1
+                : 0
+              : activeIndex - 1;
           setActiveIndex(newIndex);
         };
 
@@ -69,7 +79,9 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                 moveCurrent();
               } else {
                 if (target.selectionStart === 0 && inputValue === "") {
-                  onValueChangeHandler(selectedOptions[selectedOptions.length - 1]);
+                  onValueChangeHandler(
+                    selectedOptions[selectedOptions.length - 1],
+                  );
                 }
               }
             }
@@ -107,7 +119,10 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
     return (
       <Command.Root
         onKeyDown={handleKeyDown}
-        className={cn("overflow-visible bg-transparent flex flex-col", className)}
+        className={cn(
+          "flex flex-col overflow-visible bg-transparent",
+          className,
+        )}
         {...props}
       >
         <Popover.Root open={open} onOpenChange={setOpen}>
@@ -116,14 +131,14 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
               data-symbiosis-combobox="trigger"
               ref={ref}
               className={cn(
-                "flex flex-wrap gap-1 p-1 py-2 bg-white rounded-lg border border-slate-400",
-                "focus-within:border-main-base focus-within:ring-main-base focus-within:ring-2 focus-within:ring-offset-1",
+                "flex flex-wrap gap-1 rounded-lg border border-slate-400 bg-white p-1 py-2",
+                "focus-within:border-main-base focus-within:ring-2 focus-within:ring-main-base focus-within:ring-offset-1",
               )}
             >
               {selectedOptions.map((option) => (
                 <Pill
                   key={option.value}
-                  className={cn("px-1 rounded-xl flex items-center gap-1")}
+                  className={cn("flex items-center gap-1 rounded-xl px-1")}
                   size="small-100"
                   label={option.label}
                   onClose={() => onValueChangeHandler(option)}
@@ -138,7 +153,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                 onClick={() => setActiveIndex(-1)}
                 placeholder={placeholder}
                 className={cn(
-                  "ml-2 bg-transparent outline-hidden placeholder:text-slate-400 flex-1",
+                  "ml-2 flex-1 bg-transparent outline-hidden placeholder:text-slate-400",
                   activeIndex !== -1 && "caret-transparent",
                 )}
               />
@@ -149,15 +164,17 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
             align="start"
             side="bottom"
             onOpenAutoFocus={(e) => e.preventDefault()}
-            className="w-[var(--radix-popover-trigger-width)] p-0 my-2"
+            className="my-2 w-[var(--radix-popover-trigger-width)] p-0"
           >
             <Command.List
               className={cn(
-                "p-2 flex flex-col gap-2 rounded-lg scrollbar-thin scrollbar-track-transparent transition-colors scrollbar-thumb-rounded-lg w-full bg-white shadow-xs z-10 border border-slate-base",
+                "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-rounded-lg z-10 flex w-full flex-col gap-2 rounded-lg border border-slate-base bg-white p-2 shadow-xs transition-colors",
               )}
             >
               {localOptions.map((option) => {
-                const isIncluded = selectedOptions.some((selected) => selected.value === option.value);
+                const isIncluded = selectedOptions.some(
+                  (selected) => selected.value === option.value,
+                );
                 return (
                   <Command.Item
                     key={option.value}
@@ -168,17 +185,22 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                       onValueChangeHandler(option);
                       setInputValue("");
                     }}
-                    className={cn("rounded-md cursor-pointer px-2 py-1 transition-colors flex justify-between", {
-                      "opacity-50 cursor-default": isIncluded,
-                      "opacity-50 cursor-not-allowed": option.disabled,
-                    })}
+                    className={cn(
+                      "flex cursor-pointer justify-between rounded-md px-2 py-1 transition-colors",
+                      {
+                        "cursor-default opacity-50": isIncluded,
+                        "cursor-not-allowed opacity-50": option.disabled,
+                      },
+                    )}
                     onMouseDown={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
                     }}
                   >
                     {option.label}
-                    {isIncluded && <Icon name="symbiosis-check" className="h-4 w-4" />}
+                    {isIncluded && (
+                      <Icon name="symbiosis-check" className="h-4 w-4" />
+                    )}
                   </Command.Item>
                 );
               })}
@@ -187,7 +209,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                 <Command.Item
                   value={inputValue}
                   onSelect={handleAddCustomValue}
-                  className="rounded-md cursor-pointer px-2 py-1 transition-colors flex items-center gap-2"
+                  className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 transition-colors"
                   onMouseDown={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -199,8 +221,14 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                     </Text>
                   ) : (
                     <div className="flex items-center gap-2">
-                      <Icon name="symbiosis-plus" className="h-4 w-4 text-slate-base" />
-                      <Text variant="body-small-200" className="text-slate-base">
+                      <Icon
+                        name="symbiosis-plus"
+                        className="h-4 w-4 text-slate-base"
+                      />
+                      <Text
+                        variant="body-small-200"
+                        className="text-slate-base"
+                      >
                         "{inputValue}"
                       </Text>
                     </div>

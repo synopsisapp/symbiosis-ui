@@ -1,12 +1,17 @@
-import z from "zod";
 import type * as React from "react";
-import type { IconProps } from "../Icon/types";
+import z from "zod";
 import type { Sizes } from "../../designSystemTokens";
+import type { IconProps } from "../Icon/types";
 
 export const ButtonVariant = z.enum(["primary", "outline", "ghost", "link"]);
 export type ButtonVariant = z.infer<typeof ButtonVariant>;
 
-export const ButtonTone = z.enum(["default", "destructive", "monochrome-light", "monochrome-dark"]);
+export const ButtonTone = z.enum([
+  "default",
+  "destructive",
+  "monochrome-light",
+  "monochrome-dark",
+]);
 export type ButtonTone = z.infer<typeof ButtonTone>;
 
 export const ButtonLayout = z.enum(["normal", "fullwidth", "inline"]);
@@ -49,8 +54,11 @@ type AsButtonProps = {
   value?: string;
 };
 
-export type ButtonProps = BaseProps & (AsLinkProps | AsDivProps | AsButtonProps);
+export type ButtonProps = BaseProps &
+  (AsLinkProps | AsDivProps | AsButtonProps);
 
-export const isButtonGuard = (buttonProps: ButtonProps): buttonProps is ButtonProps & AsButtonProps => {
+export const isButtonGuard = (
+  buttonProps: ButtonProps,
+): buttonProps is ButtonProps & AsButtonProps => {
   return buttonProps.renderAs === "button";
 };

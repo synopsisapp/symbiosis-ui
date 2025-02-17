@@ -1,10 +1,10 @@
+import { compareAsc } from "date-fns/compareAsc";
 import React from "react";
 import { DayPicker } from "react-day-picker";
-import type { OnSelectHandler, Matcher, PropsBase } from "react-day-picker";
-import { compareAsc } from "date-fns/compareAsc";
+import type { Matcher, OnSelectHandler, PropsBase } from "react-day-picker";
 
-import { IconButton } from "../IconButton";
 import { cn } from "../../utils/cn";
+import { IconButton } from "../IconButton";
 import { button, iconButton, text } from "../sharedStyles";
 import type { DatePickerProps, DateRange } from "./types";
 
@@ -47,8 +47,16 @@ const classNames = {
   outside: "opacity-70",
   disabled: "opacity-50",
   hidden: "invisible",
-  button_previous: cn(button({ variant: "outline", tone: "monochrome-dark" }), iconButton({ shape: "square" }), "z-10"),
-  button_next: cn(button({ variant: "outline", tone: "monochrome-dark" }), iconButton({ shape: "square" }), "z-10"),
+  button_previous: cn(
+    button({ variant: "outline", tone: "monochrome-dark" }),
+    iconButton({ shape: "square" }),
+    "z-10",
+  ),
+  button_next: cn(
+    button({ variant: "outline", tone: "monochrome-dark" }),
+    iconButton({ shape: "square" }),
+    "z-10",
+  ),
 };
 
 export const DatePicker = ({
@@ -79,7 +87,10 @@ export const DatePicker = ({
     setInternalMonth(month);
   }, [month]);
 
-  const singleHandler: OnSelectHandler<Date | undefined> = (date, triggerDate) => {
+  const singleHandler: OnSelectHandler<Date | undefined> = (
+    date,
+    triggerDate,
+  ) => {
     if (props.mode === "single") {
       setShowDefaultDate(false);
       props.onSelect?.({
@@ -89,7 +100,10 @@ export const DatePicker = ({
     }
   };
 
-  const multipleHandler: OnSelectHandler<Date[] | undefined> = (dates, triggerDate) => {
+  const multipleHandler: OnSelectHandler<Date[] | undefined> = (
+    dates,
+    triggerDate,
+  ) => {
     if (props.mode === "multiple") {
       setShowDefaultDate(false);
       props.onSelect?.({
@@ -159,7 +173,11 @@ export const DatePicker = ({
       Chevron: ({ orientation }) => {
         return (
           <IconButton
-            icon={orientation === "left" ? "symbiosis-chevron-left" : "symbiosis-chevron-right"}
+            icon={
+              orientation === "left"
+                ? "symbiosis-chevron-left"
+                : "symbiosis-chevron-right"
+            }
             variant="ghost"
             isCircle={false}
             tone="monochrome-dark"
@@ -193,7 +211,9 @@ export const DatePicker = ({
                 mode="multiple"
                 min={minSelectedCount}
                 max={maxSelectedCount}
-                selected={showDefaultDate ? props.defaultSelectedDates : selectedDates}
+                selected={
+                  showDefaultDate ? props.defaultSelectedDates : selectedDates
+                }
                 onSelect={multipleHandler}
                 {...commonProps}
                 month={internalMonth}
@@ -207,7 +227,9 @@ export const DatePicker = ({
                 mode="range"
                 min={minSelectedCount}
                 max={maxSelectedCount}
-                selected={showDefaultDate ? props.defaultSelectedDates : selectedDates}
+                selected={
+                  showDefaultDate ? props.defaultSelectedDates : selectedDates
+                }
                 onSelect={(range, triggerDate, modifiers, event) => {
                   if (range?.from) {
                     rangeHandler(

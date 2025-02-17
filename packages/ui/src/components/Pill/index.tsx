@@ -1,10 +1,10 @@
 import { cn } from "../../utils/cn";
-import type { PillProps } from "./types";
-import { pillVariants } from "./styles";
-import { IconButton } from "../IconButton";
 import { Icon } from "../Icon";
-import { Text } from "../Text";
+import { IconButton } from "../IconButton";
 import { StopPropagation } from "../StopPropagation";
+import { Text } from "../Text";
+import { pillVariants } from "./styles";
+import type { PillProps } from "./types";
 
 export const Pill = ({
   className,
@@ -53,14 +53,14 @@ export const Pill = ({
       )}
     >
       {leftIcon && <Icon name={leftIcon} size={iconSize} />}
-      <Text variant={textVariant} className="text-inherit my-0">
+      <Text variant={textVariant} className="my-0 text-inherit">
         {label}
       </Text>
       {onClose && (
         <StopPropagation>
           <IconButton
             icon="symbiosis-x"
-            className="w-auto h-auto min-w-0 min-h-0"
+            className="h-auto min-h-0 w-auto min-w-0"
             isCircle
             tone={tone}
             size={size}

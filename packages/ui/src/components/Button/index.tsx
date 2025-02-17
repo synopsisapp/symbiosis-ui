@@ -1,10 +1,10 @@
 import * as React from "react";
+import { cn } from "../../utils/cn";
 import { Icon } from "../Icon";
 import { Spinner } from "../Spinner";
-import { isButtonGuard, type ButtonProps } from "./types";
-import { button, iconSizeToTailwind } from "../sharedStyles";
 import { Text } from "../Text";
-import { cn } from "../../utils/cn";
+import { button, iconSizeToTailwind } from "../sharedStyles";
+import { type ButtonProps, isButtonGuard } from "./types";
 
 export const Button = React.forwardRef((props: ButtonProps, ref) => {
   const {
@@ -98,7 +98,9 @@ export const Button = React.forwardRef((props: ButtonProps, ref) => {
         ),
         className,
       )}
-      style={isLoading && buttonWidth ? { width: `${buttonWidth}px` } : undefined}
+      style={
+        isLoading && buttonWidth ? { width: `${buttonWidth}px` } : undefined
+      }
       {...restProps}
     >
       {isLoading ? (
@@ -120,7 +122,11 @@ export const Button = React.forwardRef((props: ButtonProps, ref) => {
               }
             })()}
             variant={
-              variant === "primary" ? "primary" : tone === "default" && !isDisabled ? "secondary" : "currentColor"
+              variant === "primary"
+                ? "primary"
+                : tone === "default" && !isDisabled
+                  ? "secondary"
+                  : "currentColor"
             }
           />
         </div>
@@ -131,7 +137,11 @@ export const Button = React.forwardRef((props: ButtonProps, ref) => {
               <Icon name={leftIcon} size="font" />
             </div>
           )}
-          <Text noTranslations variant={textVariant} className={cn("whitespace-nowrap", "text-inherit")}>
+          <Text
+            noTranslations
+            variant={textVariant}
+            className={cn("whitespace-nowrap", "text-inherit")}
+          >
             {label}
           </Text>
           {rightIcon && (

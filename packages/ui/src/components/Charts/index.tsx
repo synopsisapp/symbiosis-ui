@@ -4,18 +4,20 @@ import * as React from "react";
 import * as ChartPrimitive from "recharts";
 import { getTwColor } from "../../utils/getTwColor";
 
-import type { ChartConfig } from "./types";
-import { ChartContext, useChart } from "./hooks/useChart";
 import { getPayloadConfigFromPayload } from "../../helpers/getPayloadConfigFromPayload";
 import { cn } from "../../utils/cn";
-import { THEMES } from "./constants";
 import { Text } from "../Text";
+import { THEMES } from "./constants";
+import { ChartContext, useChart } from "./hooks/useChart";
+import type { ChartConfig } from "./types";
 
 const ChartContainer = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
     config: ChartConfig;
-    children: React.ComponentProps<typeof ChartPrimitive.ResponsiveContainer>["children"];
+    children: React.ComponentProps<
+      typeof ChartPrimitive.ResponsiveContainer
+    >["children"];
   }
 >(({ id, className, children, config, ...props }, ref) => {
   const uniqueId = React.useId();
@@ -27,13 +29,15 @@ const ChartContainer = React.forwardRef<
         data-chart={chartId}
         ref={ref}
         className={cn(
-          "flex aspect-video justify-center text-xs [&_recharts-cartesian-axis]:font-[inherit] [&_.recharts-cartesian-axis-tick_text]:fill-slate-600/60 [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-slate-300/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-hidden [&_.recharts-surface]:outline-hidden",
+          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-slate-600/60 [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-slate-300/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_recharts-cartesian-axis]:font-[inherit] [&_.recharts-layer]:outline-hidden [&_.recharts-sector]:outline-hidden [&_.recharts-surface]:outline-hidden",
           className,
         )}
         {...props}
       >
         <ChartStyle id={chartId} config={config} />
-        <ChartPrimitive.ResponsiveContainer>{children}</ChartPrimitive.ResponsiveContainer>
+        <ChartPrimitive.ResponsiveContainer>
+          {children}
+        </ChartPrimitive.ResponsiveContainer>
       </div>
     </ChartContext.Provider>
   );
@@ -42,7 +46,9 @@ const ChartContainer = React.forwardRef<
 ChartContainer.displayName = "Chart";
 
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
-  const colorConfig = Object.entries(config).filter(([_, config]) => config.theme || config.color);
+  const colorConfig = Object.entries(config).filter(
+    ([_, config]) => config.theme || config.color,
+  );
 
   if (!colorConfig.length) {
     return null;
@@ -58,7 +64,9 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
 ${prefix} [data-chart=${id}] {
 ${colorConfig
   .map(([key, itemConfig]) => {
-    const color = itemConfig.theme?.[theme as keyof typeof itemConfig.theme] || itemConfig.color;
+    const color =
+      itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ||
+      itemConfig.color;
     return color ? `  --color-${key}: ${getTwColor(color)};` : null;
   })
   .filter(Boolean)
@@ -117,7 +125,11 @@ const ChartTooltipContent = React.forwardRef<
           : itemConfig?.label;
 
       if (labelFormatter) {
-        return <div className={cn("font-medium", labelClassName)}>{labelFormatter(value, payload)}</div>;
+        return (
+          <div className={cn("font-medium", labelClassName)}>
+            {labelFormatter(value, payload)}
+          </div>
+        );
       }
 
       if (!value) {
@@ -125,7 +137,15 @@ const ChartTooltipContent = React.forwardRef<
       }
 
       return <div className={cn("font-medium", labelClassName)}>{value}</div>;
-    }, [label, labelFormatter, payload, hideLabel, labelClassName, config, labelKey]);
+    }, [
+      label,
+      labelFormatter,
+      payload,
+      hideLabel,
+      labelClassName,
+      config,
+      labelKey,
+    ]);
 
     if (!active || !payload?.length) {
       return null;
@@ -137,7 +157,7 @@ const ChartTooltipContent = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-slate-600/20 bg-white px-2.5 py-1.5 text-xs shadow-xl text-slate-600",
+          "grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-slate-600/20 bg-white px-2.5 py-1.5 text-slate-600 text-xs shadow-xl",
           className,
         )}
       >
@@ -165,12 +185,16 @@ const ChartTooltipContent = React.forwardRef<
                     ) : (
                       !hideIndicator && (
                         <div
-                          className={cn("shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)", {
-                            "h-2.5 w-2.5": indicator === "dot",
-                            "w-1": indicator === "line",
-                            "w-0 border-[1.5px] border-dashed bg-transparent": indicator === "dashed",
-                            "my-0.5": nestLabel && indicator === "dashed",
-                          })}
+                          className={cn(
+                            "shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)",
+                            {
+                              "h-2.5 w-2.5": indicator === "dot",
+                              "w-1": indicator === "line",
+                              "w-0 border-[1.5px] border-dashed bg-transparent":
+                                indicator === "dashed",
+                              "my-0.5": nestLabel && indicator === "dashed",
+                            },
+                          )}
                           style={
                             {
                               "--color-bg": indicatorColor,
@@ -182,22 +206,35 @@ const ChartTooltipContent = React.forwardRef<
                     )}
                     <div
                       className={cn(
-                        "flex flex-1 justify-between leading-none text-inherit gap-2",
+                        "flex flex-1 justify-between gap-2 text-inherit leading-none",
                         nestLabel ? "items-end" : "items-center",
                       )}
                     >
                       <div className="grid gap-1.5">
                         {nestLabel && (
-                          <Text variant="body-small-200" renderAs="span" className="text-inherit my-0">
+                          <Text
+                            variant="body-small-200"
+                            renderAs="span"
+                            className="my-0 text-inherit"
+                          >
                             {tooltipLabel}
                           </Text>
                         )}
-                        <Text variant="body-small-200" renderAs="span" weight="thin-100" className="text-inherit my-0">
+                        <Text
+                          variant="body-small-200"
+                          renderAs="span"
+                          weight="thin-100"
+                          className="my-0 text-inherit"
+                        >
                           {itemConfig?.label || item.name}
                         </Text>
                       </div>
                       {item.value && (
-                        <Text variant="body-small-200" renderAs="span" className="tabular-nums text-inherit my-0">
+                        <Text
+                          variant="body-small-200"
+                          renderAs="span"
+                          className="my-0 text-inherit tabular-nums"
+                        >
                           {item.value.toLocaleString()}
                         </Text>
                       )}
@@ -222,50 +259,57 @@ const ChartLegendContent = React.forwardRef<
       hideIcon?: boolean;
       nameKey?: string;
     }
->(({ className, hideIcon = false, payload, verticalAlign = "bottom", nameKey }, ref) => {
-  const { config } = useChart();
+>(
+  (
+    { className, hideIcon = false, payload, verticalAlign = "bottom", nameKey },
+    ref,
+  ) => {
+    const { config } = useChart();
 
-  if (!payload?.length) {
-    return null;
-  }
+    if (!payload?.length) {
+      return null;
+    }
 
-  return (
-    <div
-      ref={ref}
-      className={cn(
-        "flex items-center justify-center gap-4 text-slate-600",
-        verticalAlign === "top" ? "pb-3" : "pt-3",
-        className,
-      )}
-    >
-      {payload.map((item) => {
-        const key = `${nameKey || item.dataKey || "value"}`;
-        const itemConfig = getPayloadConfigFromPayload(config, item, key);
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "flex items-center justify-center gap-4 text-slate-600",
+          verticalAlign === "top" ? "pb-3" : "pt-3",
+          className,
+        )}
+      >
+        {payload.map((item) => {
+          const key = `${nameKey || item.dataKey || "value"}`;
+          const itemConfig = getPayloadConfigFromPayload(config, item, key);
 
-        return (
-          <div
-            key={item.value}
-            className={cn("flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-inherit")}
-          >
-            {itemConfig?.icon && !hideIcon ? (
-              <itemConfig.icon />
-            ) : (
-              <div
-                className="h-2 w-2 shrink-0 rounded-[2px]"
-                style={{
-                  backgroundColor: item.color,
-                }}
-              />
-            )}
-            <Text variant="body-small-200" className="text-inherit my-0">
-              {itemConfig?.label}
-            </Text>
-          </div>
-        );
-      })}
-    </div>
-  );
-});
+          return (
+            <div
+              key={item.value}
+              className={cn(
+                "flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-inherit",
+              )}
+            >
+              {itemConfig?.icon && !hideIcon ? (
+                <itemConfig.icon />
+              ) : (
+                <div
+                  className="h-2 w-2 shrink-0 rounded-[2px]"
+                  style={{
+                    backgroundColor: item.color,
+                  }}
+                />
+              )}
+              <Text variant="body-small-200" className="my-0 text-inherit">
+                {itemConfig?.label}
+              </Text>
+            </div>
+          );
+        })}
+      </div>
+    );
+  },
+);
 
 ChartLegendContent.displayName = "ChartLegend";
 

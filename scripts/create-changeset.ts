@@ -1,10 +1,10 @@
-import { execSync } from 'child_process';
-import { writeFileSync, readFileSync, existsSync } from "fs";
-import { join } from 'path';
-import { createInterface } from 'readline';
+import { execSync } from "node:child_process";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
+import { createInterface } from "node:readline";
 import { Octokit } from "@octokit/rest";
 
-type VersionType = 'major' | 'minor' | 'patch';
+type VersionType = "major" | "minor" | "patch";
 type CommitType = "feat" | "fix" | "refactor" | "other";
 
 interface Commit {
@@ -26,8 +26,9 @@ const rl = createInterface({ input: process.stdin, output: process.stdout });
 
 async function loadUsernameCache(): Promise<UsernameCache> {
   try {
-    if (existsSync(CACHE_FILE)) return JSON.parse(readFileSync(CACHE_FILE, "utf8"));
-  } catch (error) {}
+    if (existsSync(CACHE_FILE))
+      return JSON.parse(readFileSync(CACHE_FILE, "utf8"));
+  } catch (_error) {}
   return {};
 }
 
@@ -63,7 +64,7 @@ async function getGitHubUsername(email: string): Promise<string> {
       await saveUsernameCache(cache);
       return user.login;
     }
-  } catch (error) {}
+  } catch (_error) {}
 
   const fallback = email.split("@")[0];
   cache[email] = fallback;
@@ -184,7 +185,12 @@ interface ChangesetContent {
   commits: Commit[];
 }
 
-function generateChangesetContent({ packageName, versionType, repoUrl, commits }: ChangesetContent): string {
+function generateChangesetContent({
+  packageName,
+  versionType,
+  repoUrl,
+  commits,
+}: ChangesetContent): string {
   const categorizedCommits = {
     feat: commits.filter((c) => c.type === "feat"),
     fix: commits.filter((c) => c.type === "fix"),
@@ -216,16 +222,21 @@ ${sections.join("\n")}`;
 
 function getVersionType(): Promise<VersionType> {
   return new Promise((resolve, reject) => {
-    rl.question("What kind of change is this? (major/minor/patch): ", (answer: string) => {
-      const version = answer.toLowerCase() as VersionType;
-      if (!["major", "minor", "patch"].includes(version)) {
+    rl.question(
+      "What kind of change is this? (major/minor/patch): ",
+      (answer: string) => {
+        const version = answer.toLowerCase() as VersionType;
+        if (!["major", "minor", "patch"].includes(version)) {
+          rl.close();
+          reject(
+            new Error("Invalid version type. Must be major, minor, or patch."),
+          );
+          return;
+        }
         rl.close();
-        reject(new Error("Invalid version type. Must be major, minor, or patch."));
-        return;
-      }
-      rl.close();
-      resolve(version);
-    });
+        resolve(version);
+      },
+    );
   });
 }
 

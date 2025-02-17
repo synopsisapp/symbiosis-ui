@@ -1,19 +1,41 @@
+import { type VariantProps, cva } from "class-variance-authority";
 import { cn } from "../../utils/cn";
-import { cva, type VariantProps } from "class-variance-authority";
 import { buttonHeightSizing, text } from "../sharedStyles";
 
-export interface InputWrapperVariants extends VariantProps<typeof inputWrapperCva> {}
-export const inputWrapper = ({ variant = "default", ...rest }: InputWrapperVariants) =>
-  cn(inputWrapperCva({ variant, ...rest }));
+export interface InputWrapperVariants
+  extends VariantProps<typeof inputWrapperCva> {}
+export const inputWrapper = ({
+  variant = "default",
+  ...rest
+}: InputWrapperVariants) => cn(inputWrapperCva({ variant, ...rest }));
 const inputWrapperCva = cva(
-  ["relative m-0 outline-hidden transition-all", "focus-within:ring-2 focus-within:ring-offset-1 rounded-lg"],
+  [
+    "relative m-0 outline-hidden transition-all",
+    "focus-within:ring-2 focus-within:ring-offset-1 rounded-lg",
+  ],
   {
     variants: {
       size: {
-        "small-200": [buttonHeightSizing({ size: "small-200" }), text({ variant: "body-small-200" }), "my-0"],
-        "small-100": [buttonHeightSizing({ size: "small-100" }), text({ variant: "body-small-100" }), "my-0"],
-        base: [buttonHeightSizing({ size: "base" }), text({ variant: "body-base" }), "my-0"],
-        "large-100": [buttonHeightSizing({ size: "large-100" }), text({ variant: "body-large-100" }), "my-0"],
+        "small-200": [
+          buttonHeightSizing({ size: "small-200" }),
+          text({ variant: "body-small-200" }),
+          "my-0",
+        ],
+        "small-100": [
+          buttonHeightSizing({ size: "small-100" }),
+          text({ variant: "body-small-100" }),
+          "my-0",
+        ],
+        base: [
+          buttonHeightSizing({ size: "base" }),
+          text({ variant: "body-base" }),
+          "my-0",
+        ],
+        "large-100": [
+          buttonHeightSizing({ size: "large-100" }),
+          text({ variant: "body-large-100" }),
+          "my-0",
+        ],
       },
       variant: {
         default: ["focus-within:ring-main-base"],
@@ -23,7 +45,8 @@ const inputWrapperCva = cva(
   },
 );
 
-export const input = ({ variant = "default", ...rest }: InputVariants) => cn(inputCva({ variant, ...rest }));
+export const input = ({ variant = "default", ...rest }: InputVariants) =>
+  cn(inputCva({ variant, ...rest }));
 export interface InputVariants extends VariantProps<typeof inputCva> {}
 const inputCva = cva(
   [
@@ -64,4 +87,3 @@ const inputCva = cva(
     ],
   },
 );
-

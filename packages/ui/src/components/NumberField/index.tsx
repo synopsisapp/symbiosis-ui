@@ -1,10 +1,10 @@
 import * as React from "react";
+import { cn } from "../../utils/cn";
 import { Icon } from "../Icon";
 import { IconButton } from "../IconButton";
-import { cn } from "../../utils/cn";
 import { Text } from "../Text";
-import { input, inputWrapper } from "./styles";
 import { inputLabel } from "../sharedStyles";
+import { input, inputWrapper } from "./styles";
 import type { NumberFieldProps } from "./types";
 
 export const NumberField = ({
@@ -68,9 +68,11 @@ export const NumberField = ({
 
   return (
     <div
-      className={cn("flex flex-col gap-1 w-full", className)}
+      className={cn("flex w-full flex-col gap-1", className)}
       onBlur={() => {
-        const value = ref.current?.value ? Number(ref.current?.value) : undefined;
+        const value = ref.current?.value
+          ? Number(ref.current?.value)
+          : undefined;
 
         if (onBlur && value !== undefined) {
           onBlur(value);
@@ -86,7 +88,7 @@ export const NumberField = ({
           {label}
         </label>
       )}
-      <div className="flex items-center gap-1 relative w-full">
+      <div className="relative flex w-full items-center gap-1">
         <div
           data-symbiosis-numberfield="wrapper"
           className={cn(
@@ -94,7 +96,7 @@ export const NumberField = ({
               size: "base",
               variant: hasError ? "error" : "default",
             }),
-            "w-full group",
+            "group w-full",
           )}
         >
           <div
@@ -106,7 +108,7 @@ export const NumberField = ({
               }),
               "text-center",
               "bg-white",
-              "py-0 px-0.5",
+              "px-0.5 py-0",
             )}
           >
             <IconButton
@@ -117,13 +119,16 @@ export const NumberField = ({
               tone="monochrome-dark"
               size="small-100"
               isDisabled={disabled}
-              className={cn("focus:before:border-none", icon ? "left-6" : "left-0")}
+              className={cn(
+                "focus:before:border-none",
+                icon ? "left-6" : "left-0",
+              )}
             />
             {icon && (
               <Icon
                 data-symbiosis-numberfield="icon"
                 name={icon}
-                className="absolute left-2 top-1/2 -translate-y-1/2 z-10 text-gray-base"
+                className="-translate-y-1/2 absolute top-1/2 left-2 z-10 text-gray-base"
                 size="small-200"
               />
             )}
@@ -131,7 +136,7 @@ export const NumberField = ({
               id={formId}
               data-symbiosis-numberfield="input"
               name={name}
-              className="outline-hidden w-full h-full text-center hide-internal-input-elements [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="hide-internal-input-elements h-full w-full text-center outline-hidden [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
               type="number"
               ref={ref}
               defaultValue={defaultValue}
@@ -180,17 +185,39 @@ export const NumberField = ({
         </div>
       </div>
       {hasError && (
-        <div className="flex gap-1 items-center" data-symbiosis-numberfield="error">
-          <Icon name="symbiosis-exclamation-circle" size="small-200" className="text-red-600" />
-          <Text noTranslations variant="body-small-200" className="m-0 text-red-600">
+        <div
+          className="flex items-center gap-1"
+          data-symbiosis-numberfield="error"
+        >
+          <Icon
+            name="symbiosis-exclamation-circle"
+            size="small-200"
+            className="text-red-600"
+          />
+          <Text
+            noTranslations
+            variant="body-small-200"
+            className="m-0 text-red-600"
+          >
             {error}
           </Text>
         </div>
       )}
       {!hasError && hint && (
-        <div className="flex gap-1 items-center text-slate-400" data-symbiosis-numberfield="hint">
-          <Icon name="symbiosis-exclamation-circle" size="small-200" className="text-inherit" />
-          <Text noTranslations variant="body-small-200" className="m-0 text-inherit">
+        <div
+          className="flex items-center gap-1 text-slate-400"
+          data-symbiosis-numberfield="hint"
+        >
+          <Icon
+            name="symbiosis-exclamation-circle"
+            size="small-200"
+            className="text-inherit"
+          />
+          <Text
+            noTranslations
+            variant="body-small-200"
+            className="m-0 text-inherit"
+          >
             {hint}
           </Text>
         </div>

@@ -6,7 +6,11 @@ type Props = {
   [key: string]: unknown;
 };
 
-export const StopPropagation = ({ as: Component = "div", children, ...props }: Props) => {
+export const StopPropagation = ({
+  as: Component = "div",
+  children,
+  ...props
+}: Props) => {
   const onUserAction = React.useCallback((e: React.SyntheticEvent) => {
     e.stopPropagation();
   }, []);

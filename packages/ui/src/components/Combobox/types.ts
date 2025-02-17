@@ -6,7 +6,9 @@ export type Option = {
   disabled?: boolean;
 };
 
-export type ComboboxProps = React.ComponentPropsWithoutRef<typeof CommandPrimitive> & {
+export type ComboboxProps = React.ComponentPropsWithoutRef<
+  typeof CommandPrimitive
+> & {
   options: Option[];
   onValuesChange: (selectedOptions: Option[]) => void;
   className?: string;

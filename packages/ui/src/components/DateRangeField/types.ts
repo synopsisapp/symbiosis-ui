@@ -1,11 +1,14 @@
-import type { TextFieldProps } from "../TextField/types";
 import type { Locale } from "date-fns";
+import type { TextFieldProps } from "../TextField/types";
 export type Value = {
   from?: Date;
   to?: Date;
 };
 
-type BaseDateRangeFieldProps = Omit<TextFieldProps, "value" | "onChange" | "defaultValue" | "icon" | "label"> & {
+type BaseDateRangeFieldProps = Omit<
+  TextFieldProps,
+  "value" | "onChange" | "defaultValue" | "icon" | "label"
+> & {
   value?: Value;
   defaultValue?: Required<Value>;
   onChange?: (range: Value) => void;

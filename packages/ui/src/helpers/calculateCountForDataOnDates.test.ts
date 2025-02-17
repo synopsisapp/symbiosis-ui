@@ -1,17 +1,55 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { calculateCountForDataOnDates } from "./calculateCountForDataOnDates";
 
 describe("calculateCountForDataOnDates", () => {
   const sortedData = {
-    model1: ["2023-01-01", "2023-01-01", "2023-01-02", "2023-01-03", "2023-01-03", "2023-01-05"],
-    model2: ["2023-01-01", "2023-01-03", "2023-01-04", "2023-01-04", "2023-01-06"],
-    model3: ["2023-01-02", "2023-01-04", "2023-01-05", "2023-01-05", "2023-01-05"],
+    model1: [
+      "2023-01-01",
+      "2023-01-01",
+      "2023-01-02",
+      "2023-01-03",
+      "2023-01-03",
+      "2023-01-05",
+    ],
+    model2: [
+      "2023-01-01",
+      "2023-01-03",
+      "2023-01-04",
+      "2023-01-04",
+      "2023-01-06",
+    ],
+    model3: [
+      "2023-01-02",
+      "2023-01-04",
+      "2023-01-05",
+      "2023-01-05",
+      "2023-01-05",
+    ],
   };
 
   const unsortedData = {
-    model1: ["2023-01-03", "2023-01-01", "2023-01-05", "2023-01-02", "2023-01-01", "2023-01-03"],
-    model2: ["2023-01-04", "2023-01-01", "2023-01-06", "2023-01-03", "2023-01-04"],
-    model3: ["2023-01-05", "2023-01-02", "2023-01-04", "2023-01-05", "2023-01-05"],
+    model1: [
+      "2023-01-03",
+      "2023-01-01",
+      "2023-01-05",
+      "2023-01-02",
+      "2023-01-01",
+      "2023-01-03",
+    ],
+    model2: [
+      "2023-01-04",
+      "2023-01-01",
+      "2023-01-06",
+      "2023-01-03",
+      "2023-01-04",
+    ],
+    model3: [
+      "2023-01-05",
+      "2023-01-02",
+      "2023-01-04",
+      "2023-01-05",
+      "2023-01-05",
+    ],
   };
 
   it("correctly calculates cumulative mode with sorted data", () => {
@@ -107,7 +145,9 @@ describe("calculateCountForDataOnDates", () => {
       mode: "daily",
     });
 
-    expect(result).toEqual([{ date: "2023-01-03T00:00:00.000Z", model1: 2, model2: 1, model3: 0 }]);
+    expect(result).toEqual([
+      { date: "2023-01-03T00:00:00.000Z", model1: 2, model2: 1, model3: 0 },
+    ]);
   });
 
   it("handles date range outside of data range", () => {
@@ -162,14 +202,46 @@ describe("calculateCountForDataOnDates", () => {
 
     // 62 days from 2022-12-30 to 2023-03-01
     expect(result).toHaveLength(62);
-    expect(result[0]).toEqual({ date: "2022-12-30T00:00:00.000Z", model1: 0, model2: 0 });
-    expect(result[1]).toEqual({ date: "2022-12-31T00:00:00.000Z", model1: 1, model2: 1 });
-    expect(result[2]).toEqual({ date: "2023-01-01T00:00:00.000Z", model1: 2, model2: 1 });
-    expect(result[16]).toEqual({ date: "2023-01-15T00:00:00.000Z", model1: 2, model2: 2 });
-    expect(result[32]).toEqual({ date: "2023-01-31T00:00:00.000Z", model1: 3, model2: 2 });
-    expect(result[33]).toEqual({ date: "2023-02-01T00:00:00.000Z", model1: 4, model2: 3 });
-    expect(result[60]).toEqual({ date: "2023-02-28T00:00:00.000Z", model1: 4, model2: 4 });
-    expect(result[61]).toEqual({ date: "2023-03-01T00:00:00.000Z", model1: 4, model2: 4 });
+    expect(result[0]).toEqual({
+      date: "2022-12-30T00:00:00.000Z",
+      model1: 0,
+      model2: 0,
+    });
+    expect(result[1]).toEqual({
+      date: "2022-12-31T00:00:00.000Z",
+      model1: 1,
+      model2: 1,
+    });
+    expect(result[2]).toEqual({
+      date: "2023-01-01T00:00:00.000Z",
+      model1: 2,
+      model2: 1,
+    });
+    expect(result[16]).toEqual({
+      date: "2023-01-15T00:00:00.000Z",
+      model1: 2,
+      model2: 2,
+    });
+    expect(result[32]).toEqual({
+      date: "2023-01-31T00:00:00.000Z",
+      model1: 3,
+      model2: 2,
+    });
+    expect(result[33]).toEqual({
+      date: "2023-02-01T00:00:00.000Z",
+      model1: 4,
+      model2: 3,
+    });
+    expect(result[60]).toEqual({
+      date: "2023-02-28T00:00:00.000Z",
+      model1: 4,
+      model2: 4,
+    });
+    expect(result[61]).toEqual({
+      date: "2023-03-01T00:00:00.000Z",
+      model1: 4,
+      model2: 4,
+    });
   });
 
   it("treats all dates as UTC, ignoring timezone information", () => {

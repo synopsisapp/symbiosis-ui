@@ -2,10 +2,7 @@
   "name": "symbiosis-monorepo",
   "type": "module",
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "examples/*"
-  ],
+  "workspaces": ["packages/*", "examples/*"],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
