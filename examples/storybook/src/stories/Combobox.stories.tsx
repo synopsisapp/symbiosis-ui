@@ -87,6 +87,16 @@ export const WithAddCustomValuesFunctionality: Story = {
   },
 };
 
+export const WithSingleSelect: Story = {
+  render: (args) => <Combobox {...args} />,
+  args: {
+    options: defaultOptions,
+    placeholder: "Select a fruit...",
+    noResultsLabel: "No fruits found",
+    singleSelect: true,
+  },
+};
+
 export const Controlled: Story = {
   render: (args) => {
     const [selectedOptions, setSelectedOptions] = React.useState<Array<{ value: string; label: string }>>([]);
