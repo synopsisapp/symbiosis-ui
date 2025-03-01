@@ -13,16 +13,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 23.8.0
-          registry-url: 'https://registry.npmjs.org'
+          node-version: '23.8.0'
+          cache: 'npm'
 
       - name: Install Dependencies
-        run: npm i --legacy-peer-deps
+        run: npm ci
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
