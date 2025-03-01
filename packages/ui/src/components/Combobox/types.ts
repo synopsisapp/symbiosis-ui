@@ -6,9 +6,7 @@ export type Option = {
   disabled?: boolean;
 };
 
-export type ComboboxProps = React.ComponentPropsWithoutRef<
-  typeof CommandPrimitive
-> & {
+export type ComboboxProps = React.ComponentPropsWithoutRef<typeof CommandPrimitive> & {
   options: Option[];
   onValuesChange: (selectedOptions: Option[]) => void;
   className?: string;
@@ -16,4 +14,6 @@ export type ComboboxProps = React.ComponentPropsWithoutRef<
   placeholder?: string;
   allowCustomValues?: boolean;
   addNewOptionLabel?: string;
+  skipComposition?: boolean;
+  singleSelect?: boolean;
 };
