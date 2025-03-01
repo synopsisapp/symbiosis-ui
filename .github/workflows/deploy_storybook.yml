@@ -23,7 +23,7 @@ jobs:
           node-version: '20'
       
       - name: Install Dependencies
-        run: npm i
+        run: npm i --legacy-peer-deps
 
       - name: Build Storybook
         run: |
