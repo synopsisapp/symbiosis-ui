@@ -1,5 +1,17 @@
 # @synopsisapp/symbiosis-ui
 
+## 0.3.1
+
+### Patch Changes
+
+- [#48](https://github.com/synopsisapp/symbiosis-ui/pull/48) [`dfd9f35`](https://github.com/synopsisapp/symbiosis-ui/commit/dfd9f35aa875cd0a16bc375d36f838f4c19302a9) Thanks [@bratsos](https://github.com/bratsos)! - ### Fixes
+
+  - fix(Modal): correct positioning of modal in large screen sizes
+
+  ### Full Changelog
+
+  - [`e9bafa9`](https://github.com/synopsisapp/symbiosis-ui/commit/e9bafa9297577a0584bb74ea7513a4564fdc3e17) Thanks [@bratsos](https://github.com/bratsos)! - fix(Modal): correct positioning of modal in large screen sizes
+
 ## 0.3.0
 
 ### Minor Changes
