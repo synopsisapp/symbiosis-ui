@@ -46,7 +46,7 @@ const ModalContent: React.FC<React.PropsWithChildren<ModalContentProps>> = ({
 }) => (
   <ModalPrimitive.Content
     className={cn(
-      "fixed bottom-0 left-0 z-999 max-h-[80vh] w-full animate-slideUpModal overflow-hidden rounded-tl-lg rounded-tr-lg rounded-br-none rounded-bl-none bg-white px-0 pt-2 pb-0 lg:inset-0 lg:bottom-auto lg:m-auto lg:h-fit lg:w-fit lg:rounded-lg lg:pt-2",
+      "fixed bottom-0 left-0 z-999 max-h-[80vh] w-full animate-slideUpModal overflow-hidden rounded-tl-lg rounded-tr-lg rounded-br-none rounded-bl-none bg-white px-0 pt-2 pb-0 lg:inset-0 lg:bottom-0 lg:left-0 lg:m-auto lg:h-fit lg:w-fit lg:rounded-lg lg:pt-2",
       className,
     )}
   >
