@@ -2,14 +2,14 @@ import { Command as CommandPrimitive } from "cmdk";
 import * as React from "react";
 import { forwardRef } from "react";
 import { cn } from "../../utils/cn";
+import { Button } from "../Button";
 import { Command } from "../Command";
 import { Icon } from "../Icon";
+import { IconButton } from "../IconButton";
 import { Pill } from "../Pill";
 import { Popover } from "../Popover";
 import { Text } from "../Text";
 import type { ComboboxProps, Option } from "./types";
-import { Button } from "../Button";
-import { IconButton } from "../IconButton";
 
 const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
   (
@@ -23,15 +23,23 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       addNewOptionLabel,
       skipComposition,
       singleSelect = false,
+      selectedOptions: controlledSelectedOptions,
       ...props
     },
     ref,
   ) => {
-    const [selectedOptions, setSelectedOptions] = React.useState<Option[]>([]);
+    const [internalSelectedOptions, setInternalSelectedOptions] =
+      React.useState<Option[]>([]);
     const [inputValue, setInputValue] = React.useState("");
     const [open, setOpen] = React.useState<boolean>(false);
     const [activeIndex, setActiveIndex] = React.useState<number>(-1);
     const inputRef = React.useRef<HTMLInputElement>(null);
+
+    // Use controlled or uncontrolled selectedOptions
+    const selectedOptions =
+      controlledSelectedOptions !== undefined
+        ? controlledSelectedOptions
+        : internalSelectedOptions;
 
     const [localOptions, setLocalOptions] = React.useState(options);
 
@@ -48,9 +56,9 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         const isSelected = selectedOptions.some(
           (selected) => selected.value === option.value,
         );
-        
+
         let newSelectedOptions: Option[];
-        
+
         if (singleSelect) {
           newSelectedOptions = isSelected ? [] : [option];
         } else {
@@ -59,14 +67,23 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
             : [...selectedOptions, option];
         }
 
-        setSelectedOptions(newSelectedOptions);
+        // Only update internal state if uncontrolled
+        if (controlledSelectedOptions === undefined) {
+          setInternalSelectedOptions(newSelectedOptions);
+        }
+
         onValuesChange(newSelectedOptions);
-        
+
         if (singleSelect && !isSelected) {
           setOpen(false);
         }
       },
-      [selectedOptions, onValuesChange, singleSelect],
+      [
+        selectedOptions,
+        onValuesChange,
+        singleSelect,
+        controlledSelectedOptions,
+      ],
     );
 
     const handleKeyDown = React.useCallback(
@@ -142,11 +159,10 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       >
         <Popover.Root open={open} onOpenChange={setOpen}>
           <Popover.Trigger asChild>
-            {
-              singleSelect ? (
-                <div>
-                  <style>
-                    {`
+            {singleSelect ? (
+              <div>
+                <style>
+                  {`
                         .adhoc-btn {
                         ${
                           selectedOptions.length === 0
@@ -157,52 +173,57 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                         }
                       }
                     `}
-                  </style>
-                  <Button
-                    label={selectedOptions[0]?.label || placeholder || "Select an option"}
-                    variant="outline"
-                    rightIcon={open ? "symbiosis-chevron-up" : "symbiosis-chevron-down"}
-                    onPress={() => setOpen((prev) => !prev)}
-                    className="adhoc-btn"
-                    tone="monochrome-dark"
+                </style>
+                <Button
+                  label={
+                    selectedOptions[0]?.label ||
+                    placeholder ||
+                    "Select an option"
+                  }
+                  variant="outline"
+                  rightIcon={
+                    open ? "symbiosis-chevron-up" : "symbiosis-chevron-down"
+                  }
+                  onPress={() => setOpen((prev) => !prev)}
+                  className="adhoc-btn"
+                  tone="monochrome-dark"
+                />
+              </div>
+            ) : (
+              <div
+                data-symbiosis-combobox="trigger"
+                ref={ref}
+                className={cn(
+                  "flex items-center rounded-lg border border-slate-400 bg-white",
+                  "flex-wrap gap-1 p-[3px]",
+                  "focus-within:border-main-base focus-within:ring-2 focus-within:ring-main-base focus-within:ring-offset-1",
+                )}
+              >
+                {selectedOptions.map((option) => (
+                  <Pill
+                    key={option.value}
+                    className="flex items-center gap-1"
+                    isRounded
+                    size="small-100"
+                    label={option.label}
+                    onClose={() => onValueChangeHandler(option)}
                   />
-                </div>
-              ) : (
-                <div
-                  data-symbiosis-combobox="trigger"
-                  ref={ref}
+                ))}
+                <CommandPrimitive.Input
+                  ref={inputRef}
+                  value={inputValue}
+                  onValueChange={setInputValue}
+                  onBlur={() => setOpen(false)}
+                  onFocus={() => setOpen(true)}
+                  onClick={() => setActiveIndex(-1)}
+                  placeholder={selectedOptions.length === 0 ? placeholder : ""}
                   className={cn(
-                    "flex items-center rounded-lg border border-slate-400 bg-white",
-                    "flex-wrap gap-1 p-[3px]",
-                    "focus-within:border-main-base focus-within:ring-2 focus-within:ring-main-base focus-within:ring-offset-1",
+                    "ml-2 flex-1 bg-transparent outline-hidden placeholder:text-slate-400",
+                    activeIndex !== -1 && "caret-transparent",
                   )}
-                >
-                      {selectedOptions.map((option) => (
-                        <Pill
-                          key={option.value}
-                          className="flex items-center gap-1"
-                          isRounded
-                          size="small-100"
-                          label={option.label}
-                          onClose={() => onValueChangeHandler(option)}
-                        />
-                      ))}
-                      <CommandPrimitive.Input
-                        ref={inputRef}
-                        value={inputValue}
-                        onValueChange={setInputValue}
-                        onBlur={() => setOpen(false)}
-                        onFocus={() => setOpen(true)}
-                        onClick={() => setActiveIndex(-1)}
-                        placeholder={selectedOptions.length === 0 ? placeholder : ""}
-                        className={cn(
-                          "ml-2 flex-1 bg-transparent outline-hidden placeholder:text-slate-400",
-                          activeIndex !== -1 && "caret-transparent",
-                        )}
-                      />
-                </div>
-              )
-            }
+                />
+              </div>
+            )}
           </Popover.Trigger>
           <Popover.Content
             data-symbiosis-combobox="content"
@@ -227,7 +248,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                     onClick={() => setActiveIndex(-1)}
                     placeholder="Search..."
                     className={cn(
-                      "w-full border-b border-slate-200 bg-transparent outline-none placeholder:text-slate-400 text-sm py-2",
+                      "w-full border-slate-200 border-b bg-transparent py-2 text-sm outline-none placeholder:text-slate-400",
                       activeIndex !== -1 && "caret-transparent",
                     )}
                   />
@@ -261,7 +282,8 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                       "flex cursor-pointer justify-between rounded-md px-2 py-1 transition-colors",
                       {
                         "bg-slate-100": isIncluded && singleSelect,
-                        "cursor-default opacity-50": isIncluded && !singleSelect,
+                        "cursor-default opacity-50":
+                          isIncluded && !singleSelect,
                         "cursor-not-allowed opacity-50": option.disabled,
                       },
                     )}

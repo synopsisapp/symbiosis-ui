@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Combobox, type ComboboxProps } from "@synopsisapp/symbiosis-ui";
+import { Combobox, type ComboboxProps, Button } from "@synopsisapp/symbiosis-ui";
 
 const meta: Meta<ComboboxProps> = {
   title: "Components/Combobox",
@@ -103,8 +103,30 @@ export const Controlled: Story = {
 
     return (
       <div>
-        <Combobox {...args} onValuesChange={setSelectedOptions} />
-        <div className="mt-4">Selected values: {selectedOptions.map((option) => option.label).join(", ")}</div>
+        <Combobox
+          {...args}
+          onValuesChange={setSelectedOptions}
+          selectedOptions={selectedOptions}
+        />
+        <div className="my-4">Selected values: {selectedOptions.map((option) => option.label).join(", ")}</div>
+
+        <div className="flex gap-4">
+          <Button
+            onPress={() => {
+              setSelectedOptions(args.options)
+            }}
+            label="Select all"
+            size="small-100"
+          />
+          <Button
+            onPress={() => {
+              setSelectedOptions([]);
+            }}
+            variant="outline"
+            size="small-100"
+            label="Clear selection"
+          />
+        </div>
       </div>
     );
   },
