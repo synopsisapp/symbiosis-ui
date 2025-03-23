@@ -1,5 +1,19 @@
 # @synopsisapp/symbiosis-ui
 
+## 0.3.2
+
+### Patch Changes
+
+- [#50](https://github.com/synopsisapp/symbiosis-ui/pull/50) [`0073049`](https://github.com/synopsisapp/symbiosis-ui/commit/0073049be3214340361b440a26d3931b153b60c7) Thanks [@bratsos](https://github.com/bratsos)! - ### Features
+
+  - feat(Button): add download and rel attributes to AsLinkProps type
+  - feat(Combobox): add support for controlled selectedOptions
+
+  ### Full Changelog
+
+  - [`3a727e4`](https://github.com/synopsisapp/symbiosis-ui/commit/3a727e483185c65c9e158fcf708d096235c344e3) Thanks [@bratsos](https://github.com/bratsos)! - feat(Button): add download and rel attributes to AsLinkProps type
+  - [`365c3b2`](https://github.com/synopsisapp/symbiosis-ui/commit/365c3b222af26552b8b2059458896d7059dadc03) Thanks [@bratsos](https://github.com/bratsos)! - feat(Combobox): add support for controlled selectedOptions
+
 ## 0.3.1
 
 ### Patch Changes
