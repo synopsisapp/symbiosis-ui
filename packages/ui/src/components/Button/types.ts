@@ -41,6 +41,8 @@ type AsLinkProps = {
   renderAs: "a";
   href?: string;
   target?: "_blank" | "_self" | "_parent" | "_top";
+  download?: string;
+  rel?: string;
 };
 
 type AsDivProps = {
