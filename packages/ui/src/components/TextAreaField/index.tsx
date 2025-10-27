@@ -6,7 +6,7 @@ import { Text } from "../Text";
 import { input, inputLabel } from "../sharedStyles";
 import type { TextAreaFieldProps } from "./types";
 
-export const TextAreaField = ({
+export const TextAreaField = React.forwardRef<HTMLTextAreaElement, TextAreaFieldProps>(({
   error,
   required,
   value,
@@ -24,9 +24,8 @@ export const TextAreaField = ({
   size = "base",
   labelWeight,
   className,
-}: TextAreaFieldProps) => {
+}: TextAreaFieldProps, ref) => {
   const formId = id ?? label ?? "";
-  const ref = React.useRef<HTMLTextAreaElement>(null);
 
   const hasError = Boolean(error);
 
@@ -35,7 +34,7 @@ export const TextAreaField = ({
       {label && (
         <label
           htmlFor={formId}
-          data-symbiosis-textAreaField="label"
+          data-symbiosis-textareafield="label"
           className={cn(inputLabel({ size, weight: labelWeight }), "m-0")}
         >
           {label}
@@ -45,14 +44,14 @@ export const TextAreaField = ({
         <div className="flex h-auto flex-1">
           {icon && (
             <Icon
-              data-symbiosis-textAreaField="icon"
+              data-symbiosis-textareafield="icon"
               name={icon}
               className="absolute top-3 left-2 z-10 translate-y-[5px] text-gray-base"
               size="small-200"
             />
           )}
           <textarea
-            data-symbiosis-textAreaField="input"
+            data-symbiosis-textareafield="input"
             id={formId}
             name={name}
             className={cn(
@@ -84,7 +83,7 @@ export const TextAreaField = ({
       {hasError && (
         <div
           className="flex items-center gap-1"
-          data-symbiosis-textAreaField="error"
+          data-symbiosis-textareafield="error"
         >
           <Icon
             name="symbiosis-exclamation-circle"
@@ -103,7 +102,7 @@ export const TextAreaField = ({
       {!hasError && hint && (
         <div
           className="flex items-center gap-1 text-slate-400"
-          data-symbiosis-textAreaField="hint"
+          data-symbiosis-textareafield="hint"
         >
           <Icon
             name="symbiosis-exclamation-circle"
@@ -121,4 +120,4 @@ export const TextAreaField = ({
       )}
     </div>
   );
-};
+});

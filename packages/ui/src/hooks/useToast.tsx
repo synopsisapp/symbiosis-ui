@@ -49,13 +49,15 @@ const ToastContent = ({
   return (
     <div className={cn("flex items-center gap-2", className)}>
       {iconName && (
-        <Icon
-          name={iconName}
-          size="small-100"
-          className={cn("text-slate-700", {
-            "animate-spin": variant === "loading",
-          })}
-        />
+        <div>
+          <Icon
+            name={iconName}
+            size="small-100"
+            className={cn("text-slate-700", {
+              "animate-spin": variant === "loading",
+            })}
+          />
+        </div>
       )}
       <div className="flex flex-col gap-1">
         <Text
